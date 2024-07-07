@@ -11,7 +11,6 @@ export const NavWrapper = styled.nav`
   width: 100%;
   display: flex;
   border: none;
-  /* border-bottom: 1px solid lightgrey; */
   border-top: 0.5 solid lightgrey;
 `;
 

@@ -57,18 +57,18 @@ const NavBar = () => {
 
   return (
     <NavWrapper className="relative z-10">
-      <div className="wrapper flex h-[15vh] w-full px-4 md:w-[80%] mx-auto items-center relative">
+      <div className="wrapper flex h-[15vh]  w-full px-4 md:w-[80%] mx-auto items-center relative">
         <div className="left flex-[1]">
           <img className="w-24 h-14 object-cover" src="/newlogo.PNG" alt="" />
         </div>
 
-        <div className="center flex-[2] hidden md:flex gap-6 text-[1.2rem] font-primary text-gray-600">
+        <div className="center flex-[2] hidden md:flex gap-6 text-[1.2rem]  text-gray-600">
           {navItems.map((item) => (
             <NavLink key={item.href} {...item} />
           ))}
         </div>
 
-        <div className="right flex-[1] hidden md:flex justify-center text-[1.1rem] font-primary">
+        <div className="right flex-[1] hidden md:flex justify-center text-[1.1rem] ">
           <SignupButton />
         </div>
 
@@ -88,7 +88,7 @@ const NavBar = () => {
           } md:hidden z-40`}
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="flex flex-col items-start gap-4 text-[1.2rem] font-primary text-gray-600 pt-20 px-6">
+          <div className="flex flex-col items-start gap-4 text-[1.2rem]  text-gray-600 pt-20 px-6">
             {navItems.map((item) => (
               <NavLink key={item.href} {...item} onClick={toggleMenu} />
             ))}

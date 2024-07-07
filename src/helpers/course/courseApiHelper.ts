@@ -149,3 +149,37 @@ export const myCourseHelper = async (id?: any) => {
     throw NewError(error)
   }
 };
+
+
+export const createSubmissionHelper = async (payload: any) => {
+  try {
+    const response = await courseService.submisson(payload);
+    if (response.status === 200 || 201) {
+      return {
+        success: true,
+        payload: response.data,
+      };
+    }
+  } catch (error: any) {
+    
+    throw NewError(error)
+  }
+};
+
+
+export const getSubmissionsHelper = async (id?: any) => {
+  const submissionId = id.queryKey[1]
+  try {
+    const response = await courseService.getSubmission({},{id:submissionId});
+    if (response.status === 200) {
+      return {
+        success: true,
+        payload: response.data,
+      };
+    }
+  } catch (error: any) {
+    console.log(error.response.data.message);
+    
+    throw NewError(error)
+  }
+};

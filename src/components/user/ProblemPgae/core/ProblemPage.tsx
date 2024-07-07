@@ -12,6 +12,8 @@ const ProblemPage = () => {
   const [sumbmission, setSumbmission] = useState<{}[] | null>(null);
   const [subMissionErr, setsubMissionErr] = useState<string>("");
   const [selectedLanguage,setSelectedLanguage]= useState<string>("javaScript")
+  const [submissonResult, setsubmissonResult] = useState<boolean>(false);
+
   const { id } = useParams();
   const { data: currentCode } = useQuery({
     queryFn: codeFetchHelper,
@@ -32,12 +34,14 @@ const ProblemPage = () => {
       <div className="right flex-[1] flex flex-col gap-3">
         <CodeWriter
         setSelectedLanguage={setSelectedLanguage}
+        submissonResult={submissonResult}
           setsubMissionErr={setsubMissionErr}
           setSumbmission={setSumbmission}
           solution={currentCode?.payload[4]}
           selectedLanguage={selectedLanguage}
         />
         <TestCase
+        setsubmissonResult={setsubmissonResult}
           subMissionErr={subMissionErr}
           sumbmission={sumbmission}
           testCase={currentCode?.payload[1]}

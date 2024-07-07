@@ -37,6 +37,14 @@ const courseEndpoints = {
     method: "get" as const,
     path: "getMyCourse/:id",
   },
+  submisson:{
+    method: "post" as const,
+    path: "addSubmission",
+  },
+  getSubmission: {
+    method: "get" as const,
+    path: "getSubmission/:id",
+  },
 };
 
 const courseService = createApiService("course", courseEndpoints);

@@ -5,9 +5,10 @@ interface Props {
   testCase: any;
   sumbmission: any;
   subMissionErr: any;
+  setsubmissonResult:any
 }
 
-const TestCase = ({ testCase, sumbmission, subMissionErr }: Props) => {
+const TestCase = ({ testCase, sumbmission, subMissionErr ,setsubmissonResult}: Props) => {
   const [submissonRes, setsubmissonRes] = useState<boolean>(true);
   const allTestCase = testCase?.testCases
     ?.split("__")
@@ -19,6 +20,11 @@ const TestCase = ({ testCase, sumbmission, subMissionErr }: Props) => {
       sumbmission.map((x: any) => {
         if (x.output === false) {
           setsubmissonRes(false);
+          setsubmissonResult(false)
+        }else{
+          setsubmissonRes(true);
+          setsubmissonResult(true);
+
         }
       });
     }

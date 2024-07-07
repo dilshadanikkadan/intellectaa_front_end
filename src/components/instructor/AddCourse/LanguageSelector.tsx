@@ -18,7 +18,7 @@ const LanguageSelector = () => {
         language:value
       })
     };
-  
+   
   return (
     <div className="mt-4 w-[90%]">
       <Select onValueChange={handleLanguageChange}>
