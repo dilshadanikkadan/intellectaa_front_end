@@ -11,9 +11,9 @@ const AdminSideNav = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const navItems = [
-    { icon: <HomeIcon />, name: "Home", href: "/admin" },
-    { icon: <DashboardIcon />, name: "Dashboard", href: "/admin/dashboard" },
+    { icon: <HomeIcon />, name: "Dashboard", href: "/admin" },
     { icon: <PeopleIcon />, name: "Users", href: "/admin/users" },
+    { icon: <PeopleIcon />, name: "Courses", href: "/admin/courses" },
     { icon: <SettingsIcon />, name: "Settings", href: "/admin/settings" },
     { icon: <LogoutIcon />, name: "Logout", href: "/logout" },
   ];

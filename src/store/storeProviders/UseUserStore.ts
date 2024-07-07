@@ -8,6 +8,7 @@ export type User = {
   image?: string;
   password?: string;
   isInstructor?: boolean;
+  _id?:any
 };
 
 type UserStore = {

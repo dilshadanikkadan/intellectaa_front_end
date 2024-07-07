@@ -4,6 +4,7 @@ import Aos from "aos";
 import { useEffect, useState } from "react";
 import "aos/dist/aos.css";
 import { ThemeProvider } from "@/store/storeProviders/ThemeProvider";
+import AddProgressBar from "@/components/instructor/AddCourse/AddProgressBar";
 
 export default function Template({
   children,
@@ -15,5 +16,7 @@ export default function Template({
   useEffect(() => {
     setIsClient(true);
   }, []);
-  return <div className="relative z-10">{children}</div>;
+  return <div className="relative z-10">
+    {children}
+    </div>;
 }

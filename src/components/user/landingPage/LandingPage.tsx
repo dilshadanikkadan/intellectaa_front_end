@@ -43,7 +43,7 @@ export default function LandingPageView() {
   }, [status, session, loginSuccess]);
 
   if (isLoading) {
-    return <div>Loading...dilshad oh my code</div>;
+    return <></>;
   }
 
 
@@ -60,7 +60,7 @@ export default function LandingPageView() {
         disableTransitionOnChange
       >
         <div className="w-full overflow-hidden">
-        <NavBar />
+        {/* < />   */}
         <TutorialHell />
         <Wrapper>
           <MainBanner />

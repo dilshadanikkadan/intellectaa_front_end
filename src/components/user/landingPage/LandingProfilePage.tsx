@@ -14,7 +14,7 @@ export default function ProfilePage() {
 
   return (
     <div>
-      <NavBar />
+      {/* <NavBar /> */}
       <div className="flex  flex-col md:flex-row w-full md:w-[80%] mx-auto">
         <AvatarBar user={user} />
         <div className="flex flex-col w-full">

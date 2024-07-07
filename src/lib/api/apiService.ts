@@ -15,13 +15,21 @@ const createApiService = <T extends Endpoints>(serviceName: string, endpoints: T
   const service: {
     [K in keyof T]: (
       data?: any,
+      pathParams?: Record<string, string>,
       config?: AxiosRequestConfig
     ) => Promise<AxiosResponse<any>>;
   } = {} as any;
 
   Object.entries(endpoints).forEach(([methodName, { method, path }]) => {
-    service[methodName as keyof T] = async (data?: any, config: AxiosRequestConfig = {}) => {
-      const url = `${serviceName}/${path}`;
+    service[methodName as keyof T] = async (data?: any, pathParams?: Record<string, string>, config: AxiosRequestConfig = {}) => {
+      let url = `${serviceName}/${path}`;
+
+      if (pathParams) {
+        Object.entries(pathParams).forEach(([key, value]) => {
+          url = url.replace(`:${key}`, encodeURIComponent(value));
+        });
+      }
+
       switch (method) {
         case "post":
           return client.post(url, data, config);
@@ -30,7 +38,7 @@ const createApiService = <T extends Endpoints>(serviceName: string, endpoints: T
         case "put":
           return client.put(url, data, config);
         case "delete":
-          return client.delete(url, { data, ...config });
+          return client.delete(url, { ...config, data });
         default:
           throw new Error(`Unsupported method: ${method}`);
       }
