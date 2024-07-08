@@ -61,6 +61,15 @@ const courseEndpoints = {
     method: "get" as const,
     path: "getTodayTask",
   },
+  getAttendence: {
+    method: "get" as const,
+    path: "getAttendence/:id",
+  },
+
+  getInstroctorCourse: {
+    method: "get" as const,
+    path: "getInstroctorCourse/:id",
+  },
 };
 
 const courseService = createApiService("course", courseEndpoints);

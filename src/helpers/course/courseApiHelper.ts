@@ -198,7 +198,7 @@ export const getMySubmissionHelper = async (id?: any) => {
 
 export const likeSubmissionHelper = async (payload: any) => {
   try {
-    const response = await courseService.submisson(payload);
+    const response = await courseService.manageLike(payload);
     if (response.status === 200 || 201) {
       return {
         success: true,
@@ -224,11 +224,43 @@ export const dailyTaskHelper = async (payload: any) => {
   }
 };
 
-
 export const getTodaysTasksHelper = async (payload: any) => {
   try {
     const response = await courseService.getTodaysTask(payload);
     if (response.status === 200) {
+      return {
+        success: true,
+        payload: response.data,
+      };
+    }
+  } catch (error: any) {
+    throw NewError(error);
+  }
+};
+
+export const getMyAttendenceHelper = async (id?: any) => {
+  const userId = id.queryKey[1];
+  try {
+    const response = await courseService.getAttendence({}, { id: userId });
+    if (response.status === 200 || 201) {
+      return {
+        success: true,
+        payload: response.data,
+      };
+    }
+  } catch (error: any) {
+    throw NewError(error);
+  }
+};
+
+export const getInstroctorCourseHelper = async (id?: any) => {
+  const userId = id.queryKey[1];
+  try {
+    const response = await courseService.getInstroctorCourse(
+      {},
+      { id: userId }
+    );
+    if (response.status === 200 || 201) {
       return {
         success: true,
         payload: response.data,

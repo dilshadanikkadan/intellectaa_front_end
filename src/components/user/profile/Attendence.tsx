@@ -1,20 +1,14 @@
+"use client"
 import React from "react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useQuery } from "@tanstack/react-query";
+import { getMyAttendenceHelper } from "@/helpers/course/courseApiHelper";
+import { useUserStore } from "@/store/storeProviders/UseUserStore";
 
 interface ActivityData {
   [date: string]: number;
 }
-
-const generateActivityData = (): ActivityData => {
-  const data: ActivityData = {};
-  const today = new Date();
-  for (let i = 179; i >= 0; i--) {
-    const date = new Date(today.getTime() - i * 24 * 60 * 60 * 1000);
-    data[date.toISOString().split('T')[0]] = Math.random() > 0.7 ? Math.floor(Math.random() * 5) + 1 : 0;
-  }
-  return data;
-};
 
 interface ActivitySquareProps {
   date: string;
@@ -24,8 +18,8 @@ interface ActivitySquareProps {
 const ActivitySquare: React.FC<ActivitySquareProps> = ({ date, activity }) => {
   const getColor = (value: number): string => {
     if (value === 0) return "bg-gray-100";
-    if (value === 1) return "bg-green-200";
-    if (value === 2) return "bg-green-300";
+    if (value === 1) return "bg-green-300";
+    if (value === 2) return "bg-green-400";
     if (value === 3) return "bg-green-400";
     if (value === 4) return "bg-green-500";
     return "bg-green-600";
@@ -38,7 +32,7 @@ const ActivitySquare: React.FC<ActivitySquareProps> = ({ date, activity }) => {
           <div className={`w-3 h-3 ${getColor(activity)} rounded-sm`} />
         </TooltipTrigger>
         <TooltipContent>
-          <p>{`${date}: ${activity} contributions`}</p>
+          <p>{`${date}: ${activity} Submission`}</p>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
@@ -46,7 +40,31 @@ const ActivitySquare: React.FC<ActivitySquareProps> = ({ date, activity }) => {
 };
 
 const ActivityTracker: React.FC = () => {
-  const activityData: ActivityData = generateActivityData();
+  const user = useUserStore(state => state.user);
+
+  const { data: myAttendance } = useQuery({
+    queryKey: ['myAttendance', user?._id],
+    queryFn: getMyAttendenceHelper
+  });
+
+  const generateActivityData = (attendanceData: any): ActivityData => {
+    const data: ActivityData = {};
+    const startDate = new Date('2024-01-01');
+    for (let i = 0; i < 180; i++) {
+      const date = new Date(startDate.getTime() + i * 24 * 60 * 60 * 1000);
+      data[date.toISOString().split('T')[0]] = 0;
+    }
+
+    attendanceData?.forEach((entry: any) => {
+      const date = entry._id;
+      const submissions = entry.submissionByDate.length;
+      data[date] = submissions;
+    });
+
+    return data;
+  };
+
+  const activityData: ActivityData = generateActivityData(myAttendance?.payload);
 
   return (
     <Card className="w-[95%] max-w-4xl ml-10 mx-auto mt-8">
@@ -55,14 +73,14 @@ const ActivityTracker: React.FC = () => {
       </CardHeader>
       <CardContent>
         <div className="flex flex-wrap gap-1">
-          {Object.entries(activityData).map(([date, activity]) => (
+          {Object.entries(activityData)?.map(([date, activity]) => (
             <ActivitySquare key={date} date={date} activity={activity} />
           ))}
         </div>
         <div className="flex justify-between items-center mt-4 ">
           <span className="text-sm text-gray-500">Less</span>
           <div className="flex items-center space-x-1">
-            {[100, 200, 300, 400, 500, 600].map((shade: number) => (
+            {[100, 200, 300, 400, 500, 600]?.map((shade: number) => (
               <div key={shade} className={`w-3 h-3 bg-green-${shade} rounded-sm`} />
             ))}
           </div>
