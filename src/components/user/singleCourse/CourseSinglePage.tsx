@@ -59,7 +59,6 @@ const CourseSinglePage = () => {
     queryFn:myCourseHelper
   }) 
 
-  console.log("!!!!!!!!!!!!!!!!!!!!!!",myCorse?.payload);
   return (
     <div className="w-[80%] mx-auto mt-5  ">
       <div className="w-full h-52 ">

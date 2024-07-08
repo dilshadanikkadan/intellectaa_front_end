@@ -9,6 +9,8 @@ import {
 } from "@/components/ui/accordion";
 import { CldVideoPlayer } from "next-cloudinary";
 import { useRouter } from "next/navigation";
+import { useQuery } from "@tanstack/react-query";
+import { getMySubmissionHelper } from "@/helpers/course/courseApiHelper";
 
 const EntrolledSector = ({ course }: any) => {
   const [current, setCurrent] = useState<any>(null);
@@ -21,6 +23,24 @@ const EntrolledSector = ({ course }: any) => {
       setCurrent(course);
     }
   }, [course]);
+
+  const {
+    data: mySubmission,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["mySubmission", current?.problems?.[0] ?? "add_num_001"],
+    queryFn: getMySubmissionHelper,
+    enabled: !course?.problems,
+  });
+
+  useEffect(() => {
+    if (mySubmission) {
+      console.log("My submission data:", mySubmission);
+    }
+  }, [mySubmission]);
+  // console.log("_______________",mySubmission);
+
   return (
     <div className="w-full mx-auto flex mt-10 mb-10 gap-10 ">
       <div className="left flex-[3]  mx-auto">
@@ -45,12 +65,32 @@ const EntrolledSector = ({ course }: any) => {
         {current?.problems && (
           <div className="mt-10   gap-5">
             <p className="text-xl font-semibold">Assignment</p>
-            <button
-              onClick={() => router.push(`/problems/${current?.problems[0]}`)}
-              className="py-2 bg-gray-800 text-white  px-3 mt-4"
-            >
-              Go And Code
-            </button>
+
+            {mySubmission?.payload ? (
+              <div className="flex gap-3">
+                <button
+
+                  className="py-2 bg-gray-800 text-white  px-3 mt-4"
+                >
+                  Completed
+                </button>
+                <button
+                  onClick={() =>
+                    router.push(`/problems/${current?.problems[0]}/submission`)
+                  }
+                  className="py-2 bg-gray-800 text-white  px-3 mt-4"
+                >
+                  View Submission
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => router.push(`/problems/${current?.problems[0]}`)}
+                className="py-2 bg-gray-800 text-white  px-3 mt-4"
+              >
+                Go And Code
+              </button>
+            )}
           </div>
         )}
       </div>

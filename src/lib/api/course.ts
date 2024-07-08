@@ -45,6 +45,22 @@ const courseEndpoints = {
     method: "get" as const,
     path: "getSubmission/:id",
   },
+  getMySubmission: {
+    method: "get" as const,
+    path: "getMySubmission/:id",
+  },
+  manageLike:{
+    method: "post" as const,
+    path: "like",
+  },
+  assignTask:{
+    method: "post" as const,
+    path: "addtask",
+  },
+  getTodaysTask: {
+    method: "get" as const,
+    path: "getTodayTask",
+  },
 };
 
 const courseService = createApiService("course", courseEndpoints);

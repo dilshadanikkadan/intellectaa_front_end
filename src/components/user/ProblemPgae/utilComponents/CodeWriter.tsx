@@ -58,10 +58,11 @@ console.log(">>>>>>>>>>>>>>>>>",data?.payload);
     onError: (err) => {
       setsubMissionErr(err);
     },
-  });
+  }); 
 
   const runCode = () => {
-    runCodeMutate({ code, language: selectedLanguage });
+      
+      runCodeMutate({ code, language: selectedLanguage,question:problemName, problemType:'string'});
   };
 
   const onChange = (newValue: string) => {

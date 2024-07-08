@@ -14,6 +14,7 @@ const AdminSideNav = () => {
     { icon: <HomeIcon />, name: "Dashboard", href: "/admin" },
     { icon: <PeopleIcon />, name: "Users", href: "/admin/users" },
     { icon: <PeopleIcon />, name: "Courses", href: "/admin/courses" },
+    { icon: <PeopleIcon />, name: "Tasks", href: "/admin/tasks" },
     { icon: <SettingsIcon />, name: "Settings", href: "/admin/settings" },
     { icon: <LogoutIcon />, name: "Logout", href: "/logout" },
   ];

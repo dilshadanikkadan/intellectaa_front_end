@@ -17,9 +17,6 @@ export const codeExcuteHelper = async (payload: any) => {
   }
 };
 
-
-
-
 export const allProblemsFetchHelper = async (payload: any) => {
   try {
     const response = await courseService.allProblemsFetch(payload);
@@ -32,7 +29,7 @@ export const allProblemsFetchHelper = async (payload: any) => {
   } catch (error: any) {
     console.log(error.response.data.message);
 
-    throw NewError(error)
+    throw NewError(error);
   }
 };
 
@@ -47,8 +44,8 @@ export const submitCourseHelper = async (payload: any) => {
     }
   } catch (error: any) {
     console.log(error.response.data.message);
-    
-    throw NewError(error)
+
+    throw NewError(error);
   }
 };
 
@@ -63,15 +60,15 @@ export const getAllCourseHelper = async (payload?: any) => {
     }
   } catch (error: any) {
     console.log(error.response.data.message);
-    
-    throw NewError(error)
+
+    throw NewError(error);
   }
 };
 
 export const getCourseeHelper = async (id?: any) => {
-  const courseId = id.queryKey[1]
+  const courseId = id.queryKey[1];
   try {
-    const response = await courseService.getCourse({},{id:courseId});
+    const response = await courseService.getCourse({}, { id: courseId });
     if (response.status === 200) {
       return {
         success: true,
@@ -80,16 +77,16 @@ export const getCourseeHelper = async (id?: any) => {
     }
   } catch (error: any) {
     console.log(error.response.data.message);
-    
-    throw NewError(error)
+
+    throw NewError(error);
   }
 };
 
 export const codeFetchHelper = async (id: any) => {
-  const question = id.queryKey[1]
-  const langauge = id.queryKey[2]
+  const question = id.queryKey[1];
+  const langauge = id.queryKey[2];
   try {
-    const response = await courseService.codeFetch({},{question,langauge});
+    const response = await courseService.codeFetch({}, { question, langauge });
     if (response.status === 200) {
       return {
         success: true,
@@ -99,7 +96,7 @@ export const codeFetchHelper = async (id: any) => {
   } catch (error: any) {
     console.log(error.response.data.message);
 
-    throw NewError(error)
+    throw NewError(error);
   }
 };
 export const publishCourseHelper = async (payload: any) => {
@@ -112,11 +109,9 @@ export const publishCourseHelper = async (payload: any) => {
       };
     }
   } catch (error: any) {
-    
-    throw NewError(error)
+    throw NewError(error);
   }
 };
-
 
 export const getAllPublishCoursesHelper = async (payload: any) => {
   try {
@@ -128,15 +123,14 @@ export const getAllPublishCoursesHelper = async (payload: any) => {
       };
     }
   } catch (error: any) {
-    
-    throw NewError(error)
+    throw NewError(error);
   }
 };
 
 export const myCourseHelper = async (id?: any) => {
-  const courseId = id.queryKey[1]
+  const courseId = id.queryKey[1];
   try {
-    const response = await courseService.myCourse({},{id:courseId});
+    const response = await courseService.myCourse({}, { id: courseId });
     if (response.status === 200) {
       return {
         success: true,
@@ -145,11 +139,10 @@ export const myCourseHelper = async (id?: any) => {
     }
   } catch (error: any) {
     console.log(error.response.data.message);
-    
-    throw NewError(error)
+
+    throw NewError(error);
   }
 };
-
 
 export const createSubmissionHelper = async (payload: any) => {
   try {
@@ -161,16 +154,17 @@ export const createSubmissionHelper = async (payload: any) => {
       };
     }
   } catch (error: any) {
-    
-    throw NewError(error)
+    throw NewError(error);
   }
 };
 
-
 export const getSubmissionsHelper = async (id?: any) => {
-  const submissionId = id.queryKey[1]
+  const submissionId = id.queryKey[1];
   try {
-    const response = await courseService.getSubmission({},{id:submissionId});
+    const response = await courseService.getSubmission(
+      {},
+      { id: submissionId }
+    );
     if (response.status === 200) {
       return {
         success: true,
@@ -179,7 +173,68 @@ export const getSubmissionsHelper = async (id?: any) => {
     }
   } catch (error: any) {
     console.log(error.response.data.message);
-    
-    throw NewError(error)
+
+    throw NewError(error);
+  }
+};
+
+export const getMySubmissionHelper = async (id?: any) => {
+  const submissionId = id.queryKey[1];
+  try {
+    const response = await courseService.getMySubmission(
+      {},
+      { id: submissionId }
+    );
+    if (response.status === 200 || 201) {
+      return {
+        success: true,
+        payload: response.data,
+      };
+    }
+  } catch (error: any) {
+    throw NewError(error);
+  }
+};
+
+export const likeSubmissionHelper = async (payload: any) => {
+  try {
+    const response = await courseService.submisson(payload);
+    if (response.status === 200 || 201) {
+      return {
+        success: true,
+        payload: response.data,
+      };
+    }
+  } catch (error: any) {
+    throw NewError(error);
+  }
+};
+
+export const dailyTaskHelper = async (payload: any) => {
+  try {
+    const response = await courseService.assignTask(payload);
+    if (response.status === 200 || 201) {
+      return {
+        success: true,
+        payload: response.data,
+      };
+    }
+  } catch (error: any) {
+    throw error.response.data.message;
+  }
+};
+
+
+export const getTodaysTasksHelper = async (payload: any) => {
+  try {
+    const response = await courseService.getTodaysTask(payload);
+    if (response.status === 200) {
+      return {
+        success: true,
+        payload: response.data,
+      };
+    }
+  } catch (error: any) {
+    throw NewError(error);
   }
 };
