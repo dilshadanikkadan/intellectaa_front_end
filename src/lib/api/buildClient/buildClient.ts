@@ -1,7 +1,7 @@
   import axios, { AxiosInstance } from "axios";
 
   const apiUrl = "/api";
-  
+  export const  baseApi_ = 'http://localhost:5000/api/'
   export const buildClient = (): AxiosInstance => {
     let apiClient;
     if (typeof window === "undefined") {

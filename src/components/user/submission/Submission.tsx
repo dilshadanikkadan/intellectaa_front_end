@@ -18,7 +18,7 @@ const Submission = () => {
     queryFn: getSubmissionsHelper,
   });
 
-  console.log(allSubmission);
+  console.log("**************************************",allSubmission);
   const queryClient = useQueryClient();
 
   const { mutate: submissionLikeMutate } = useMutation({
@@ -47,7 +47,7 @@ const Submission = () => {
                   alt="User Avatar"
                 />
                 <p className="text-lg font-semibold">
-                  {submission?.userId.username}
+                  {submission?.userId?.username}
                 </p>
               </div>
 

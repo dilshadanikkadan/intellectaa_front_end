@@ -5,6 +5,7 @@ import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ChatIcon from "@mui/icons-material/Chat";
 import { User } from "@/store/storeProviders/UseUserStore";
 import Image from "next/image";
+import { EditProfile } from "./ProfileUpdateModal";
 type AvatarBarProps = {
   user: User | null;
 };
@@ -22,7 +23,7 @@ const AvatarBar = ({ user }: AvatarBarProps) => {
         <p>{user?.username ?? user?.name}</p>
       </div>
       <button className=" text-[#20B486] mt-3 bg-white border border-[#20B486] px-7 py-[6px]  ">
-        Edit Profile
+        <EditProfile/>
       </button>
       <div className="w-full mt-3">
         <div className="flex gap-5">

@@ -46,7 +46,7 @@ const CoursesPage = () => {
               <TableCell className="font-medium ">{course?.title}</TableCell>
               <TableCell>{course?.language}</TableCell>
               <TableCell>{course?.category}</TableCell>
-              <TableCell>{String(course?.isPublished ? "Published" :"Not Yet")}</TableCell>
+              <TableCell>{String(course?.isRejected ? "Rejected" :course?.isPublished ? "Published" :"Not Yet")}</TableCell>
               <TableCell className="text-right">
               <Link href={`/admin/courses/${course._id}`} className='py-2 px-5 rounded-md bg-gray-800 text-white text-sm'>View Details</Link>
               </TableCell>

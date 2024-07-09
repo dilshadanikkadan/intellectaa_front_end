@@ -1,6 +1,8 @@
 import userService from "@/lib/api/user";
 import { NewError } from "../error/serializeError";
 import { useUserStore } from "@/store/storeProviders/UseUserStore";
+import axios from "axios";
+import { baseApi_ } from "@/lib/api/buildClient/buildClient";
 export const userBlockHelper = async (payload: any) => {
     try {
       const response = await userService.blockManage(payload);
@@ -15,14 +17,15 @@ export const userBlockHelper = async (payload: any) => {
     }
   };
   
-  export const getAllUserHelper = async (payload: any) => {
+  export const getAllUserHelper = async (pageNumber: number, limit: number) => {
     try {
-      const response = await userService.getAllUser(payload);
+      const response = await axios.get(`${baseApi_}user/getAllUsers?_limit=${limit}&_page=${pageNumber}`);
       if (response.status === 200) {
         return {
           success: true,
-          payload: response.data,
-        };
+          payload: response.data.users,
+          totalCount: response.data.totalCount,
+        };  
       }
     } catch (error: any) {
       throw NewError(error);

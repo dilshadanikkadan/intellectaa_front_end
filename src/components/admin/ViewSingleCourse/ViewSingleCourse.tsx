@@ -7,19 +7,31 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { useQuery } from "@tanstack/react-query";
-import { getCourseeHelper } from "@/helpers/course/courseApiHelper";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { PiSpinnerBold } from "react-icons/pi";
+
+import {
+  getCourseeHelper,
+  rejectCourseHelper,
+} from "@/helpers/course/courseApiHelper";
 import { useParams } from "next/navigation";
-import { PlayCircle } from "lucide-react"; 
+import { PlayCircle } from "lucide-react";
 import PublishModal from "./utilComponents/PublishModal";
+import { useRouter } from "next/navigation";
 
 const ViewSingleCourse = () => {
   const { id } = useParams();
-
+  const { mutate: rejectMutate,isPending } = useMutation({
+    mutationFn: rejectCourseHelper,
+    onSuccess: (data) => {
+      router.push("/admin/courses");
+    },
+  });
   const { data: course, isLoading } = useQuery({
     queryKey: ["course", id],
     queryFn: getCourseeHelper,
   });
+  const router = useRouter();
 
   const [currentView, setCurrentView] = useState<any>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -42,8 +54,11 @@ const ViewSingleCourse = () => {
     setIsPlaying(true);
   };
 
-  console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^", currentView);
-
+  const handleRejectCourse = () => {
+    rejectMutate({
+      courseId:id
+    })
+  };
   return (
     <div className="w-[90%] mx-auto relative">
       <div className="wrapper flex w-[90%] mx-auto">
@@ -94,7 +109,7 @@ const ViewSingleCourse = () => {
         <div className="right flex-[1] ">
           <div className="w-[90%] mx-auto mt-10">
             <Accordion type="single" collapsible className="w-full">
-              {course.payload.lessons.map((lesson: any, i: number) => (
+              {course?.payload?.lessons.map((lesson: any, i: number) => (
                 <AccordionItem key={i} value={`item-${i}`}>
                   <AccordionTrigger>Lesson {i + 1}</AccordionTrigger>
                   <AccordionContent
@@ -115,10 +130,16 @@ const ViewSingleCourse = () => {
       <div>
         <div className="w-[90%] mx-auto  flex justify-between mt-10">
           <button className="py-2 px-5 rounded-md bg-gray-800 text-white">
-           <PublishModal/>
+            <PublishModal />
           </button>
-          <button className="py-2 px-5 rounded-md bg-gray-800 text-white">
+          <button
+            onClick={handleRejectCourse}
+            className="py-2 px-5 flex rounded-md bg-gray-800 text-white"
+          >
             Reject
+            {isPending && (
+            <PiSpinnerBold className="text-xl ml-2 animate-spin" />
+             )}
           </button>
         </div>
       </div>

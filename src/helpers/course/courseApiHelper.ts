@@ -270,3 +270,32 @@ export const getInstroctorCourseHelper = async (id?: any) => {
     throw NewError(error);
   }
 };
+
+
+export const updateCourseHelper = async (payload: any) => {
+  try {
+    const response = await courseService.updateCourse(payload);
+    if (response.status === 200 || 201) {
+      return {
+        success: true,
+        payload: response.data,
+      };
+    }
+  } catch (error: any) {
+    throw NewError(error);
+  }
+};
+
+export const rejectCourseHelper = async (payload: any) => {
+  try {
+    const response = await courseService.rejectCourse(payload);
+    if (response.status === 200 || 201) {
+      return {
+        success: true,
+        payload: response.data,
+      };
+    }
+  } catch (error: any) {
+    throw NewError(error);
+  }
+};

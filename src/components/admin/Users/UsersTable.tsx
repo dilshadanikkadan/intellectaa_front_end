@@ -1,4 +1,5 @@
 "use client";
+import { useState, useEffect } from "react";
 import {
   Table,
   TableBody,
@@ -9,20 +10,25 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { getAllUserHelper, userBlockHelper } from "@/helpers/user/userApiHelper";
-import Modal from "@/styles/ui/Modal";
 import { useQuery } from "@tanstack/react-query";
 import UserBlockModal from "./UserDeleteModal";
+import { UserTablePagination } from "./UserTablePagination";
 
 const UsersTable = () => {
+  const [pageNumber, setPageNumber] = useState(1);
+  const limit = 5;
+
   const { data: AllUsers, isLoading, refetch } = useQuery({
-    queryFn: getAllUserHelper,
-    queryKey: ["users"],
+    queryFn: () => getAllUserHelper(pageNumber, limit),
+    queryKey: ["users", pageNumber, limit],
   });
 
+  const totalPages = Math.ceil((AllUsers?.totalCount || 0) / limit);
+
   return (
-    <div className="w-[90%] mx-auto  relative">
+    <div className="w-[90%] mx-auto relative">
       <Table className="relative z-0">
-        <TableCaption>A list Users</TableCaption>
+        <TableCaption>A list of Users</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead>Profile</TableHead>
@@ -39,20 +45,20 @@ const UsersTable = () => {
               <TableCell className="font-medium">
                 <img
                   src="/avt.png"
-                  className="w-14 h-w-14  object-cover"
+                  className="w-14 h-w-14 object-cover"
                   alt=""
                 />
               </TableCell>
               <TableCell className="font-medium ">{user?.username}</TableCell>
               <TableCell>{user?.email}</TableCell>
               <TableCell>{user?.role}</TableCell>
-              <TableCell>{String(user?.isBlocked ? "blocked" :"active")}</TableCell>
+              <TableCell>{String(user?.isBlocked ? "blocked" : "active")}</TableCell>
               <TableCell className="text-right">
                 <UserBlockModal
                   id={`modal_${user.email}`}
                   title="Block User"
                   content={<p>Are you sure you want to block this user?</p>}
-                  buttonText={`${user?.isBlocked ? "Unblock" :"block"}   `}
+                  buttonText={`${user?.isBlocked ? "Unblock" : "block"}`}
                   email={user.email}
                 />
               </TableCell>
@@ -60,6 +66,11 @@ const UsersTable = () => {
           ))}
         </TableBody>
       </Table>
+      <UserTablePagination 
+        setPageNumber={setPageNumber} 
+        currentPage={pageNumber}
+        totalPages={totalPages}
+      />
     </div>
   );
 };

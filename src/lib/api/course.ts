@@ -70,6 +70,14 @@ const courseEndpoints = {
     method: "get" as const,
     path: "getInstroctorCourse/:id",
   },
+  updateCourse:{
+    method: "post" as const,
+    path: "updateCourse",
+  },
+  rejectCourse:{
+    method: "post" as const,
+    path: "rejectCourse",
+  },
 };
 
 const courseService = createApiService("course", courseEndpoints);
