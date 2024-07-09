@@ -41,7 +41,6 @@ const AdminLoginForm = () => {
     },
   });
   const onSubmit = async (data: FormData) => {
-    console.log(data);
     loginMutate(data);
   };
   return (

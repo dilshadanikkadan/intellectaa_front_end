@@ -13,6 +13,10 @@ const userEndpoints = {
     method: "put" as const,
     path: "createInstructor",
   },
+  userProfilePatch: {
+    method: "put" as const,
+    path: "updateProfile",
+  },
 };
  
 const userService = createApiService("user", userEndpoints);

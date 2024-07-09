@@ -15,6 +15,8 @@ import { Label } from "@/components/ui/label";
 import { useUserStore } from "@/store/storeProviders/UseUserStore";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { UseCloudinaryImage } from "@/hooks/UseCloudinaryImage";
+import { useMutation } from "@tanstack/react-query";
+import { userPrfilePatchHelper } from "@/helpers/user/userApiHelper";
 
 export function EditProfile() {
   const user = useUserStore(state => state.user);
@@ -34,15 +36,24 @@ export function EditProfile() {
     }
   };
 
+  const {mutate:profileUpdateMutate,}= useMutation({
+    mutationFn:userPrfilePatchHelper,
+    onSuccess:()=>{
+
+    }
+  })
   const handleSaveChanges = () => {
     const updatedUser = {
       username,
       firstName,
       lastaName,
-      profileImage,
+      profile:profileImage,
     };
-    console.log(updatedUser);
-    
+    userPrfilePatchHelper({
+        ...updatedUser,
+        userId:user?._id
+    })
+      
   };
 
   return (

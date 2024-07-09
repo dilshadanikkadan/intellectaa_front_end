@@ -5,10 +5,8 @@ import { Suspense } from "react";
 export default function Home() {
   return (
     <>
-    <Suspense fallback={"loading........"} >
       <LandingPageView />
       <ProfilePage />
-    </Suspense>
     </>
   );
 }

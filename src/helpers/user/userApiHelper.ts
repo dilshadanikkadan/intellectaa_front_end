@@ -48,3 +48,19 @@ export const userBlockHelper = async (payload: any) => {
       throw NewError(error);
     }
   };
+
+  export const userPrfilePatchHelper = async (payload: any) => {
+    try {
+      const response = await userService.userProfilePatch(payload);
+      console.log("response status ++++++++++",response.status);
+      
+      if (response.status === 200) {
+        return {
+          success: true,
+          payload: response.data,
+        };
+      }
+    } catch (error: any) {
+      throw NewError(error);
+    }
+  };

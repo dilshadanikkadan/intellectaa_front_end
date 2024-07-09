@@ -17,14 +17,11 @@ export const options: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async signIn({ profile, user,account }) {
+    async signIn({ profile, user, account }) {
       if (!profile?.email) {
         throw new Error("NO profile");
       }
-      console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
-      console.log(account);
-      
-      
+
       const response = await googleAuthHelper(profile);
 
       if (response?.success) {
@@ -36,12 +33,20 @@ export const options: NextAuthOptions = {
           response?.payload?.headers?.["set-cookie"]?.[1]
             ?.split("=")[1]
             ?.split(";")[0] ?? "";
+    console.log("____________________________");
+    console.log(response.payload.data);
+    console.log("____________________________");
+    
 
         cookies().set("token", access, {
           path: "/",
           httpOnly: true,
         });
         cookies().set("session_id", session_id, {
+          path: "/",
+          httpOnly: true,
+        });
+        cookies().set("user", response.payload.data as any, {
           path: "/",
           httpOnly: true,
         });

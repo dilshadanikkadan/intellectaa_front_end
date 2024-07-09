@@ -64,6 +64,8 @@ export const googleAuthHelper = async (payload: any) => {
     const response = await authService.googleSignup({
       ...payload,
     });
+     
+    
     if (response.status === 200) {
       return {
         success: true,

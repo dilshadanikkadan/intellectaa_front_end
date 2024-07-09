@@ -24,14 +24,8 @@ export default function LandingPageView() {
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     if (status === "authenticated") {
-      console.log(
-        "***********************************************************"
-      );
-      console.log("#####################################################");
-      console.log(
-        "***********************************************************"
-      );
-
+     
+  
       googleAuthSucess(session.user as any);
     } else if (status === "unauthenticated" && !user) {
       logoutSuccess();
