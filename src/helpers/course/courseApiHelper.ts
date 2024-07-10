@@ -299,3 +299,17 @@ export const rejectCourseHelper = async (payload: any) => {
     throw NewError(error);
   }
 };
+
+export const updateProgressCourseHelper = async (payload: any) => {
+  try {
+    const response = await courseService.updateProgressCourse(payload);
+    if (response.status === 200 || 201) {
+      return {
+        success: true,
+        payload: response.data,
+      };
+    }
+  } catch (error: any) {
+    throw NewError(error);
+  }
+};

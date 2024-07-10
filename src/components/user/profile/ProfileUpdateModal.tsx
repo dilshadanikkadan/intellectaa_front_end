@@ -23,33 +23,40 @@ export function EditProfile() {
   const [profileImage, setProfileImage] = useState(user?.profile || "/avt.png");
   const [username, setUsername] = useState(user?.username || "");
   const [firstName, setFirstName] = useState(user?.firstName || "");
-  const [lastaName, setLastaName] = useState(user?.lastaName || "");
+  const [lastName, setLastaName] = useState(user?.lastaName || "");
   const [uploadProgress, setUploadProgress] = useState(0);
-
+const loginSucees = useUserStore(state=> state.loginSuccess)
   const handleImageUpload = async (e:any) => {
     const file = e.target.files[0];
     if (file) {
       const imageUrl = await UseCloudinaryImage(file, setUploadProgress);
       if (imageUrl) {
-        setProfileImage(imageUrl);
+        setProfileImage(imageUrl);  
       }
     }
   };
 
   const {mutate:profileUpdateMutate,}= useMutation({
     mutationFn:userPrfilePatchHelper,
-    onSuccess:()=>{
-
+    onSuccess:(data)=>{
+         console.log("______________________________",data?.payload);
+         loginSucees(data?.payload)
     }
   })
   const handleSaveChanges = () => {
     const updatedUser = {
       username,
       firstName,
-      lastaName,
+      lastName,
       profile:profileImage,
     };
-    userPrfilePatchHelper({
+
+    console.log({
+      ...updatedUser,
+      userId:user?._id
+    });
+    
+    profileUpdateMutate({
         ...updatedUser,
         userId:user?._id
     })
@@ -127,7 +134,7 @@ export function EditProfile() {
             </Label>
             <Input
               id="firstName"
-              value={lastaName}
+              value={lastName}
               onChange={(e) => setLastaName(e.target.value)}
               className="col-span-3"
             />

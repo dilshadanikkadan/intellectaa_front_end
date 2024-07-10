@@ -23,10 +23,21 @@ const AllMyCourses = () => {
     queryKey: ["myCourse", user?._id],
     queryFn: getInstroctorCourseHelper,
   });
+
+
+  console.log("_________(((((((())))))))))",myCourse?.payload);
+  
   return (
- 
     <div className="w-[90%] mx-auto  relative">
-      <h3 className="text-lg font-semibold mb-3">My Courses</h3>
+      <div className="flex justify-between mb-3">
+        <h3 className="text-lg font-semibold mb-3">My Courses</h3>
+        <button
+          className="px-4 py-2 rounded-md text-gray-800 border border-gray-800"
+          onClick={() => router.push("/instructor/myCourses/addCourse")}
+        >
+          Add Course
+        </button>
+      </div>
       <Table className="relative z-0">
         <TableCaption>A list Users</TableCaption>
         <TableHeader>
@@ -53,12 +64,16 @@ const AllMyCourses = () => {
               <TableCell>{course?.language}</TableCell>
               <TableCell>{course?.category}</TableCell>
               <TableCell>
-                {String( course?.isRejected ? "Rejected" :course?.isPublished ? "Published" : "Not Yet")}
+                {String(
+                  course?.isRejected
+                    ? "Rejected"
+                    : course?.isPublished
+                    ? "Published"
+                    : "Not Yet"
+                )}
               </TableCell>
               <TableCell className="text-right">
-                {
-   
-                course?.isPublished ? (
+                {course?.isPublished ? (
                   <Link
                     href={`/instructor/myCourses/${course._id}`}
                     className="py-2 px-5 rounded-md bg-gray-800 text-white text-sm"
@@ -70,7 +85,7 @@ const AllMyCourses = () => {
                     href={``}
                     className="py-2 px-5 rounded-md bg-gray-800 text-white text-sm"
                   >
-                   Delete
+                    Delete
                   </Link>
                 )}
               </TableCell>

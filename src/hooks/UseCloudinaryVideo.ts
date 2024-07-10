@@ -25,8 +25,8 @@ export const UseCloudinaryVideo = async (video: any,setPrgress:any) => {
         }
       );
 
-      const { secure_url } = res?.data;
-      return secure_url;
+      const { secure_url,duration } = res?.data;
+      return {secure_url,duration}
     }
   } catch (error) {
     console.error("Error uploading video:", error);

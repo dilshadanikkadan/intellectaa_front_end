@@ -12,12 +12,13 @@ type AvatarBarProps = {
 const AvatarBar = ({ user }: AvatarBarProps) => {
   return (
     <Card className="w-[90%] mx-auto md:w-[25%]  flex flex-col  p-3 h-[28rem] mt-5 ">
-      <div className="warapper flex gap-4">
+      <div className="warapper py-2 flex gap-4">
         <Image
-          src={user?.image || "/avt.png"}
+          src={user?.image || user?.profile || "/avt.png"}
           alt={user?.name || "User"}
           width={70}
-          height={70}
+          height={90}
+          objectFit="cover"
           onError={() => console.error("Image failed to load")}
         />
         <p>{user?.username ?? user?.name}</p>

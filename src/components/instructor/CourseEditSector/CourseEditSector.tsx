@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { UseCloudinaryVideo } from "@/hooks/UseCloudinaryVideo";
 import { UseCloudinaryImage } from "@/hooks/UseCloudinaryImage";
 import { PiSpinnerBold } from "react-icons/pi";
+import { useUserStore } from "@/store/storeProviders/UseUserStore";
 
 const CourseEditSector = () => {
   const { id } = useParams();
@@ -28,7 +29,7 @@ const CourseEditSector = () => {
 
   const [editedCourse, setEditedCourse] = useState<any>(null);
   const [uploadProgress, setUploadProgress] = useState<any>({});
-
+  const user = useUserStore((state) => state.user);
   useEffect(() => {
     if (course?.payload) {
       setEditedCourse(course.payload);
@@ -102,18 +103,18 @@ const CourseEditSector = () => {
     }
 
     if (updatedCourse.trailer && updatedCourse.trailer instanceof File) {
-      const trailerUrl = await UseCloudinaryVideo(
+      const { secure_url }: any = await UseCloudinaryVideo(
         updatedCourse.trailer,
         (progress: any) =>
           setUploadProgress((prev: any) => ({ ...prev, trailer: progress }))
       );
-      updatedCourse.trailer = trailerUrl;
+      updatedCourse.trailer = secure_url;
     }
 
     updatedCourse.lessons = await Promise.all(
       updatedCourse.lessons.map(async (lesson: any, index: number) => {
         if (lesson.video && lesson.video instanceof File) {
-          const videoUrl = await UseCloudinaryVideo(
+          const { secure_url }: any = await UseCloudinaryVideo(
             lesson.video,
             (progress: any) =>
               setUploadProgress((prev: any) => ({
@@ -121,7 +122,7 @@ const CourseEditSector = () => {
                 [`lesson${index}`]: progress,
               }))
           );
-          return { ...lesson, video: videoUrl };
+          return { ...lesson, video: secure_url };
         }
         return lesson;
       })
@@ -132,12 +133,21 @@ const CourseEditSector = () => {
   };
 
   const handleSaveChanges = () => {
+    const { instructor, ...rest } = editedCourse;
     console.log({
       id,
-      updatedCourse: editedCourse,
+      updatedCourse: {
+        instructor: user?._id,
+        ...rest,
+      },
     });
-    // Uncomment the following line when ready to actually save changes
-    updateMutation.mutate({ id, updatedCourse: editedCourse });
+    updateMutation.mutate({ 
+      id,
+      updatedCourse: {
+        instructor: user?._id,
+        ...rest,
+      },
+     });
   };
 
   return (

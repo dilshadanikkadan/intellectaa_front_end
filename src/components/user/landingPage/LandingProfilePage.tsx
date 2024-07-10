@@ -11,25 +11,16 @@ import { flushSync } from "react-dom";
 
 export default function ProfilePage() {
   const isAuthenticated = useUserStore((state) => state.isAuthenticated);
-  const [currentUser, setcurrentUser] = useState<any | null>(null);
-  if (!isAuthenticated) return null;
+  const user = useUserStore(state=> state.user)
 
-  useEffect(() => {
-    const setUser = async () => {
-    const res =await useUser();
-    setcurrentUser(res);
-    };
-    setUser()
-   
-  }, []);
+ 
 
-  console.log("*********", currentUser);
 
   return (
     <div>
       {/* <NavBar /> */}
       <div className="flex  flex-col md:flex-row w-full md:w-[80%] mx-auto">
-        <AvatarBar user={currentUser} />
+        <AvatarBar user={user} />
         <div className="flex flex-col w-full">
           <TopBarProfile />
           <Attendence />

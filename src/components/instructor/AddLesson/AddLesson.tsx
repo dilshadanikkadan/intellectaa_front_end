@@ -45,7 +45,6 @@ const AddLesson = () => {
     handleInputChange(lessonIndex, "resource", value);
   };
   const addLesson = async () => {
-    setIsModalOpen(true);
     setOverallProgress(0);
     try {
       const totalLessons = lessons.length;
@@ -61,7 +60,8 @@ const AddLesson = () => {
           if (!thumbnail || !resource) {
             throw new Error("Thumbnail or resource not provided for all lessons");
           }
-  
+          setIsModalOpen(true);
+
           const updateProgress = (uploadIndex:any, progress:any) => {
             const baseProgress = (completedUploads / totalUploads) * 100;
             const currentProgress = (progress / 100) * (1 / totalUploads) * 100;
@@ -72,14 +72,15 @@ const AddLesson = () => {
           completedUploads++;
           updateProgress(0, 100);
   
-          const trailerVideo = await UseCloudinaryVideo(resource, (progress:any) => updateProgress(1, progress));
+          const {secure_url,duration}:any = await UseCloudinaryVideo(resource, (progress:any) => updateProgress(1, progress));
           completedUploads++;
           updateProgress(1, 100);
-  
+              
           return {
             ...titleDescription,
             thumbnail: thumbnailImage,
-            video: trailerVideo,
+            video: secure_url,
+            duration,
             problems: selectedProblems,
             lessonNumber:lessonIndex+1 
           };

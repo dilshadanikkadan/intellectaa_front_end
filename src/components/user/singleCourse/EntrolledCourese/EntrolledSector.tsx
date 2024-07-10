@@ -1,6 +1,6 @@
 "use client";
 import { Card } from "@/components/ui/card";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -8,16 +8,25 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { CldVideoPlayer } from "next-cloudinary";
-import { useRouter } from "next/navigation";
-import { useQuery } from "@tanstack/react-query";
-import { getMySubmissionHelper } from "@/helpers/course/courseApiHelper";
+import { useParams, useRouter } from "next/navigation";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import {
+  getMySubmissionHelper,
+  updateProgressCourseHelper,
+} from "@/helpers/course/courseApiHelper";
+import { useUserStore } from "@/store/storeProviders/UseUserStore";
 
-const EntrolledSector = ({ course }: any) => {
+const EntrolledSector = ({ course,myCourse }: any) => {
   const [current, setCurrent] = useState<any>(null);
-
   const [videoKey, setVideoKey] = useState(0);
+  const videoWrapperRef = useRef<HTMLDivElement>(null);
+  const { id }: any = useParams();
   const router = useRouter();
-
+  const user = useUserStore((state) => state.user);
+  const { mutate: progressMutate } = useMutation({
+    mutationFn: updateProgressCourseHelper,
+    onSuccess: (data) => {},
+  });
   useEffect(() => {
     if (course) {
       setCurrent(course);
@@ -39,13 +48,46 @@ const EntrolledSector = ({ course }: any) => {
       console.log("My submission data:", mySubmission);
     }
   }, [mySubmission]);
-  // console.log("_______________",mySubmission);
+console.log("_______++++++++++++___",myCourse);
+
+  useEffect(() => {
+    const videoElement = videoWrapperRef.current?.querySelector("video");
+    const handleTimeUpdate = () => {
+      if (videoElement) {
+        const currentTime = videoElement.currentTime;
+        const duration = videoElement.duration;
+        const percentage = (currentTime / duration) * 100;
+
+        if (percentage >= 80) {
+          console.log("Video has reached 80%");
+          console.log("currentLesson", current?._id);
+          progressMutate({
+            courseId: id,
+            userId: user?._id,
+            lessonId: current?._id,
+          });
+    
+          
+        }
+      }
+    };
+
+    if (videoElement) {
+      videoElement.addEventListener("timeupdate", handleTimeUpdate);
+    }
+
+    return () => {
+      if (videoElement) {
+        videoElement.removeEventListener("timeupdate", handleTimeUpdate);
+      }
+    };
+  }, [videoKey]);
 
   return (
     <div className="w-full mx-auto flex mt-10 mb-10 gap-10 ">
       <div className="left flex-[3]  mx-auto">
         {current && (
-          <Card className="w-[100%] mx-auto h-96">
+          <Card className="w-[100%] mx-auto h-96" ref={videoWrapperRef}>
             <CldVideoPlayer
               poster={current?.thumbnail}
               key={videoKey}
@@ -68,10 +110,7 @@ const EntrolledSector = ({ course }: any) => {
 
             {mySubmission?.payload ? (
               <div className="flex gap-3">
-                <button
-
-                  className="py-2 bg-gray-800 text-white  px-3 mt-4"
-                >
+                <button className="py-2 bg-gray-800 text-white  px-3 mt-4">
                   Completed
                 </button>
                 <button
@@ -111,6 +150,11 @@ const EntrolledSector = ({ course }: any) => {
             </AccordionItem>
           ))}
         </Accordion>
+
+        {
+          myCourse?.courseMode ==="premium" &&
+          <button onClick={()=> router.push(`/courses/${id}/chat`)} className="text-white bg-[#20B486] rounded-md py-2 px-5 float-left mt-14">Chat Room</button>
+        }
       </div>
     </div>
   );

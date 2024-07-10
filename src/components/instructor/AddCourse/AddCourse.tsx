@@ -24,6 +24,7 @@ const AddCourse = () => {
   const savedDraft = UseLocalStroageValue("courseDraft");
   if (savedDraft) return <DraftCourse />;
 
+  const [error, setError] = useState<string>("");
   const [thumbnail, setThumbnail] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [trailer, setTrailer] = useState<File | null>(null);
@@ -50,15 +51,24 @@ const AddCourse = () => {
   };
 
   const addLesson = async () => {
+    if (!trailer || !thumbnail) {
+      setError("please provide tubmnail");
+      return;
+    }
+    if (Object.values(tileDescription).length === 0) {
+      setError("please provide title Description");
+      return;
+    }
     setIsModalOpen(true);
     setProgress(25);
     const thumbnailImage = await UseCloudinaryImage(thumbnail, setprogressImg);
-    const trailerVideo = await UseCloudinaryVideo(trailer, setprogressBar);
+    const {secure_url,duration}:any = await UseCloudinaryVideo(trailer, setprogressBar);
     setProgress(100);
     const newData = {
       ...tileDescription,
       thumbnail: thumbnailImage,
-      trailer: trailerVideo,
+      trailer: secure_url,
+      duration,
     };
     setKeyValue(newData);
     const updatedFormData = useFormStore.getState().formData;
@@ -144,9 +154,10 @@ const AddCourse = () => {
 
           <CategorySelectors />
           <LanguageSelector />
+          {error && <p className="text-red-500 mt-2">{error}</p>}
           <button
             onClick={addLesson}
-            className="800 mt-7 flex items-center justify-center text-white bg-gray-900 w-[28%] py-[6px] mr-16"
+            className="800 mt-3 flex items-center justify-center text-white bg-gray-900 w-[28%] py-[6px] mr-16"
           >
             Add Lesson
             {/* <PiSpinnerBold fontSize={26} className="ml-3 font-normal" /> */}

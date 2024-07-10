@@ -42,6 +42,9 @@ const ViewSingleCourse = () => {
     }
   }, [course]);
 
+
+  console.log("_______________________________________",course?.payload);
+  
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -127,7 +130,15 @@ const ViewSingleCourse = () => {
           </div>
         </div>
       </div>
-      <div>
+      <div className="w-[90%] mx-auto">
+        <Card className="w-[70%] py-3 mt-10  flex flex-col justify-center">
+          <h3 className="text-lg ml-10 font-semibold mb-5">Instructor Details</h3>
+          <div className="ml-10 flex gap-4">
+
+          <img className="w-16 h-16 object-cover rounded-full" src={course?.payload?.instructor.profile} alt="" />
+          <h3 className="text-lg font-semibold">{course?.payload?.instructor?.username}</h3>
+          </div>
+        </Card>
         <div className="w-[90%] mx-auto  flex justify-between mt-10">
           <button className="py-2 px-5 rounded-md bg-gray-800 text-white">
             <PublishModal />

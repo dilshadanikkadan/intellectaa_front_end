@@ -59,6 +59,8 @@ const CourseSinglePage = () => {
     queryFn:myCourseHelper
   }) 
 
+
+  
   return (
     <div className="w-[80%] mx-auto mt-5  ">
       <div className="w-full h-52 ">
@@ -68,7 +70,7 @@ const CourseSinglePage = () => {
       {
         myCorse?.payload ?
         <>
-        <EntrolledSector course={course?.payload}/>
+        <EntrolledSector course={course?.payload} myCourse={myCorse?.payload }/>
         </>
         :
         <div className="wrapper w-full flex ">

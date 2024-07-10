@@ -13,52 +13,51 @@ import { useQuery } from "@tanstack/react-query";
 const PaymentPacks = () => {
   const user = useUserStore((state) => state.user);
   const router = useRouter();
-  const {id} = useParams();
+  const { id } = useParams();
 
   const { data: course, isLoading } = useQuery({
-    queryKey: ["course",id],
+    queryKey: ["course", id],
     queryFn: getCourseeHelper,
   });
-  console.log("___________________________",course);
-  
+  console.log("__________________________%%%%%%%%%%###############_", course?.payload);
 
-    const handlePayment = async () => {
-        try {
-        const stripe = await loadStripe(
-            process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string
-        );
+  const handlePayment = async (payload: any) => {
+    try {
+      const stripe = await loadStripe(
+        process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string
+      );
 
-        if (!stripe) {
-            console.error("Stripe failed to load");
-            return;
+      if (!stripe) {
+        console.error("Stripe failed to load");
+        return;
+      }
+
+      const response = await axios.post(
+        "http://localhost:5000/api/payment/stripeSession",
+        {
+          userId: user?._id,
+          courseId: course?.payload._id,
+          instructor:course?.payload?.instructor?._id,
+          amount: payload.amount,
+          courseTitle: course?.payload.title,
+          courseThumbnail: course?.payload.thumbnail,
+          courseMode: payload?.mode,
         }
+      );
 
-        const response = await axios.post(
-            "http://localhost:5000/api/payment/stripeSession",
-            {
-            userId: user?._id,
-            courseId: course?.payload._id,
-            amount: 799,
-            courseTitle:course?.payload.title,
-            courseThumbnail:
-                course?.payload.thumbnail,
-                courseMode:"basic"
-            },
-        );
+      console.log("+++++++++++", response.data.data.sessionId);
 
-        console.log("+++++++++++", response.data.data.sessionId);
+      const result = await stripe.redirectToCheckout({
+        sessionId: response.data.data?.sessionId,
+      });
 
-        const result = await stripe.redirectToCheckout({
-            sessionId: response.data.data?.sessionId,
-        });
-
-        if (result.error) {
-            console.error("Stripe checkout error:", result.error.message);
-        }
-        } catch (error) {
-        console.error("Error initiating payment:", error);
-        }
-    };
+      if (result.error) {
+        console.error("Stripe checkout error:", result.error.message);
+      }
+    } catch (error) {
+      console.error("Error initiating payment:", error);
+    }
+  };
 
   return (
     <div className="w-[60%] mx-auto mt-10">
@@ -105,7 +104,12 @@ const PaymentPacks = () => {
           </CardContent>
           <CardFooter>
             <button
-              onClick={handlePayment}
+              onClick={() =>
+                handlePayment({
+                  amount: 799,
+                  mode: "basic",
+                })
+              }
               className="py-2 w-[90%] mx-auto text-[#20B486] border border-[#20B486]"
             >
               Buy Now
@@ -124,25 +128,33 @@ const PaymentPacks = () => {
               <VerifiedIcon className="text-[#20B486] mr-3" />
               Access All Time
             </p>
-
             <p>
               <VerifiedIcon className="text-[#20B486] mr-3" />
-              Access All Time
+              Questions during Lesson
             </p>
             <p>
               <VerifiedIcon className="text-[#20B486] mr-3" />
-              Access All Time
+              chat With instructor
             </p>
             <p>
               <VerifiedIcon className="text-[#20B486] mr-3" />
-              Access All Time
+              chat Room
             </p>
+        
             <h3 className="text-lg text-start font-semibold ml-[3%]">
               $ <span className="ml-3">999</span>
             </h3>
           </CardContent>
           <CardFooter className="flex flex-col gap-4">
-            <button className="py-2 w-[90%] mx-auto text-[#20B486] border border-[#20B486]">
+            <button
+              onClick={() =>
+                handlePayment({
+                  amount: 999,
+                  mode: "premium",
+                })
+              }
+              className="py-2 w-[90%] mx-auto text-[#20B486] border border-[#20B486]"
+            >
               Buy Now
             </button>
           </CardFooter>

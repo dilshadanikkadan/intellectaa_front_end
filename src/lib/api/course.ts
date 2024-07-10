@@ -78,6 +78,10 @@ const courseEndpoints = {
     method: "post" as const,
     path: "rejectCourse",
   },
+  updateProgressCourse:{
+    method: "post" as const,
+    path: "updateProgress",
+  },
 };
 
 const courseService = createApiService("course", courseEndpoints);
