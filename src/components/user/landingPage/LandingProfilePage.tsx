@@ -8,23 +8,35 @@ import { useUser } from "@/hooks/UseUser";
 import { useUserStore } from "@/store/storeProviders/UseUserStore";
 import { useEffect, useState } from "react";
 import { flushSync } from "react-dom";
-
+import ProgressTrack from "./utilComponents/ProgressTrack";
+enum IComponents {
+  WhatToday = "WhatToday",
+  Course = "course",
+}
 export default function ProfilePage() {
   const isAuthenticated = useUserStore((state) => state.isAuthenticated);
-  const user = useUserStore(state=> state.user)
-
- 
-
+  const user = useUserStore((state) => state.user);
+  const [currentView, setCurrentView] = useState<IComponents>(
+    IComponents.WhatToday
+  );
 
   return (
     <div>
       {/* <NavBar /> */}
-      <div className="flex  flex-col md:flex-row w-full md:w-[80%] mx-auto">
+      <div className="flex   flex-col md:flex-row w-full md:w-[80%] mx-auto">
         <AvatarBar user={user} />
         <div className="flex flex-col w-full">
-          <TopBarProfile />
-          <Attendence />
-          <DailyTask />
+          <TopBarProfile setCurrentView={setCurrentView}  currentView={currentView}/>
+          {currentView === "course" ? (
+            <ProgressTrack />
+          ) : currentView === "WhatToday" ? (
+            <>
+              <Attendence />
+              <DailyTask />
+            </>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </div>

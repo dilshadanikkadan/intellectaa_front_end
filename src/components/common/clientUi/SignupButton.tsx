@@ -9,7 +9,7 @@ import { ModeToggle } from "./DarkModeBtn";
 
 const SignupButton = () => {
   const { data: session, status } = useSession();
-  const { loginSuccess, logoutSuccess, isAuthenticated ,setIsAuthMode,googleAuthSucess} = useUserStore();
+  const { loginSuccess, logoutSuccess, isAuthenticated ,setIsAuthMode,googleAuthSucess,user} = useUserStore();
   const router = useRouter();
 
   const { mutate: logoutMutate, isPending: isLoggingOut } = useMutation({
@@ -43,7 +43,7 @@ const SignupButton = () => {
 
   return (
     <div className="flex gap-5"> 
-      {!isAuthenticated ? (
+      {!user ? (
         <button
           onClick={() => router.push("/signup")}
           className="text-white bg-[#20B486] px-7 py-[6px]"

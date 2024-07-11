@@ -32,20 +32,20 @@
       },
       async (error) => {
         const originalRequest = error.config;
-        console.log("errror couured !!!!!!!!!!!!!!!!",error);
+        console.log("errror couured __________________",error);
         
-        if (error.response && error.response.status === 401 && !originalRequest._retry) {
+        if (error.response && error.response.status === 401 ) {
           originalRequest._retry = true;
-          console.log("Attempting to refresh token...");
-              
+
           try {
+            
             const response = await axios.post(
               "http://localhost:5000/api/auth/refreshToken",
               {},
               { withCredentials: true }
             );
   
-            if (response.status === 200) {
+            if (response.status === 200 || 201) {
               console.log("Token refreshed successfully");
               return apiClient(originalRequest);
             }

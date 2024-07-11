@@ -69,7 +69,7 @@ export const googleAuthHelper = async (payload: any) => {
     if (response.status === 200) {
       return {
         success: true,
-        payload: response,
+        payload: response, 
       };
     }
   } catch (error: any) {

@@ -313,3 +313,22 @@ export const updateProgressCourseHelper = async (payload: any) => {
     throw NewError(error);
   }
 };
+
+
+export const getMyEntrollHelper = async (id?: any) => {
+  const userId = id.queryKey[1];
+  try {
+    const response = await courseService.getMyEntroll(
+      {},
+      { id: userId }
+    );
+    if (response.status === 200 || 201) {
+      return {
+        success: true,
+        payload: response.data,
+      };
+    }
+  } catch (error: any) {
+    throw NewError(error);
+  }
+};

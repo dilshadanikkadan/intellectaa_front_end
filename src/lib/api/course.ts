@@ -49,6 +49,10 @@ const courseEndpoints = {
     method: "get" as const,
     path: "getMySubmission/:id",
   },
+  getMyEntroll: {
+    method: "get" as const,
+    path: "myEntrolledCourse/:id",
+  },
   manageLike:{
     method: "post" as const,
     path: "like",

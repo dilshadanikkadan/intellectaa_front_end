@@ -21,28 +21,9 @@ export default function LandingPageView() {
   const { isAuthenticated, loginSuccess, logoutSuccess, user ,googleAuthSucess} = useUserStore(
     (state) => state
   );
-  const [isLoading, setIsLoading] = useState(true);
-  useEffect(() => {
-    if (status === "authenticated") {
-     
-  
-      googleAuthSucess(session.user as any);
-    } else if (status === "unauthenticated" && !user) {
-      logoutSuccess();
-    }
-
-    if (status !== "loading") {
-      setIsLoading(false);
-    }
-  }, [status, session, loginSuccess]);
-
-  if (isLoading) {
-    return <></>;
-  }
-
-
-  if (status === "authenticated" || isAuthenticated) {
-    return <></>;
+ 
+  if(user){
+    return null
   }
 
   return (
