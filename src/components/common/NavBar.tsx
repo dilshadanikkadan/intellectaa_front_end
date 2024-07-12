@@ -56,7 +56,7 @@ const NavBar = () => {
   };
 
   return (
-    <NavWrapper className="relative z-10">
+    <NavWrapper className="relative z-50">
       <div className="wrapper flex h-[15vh]  w-full px-4 md:w-[80%] mx-auto items-center relative">
         <div className="left flex-[1]">
           <img className="w-24 h-14 object-cover" src="/newlogo.PNG" alt="" />

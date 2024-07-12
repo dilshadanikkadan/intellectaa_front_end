@@ -49,6 +49,10 @@ const courseEndpoints = {
     method: "get" as const,
     path: "getMySubmission/:id",
   },
+  getMySubmittedQuestion: {
+    method: "get" as const,
+    path: "myAllSumbittedProblems/:id",
+  },
   getMyEntroll: {
     method: "get" as const,
     path: "myEntrolledCourse/:id",

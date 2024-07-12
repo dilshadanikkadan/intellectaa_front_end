@@ -332,3 +332,22 @@ export const getMyEntrollHelper = async (id?: any) => {
     throw NewError(error);
   }
 };
+
+
+export const getMySubmittedQuestionHelper = async (id?: any) => {
+  const userId = id.queryKey[1];
+  try {
+    const response = await courseService.getMySubmittedQuestion(
+      {},
+      { id: userId }
+    );
+    if (response.status === 200 || 201) {
+      return {
+        success: true,
+        payload: response.data,
+      };
+    }
+  } catch (error: any) {
+    throw NewError(error);
+  }
+};

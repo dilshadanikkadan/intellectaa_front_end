@@ -9,7 +9,7 @@ import {
 
 const CategorySelector = () => {
   return (
-    <div className="mt-2 w-[35%] py-1">
+    <div className="mt-2 w-[90%] mx-auto md:w-[35%] py-1">
       <Select>
         <SelectTrigger className="w-[97%]">
           <SelectValue placeholder="Language" />

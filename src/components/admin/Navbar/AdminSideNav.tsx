@@ -21,7 +21,7 @@ const AdminSideNav = () => {
 
   return (
     <section
-      className={`fixed top-0 left-0 h-[100vh] bg-[#2D2F31] font-primary transition-all duration-300 z-50
+      className={`fixed top-0 left-0 h-[100vh] bg-[#2D2F31]  transition-all duration-300 z-50
         ${isExpanded ? "w-[22%]" : "w-[5%]"}`}
       onMouseEnter={() => setIsExpanded(true)}
       onMouseLeave={() => setIsExpanded(false)}

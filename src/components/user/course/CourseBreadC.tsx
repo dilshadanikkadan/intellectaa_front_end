@@ -12,18 +12,18 @@ const CourseBreadC = () => {
       >
         <div className="absolute inset-0 "></div>
         <div className="relative z-10 w-full flex justify-center flex-col items-center">
-          <div className="w-[70%] mx-auto flex mb-2">
+          <div className="w-[70%] mx-auto flex flex-col md:flex-row mb-2">
             <Input
               placeholder="Search here"
               type="text"
               name="search"
-              className="border-[1px] max-w-[44rem] rounded-sm placeholder:text-gray-300 shadow-sm border-gray-300 w-[100%] h-12 text-sm bg-white/80 backdrop-blur-sm"
+              className="border-[1px]  max-w-[44rem] rounded-sm placeholder:text-gray-300 shadow-sm border-gray-300 w-[100%] h-12 text-sm bg-white/80 backdrop-blur-sm"
             />
-            <button className="px-6 h-12 bg-[#20B486] text-white rounded-md ml-3 hover:bg-[#1a9069] transition-colors">
+            <button className="px-6 hidden md:block h-12 bg-[#20B486] text-white rounded-md ml-3 hover:bg-[#1a9069] transition-colors">
               Search
             </button>
           </div>
-          <div className="w-[70%] flex justify-between">
+          <div className="w-[70%] hidden md:flex flex-col md:flex-row justify-between">
             <CategorySelector />
             <CategorySelector />
             <CategorySelector />

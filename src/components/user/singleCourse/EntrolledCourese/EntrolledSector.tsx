@@ -84,10 +84,10 @@ console.log("_______++++++++++++___",myCourse);
   }, [videoKey]);
 
   return (
-    <div className="w-full mx-auto flex mt-10 mb-10 gap-10 ">
+    <div className="w-full mx-auto flex flex-col md:flex-row mt-10 mb-10 gap-10 ">
       <div className="left flex-[3]  mx-auto">
         {current && (
-          <Card className="w-[100%] mx-auto h-96" ref={videoWrapperRef}>
+          <Card className="w-[100%] mx-auto h-64 md:h-96" ref={videoWrapperRef}>
             <CldVideoPlayer
               poster={current?.thumbnail}
               key={videoKey}
@@ -133,7 +133,7 @@ console.log("_______++++++++++++___",myCourse);
           </div>
         )}
       </div>
-      <div className="right  mx-auto flex-[2]">
+      <div className="right w-full  mx-auto  flex-[1] md:flex-[2]">
         <Accordion type="single" collapsible className="w-full">
           {course?.lessons.map((lesson: any, i: number) => (
             <AccordionItem key={i} value={`item-${i}`}>

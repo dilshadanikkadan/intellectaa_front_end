@@ -129,7 +129,7 @@ console.log(">>>>>>>>>>>>>>>>>",data?.payload);
           className="rounded-lg"
         />
       </div>
-      <SubmissionModal isOpen={isOpen} setIsOpen={setIsOpen}/>
+      <SubmissionModal isOpen={isOpen} setIsOpen={setIsOpen} problemName={problemName}/>
     </div>
   );
 };

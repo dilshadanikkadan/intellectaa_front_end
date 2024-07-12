@@ -73,10 +73,10 @@ const CourseSinglePage = () => {
         <EntrolledSector course={course?.payload} myCourse={myCorse?.payload }/>
         </>
         :
-        <div className="wrapper w-full flex ">
+        <div className="wrapper w-full flex flex-col md:flex-row ">
         <div className="left flex-[3] m-5">
           
-         <Card className="h-80 w-[90%] mx-auto">
+         <Card className="h-52 md:h-80 w-full md:w-[90%] mx-auto">
             {isLoading || !videoSrc ? (
               <div className="flex items-center justify-center h-full">
                 Loading video...

@@ -13,18 +13,19 @@ import { useRouter } from "next/navigation";
 
 interface Props{
     setIsOpen:any
-    isOpen:boolean
+    isOpen:boolean,
+    problemName:any
 }
-const SubmissionModal = ({setIsOpen,isOpen}: Props) => {
+const SubmissionModal = ({setIsOpen,isOpen,problemName}: Props) => {
     const router = useRouter()
   return (
     <Dialog open={isOpen}>
       <DialogTrigger>Submit</DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Instructor Terms and Conditions</DialogTitle>
+          <DialogTitle>Contgratulation 🎉</DialogTitle>
           <DialogDescription>
-            <button onClick={()=> router.push('/problems/add_num_001/submission')} className="px-4 py-1.5 rounded-md bg-gray-900 text-white ">
+            <button onClick={()=> router.push(`/problems/${problemName}/submission`)} className="px-4 py-1.5 rounded-md bg-gray-900 text-white ">
               See All Submissiom
             </button>
           </DialogDescription>

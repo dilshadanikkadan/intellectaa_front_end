@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 const CoursePurchaseCard = ({ item }: any) => {
   const router = useRouter()
   return (
-    <Card className="w-[20vw] pb-5">
+    <Card className="w-[70vw] mt-5 md:mt-0 md:w-[20vw] pb-5">
       <div className="wrapper w-[90%] mx-auto mt-3">
         <img className="w-full" src={item?.thumbnail} alt="" />
         <div className="info mt-5">
