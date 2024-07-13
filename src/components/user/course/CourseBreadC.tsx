@@ -1,9 +1,22 @@
 import { ContainerFuild } from "@/styles/layouts/Wrappers";
 import Input from "@/styles/ui/Input";
-import React from "react";
+import React, { useState } from "react";
 import CategorySelector from "./utilComponents/CategorySelector";
+interface Props{
+  onSearch:any
+}
+const CourseBreadC = ({ onSearch }:Props) => {
+  const [searchTerm, setSearchTerm] = useState("");
 
-const CourseBreadC = () => {
+  const handleInputChange = (e:any) => {
+    setSearchTerm(e.target.value);
+    onSearch(e.target.value);
+  };
+
+  const handleSearchClick = () => {
+    onSearch(searchTerm);
+  };
+
   return (
     <ContainerFuild>
       <div 
@@ -17,9 +30,14 @@ const CourseBreadC = () => {
               placeholder="Search here"
               type="text"
               name="search"
-              className="border-[1px]  max-w-[44rem] rounded-sm placeholder:text-gray-300 shadow-sm border-gray-300 w-[100%] h-12 text-sm bg-white/80 backdrop-blur-sm"
+              value={searchTerm}
+              onChange={handleInputChange}
+              className="border-[1px] max-w-[44rem] rounded-sm placeholder:text-gray-300 shadow-sm border-gray-300 w-[100%] h-12 text-sm bg-white/80 backdrop-blur-sm"
             />
-            <button className="px-6 hidden md:block h-12 bg-[#20B486] text-white rounded-md ml-3 hover:bg-[#1a9069] transition-colors">
+            <button 
+              className="px-6 hidden md:block h-12 bg-[#20B486] text-white rounded-md ml-3 hover:bg-[#1a9069] transition-colors"
+              onClick={handleSearchClick}
+            >
               Search
             </button>
           </div>

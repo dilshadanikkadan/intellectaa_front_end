@@ -194,7 +194,7 @@ const AddCourse = () => {
             className="border-[1px] max-w-lg rounded-sm placeholder:text-gray-800 shadow-sm border-gray-300 w-[100%] h-10 mt-4 text-sm"
           />
         </div>
-        <div className="w-10 h-10 bg-red-300">
+        <div className="w-10 h-10 ">
           <UploadModal
             isOpen={isModalOpen}
             onOpenChange={setIsModalOpen}

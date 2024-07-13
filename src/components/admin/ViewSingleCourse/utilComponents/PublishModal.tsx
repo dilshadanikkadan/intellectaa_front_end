@@ -37,7 +37,7 @@ const router = useRouter()
     return (
         <div>
             <Dialog>
-                <DialogTrigger className="underline">Publish</DialogTrigger>
+                <DialogTrigger className="">Publish</DialogTrigger>
                 <DialogContent>
                     <DialogHeader>
                         <DialogTitle>Are You sure want To Publish This ?</DialogTitle>

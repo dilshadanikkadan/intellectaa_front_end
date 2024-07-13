@@ -29,6 +29,7 @@ const CourseEditSector = () => {
 
   const [editedCourse, setEditedCourse] = useState<any>(null);
   const [uploadProgress, setUploadProgress] = useState<any>({});
+  const [loading, setLoading] = useState<any>(false);
   const user = useUserStore((state) => state.user);
   useEffect(() => {
     if (course?.payload) {
@@ -91,8 +92,9 @@ const CourseEditSector = () => {
   };
 
   const handleUpload = async () => {
+    setLoading(true)
     let updatedCourse = { ...editedCourse };
-
+    
     if (updatedCourse.thumbnail && updatedCourse.thumbnail instanceof File) {
       const thumbnailUrl = await UseCloudinaryImage(
         updatedCourse.thumbnail,
@@ -127,7 +129,7 @@ const CourseEditSector = () => {
         return lesson;
       })
     );
-
+setLoading(false)
     setEditedCourse(updatedCourse);
     setUploadProgress({});
   };
@@ -248,6 +250,10 @@ const CourseEditSector = () => {
 
       <Button onClick={handleUpload} className="mt-4 mr-4">
         Upload to Cloudinary
+        {
+          loading &&
+        <PiSpinnerBold className="text-xl ml-2 animate-spin" />
+        }
       </Button>
       <Button onClick={handleSaveChanges} className="mt-4">
         Save Changes

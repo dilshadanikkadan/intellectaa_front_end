@@ -9,6 +9,7 @@ import { useMutation } from "@tanstack/react-query";
 import { submitCourseHelper } from "@/helpers/course/courseApiHelper";
 import { useRouter } from "next/navigation";
 import { PiSpinnerBold } from "react-icons/pi";
+import { UseLocalStroageRemove } from "@/hooks/UseLocalStorageRemove";
 
 const PreViewPage = () => {
     const myCourse= UseLocalStroageValue("courseDraft");
@@ -20,7 +21,10 @@ const PreViewPage = () => {
      const {mutate:sumbutMuate,isPending} = useMutation({
         mutationFn:submitCourseHelper,
         onSuccess:(data)=>{
+           
             router.push("/instructor/myCourses");
+             UseLocalStroageRemove("courseDraft")
+             UseLocalStroageRemove("lessonDraft")
         }
      })
      const handleSubmit=()=>{

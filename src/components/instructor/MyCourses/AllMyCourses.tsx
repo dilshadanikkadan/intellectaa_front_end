@@ -2,8 +2,8 @@
 import React from "react";
 import CourseCard from "./CourseCard";
 import { useRouter } from "next/navigation";
-import { useQuery } from "@tanstack/react-query";
-import { getInstroctorCourseHelper } from "@/helpers/course/courseApiHelper";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { deleteCourseHelper, getInstroctorCourseHelper } from "@/helpers/course/courseApiHelper";
 import { useUserStore } from "@/store/storeProviders/UseUserStore";
 import {
   Table,
@@ -27,6 +27,21 @@ const AllMyCourses = () => {
 
   console.log("_________(((((((())))))))))",myCourse?.payload);
   
+  const queryCleint= useQueryClient();
+
+  const {mutate:deleteMutate}= useMutation({
+    mutationFn:deleteCourseHelper,
+    onSuccess:(data)=>{
+     queryCleint.invalidateQueries(["myCourse"] as any)
+    }
+  })
+
+  const handleDelete=(courseId:string)=>{
+   
+    deleteMutate({
+      id:courseId
+    })
+  }
   return (
     <div className="w-[90%] mx-auto  relative">
       <div className="flex justify-between mb-3">
@@ -81,12 +96,12 @@ const AllMyCourses = () => {
                     Edit
                   </Link>
                 ) : (
-                  <Link
-                    href={``}
+                  <button
+                    onClick={()=> handleDelete(course._id)}
                     className="py-2 px-5 rounded-md bg-gray-800 text-white text-sm"
                   >
                     Delete
-                  </Link>
+                  </button>
                 )}
               </TableCell>
             </TableRow>

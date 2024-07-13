@@ -1,9 +1,9 @@
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import React from "react";
-import AttachFileIcon from '@mui/icons-material/AttachFile';
-import SendIcon from '@mui/icons-material/Send';
-import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice';
+import AttachFileIcon from "@mui/icons-material/AttachFile";
+import SendIcon from "@mui/icons-material/Send";
+import KeyboardVoiceIcon from "@mui/icons-material/KeyboardVoice";
 const MesageBar = () => {
   return (
     <div className="flex-[5] flex w-full">
@@ -24,17 +24,47 @@ const MesageBar = () => {
           <div className="right flex-[1]"></div>
         </Card>
 
-        <div className="w-full ml-3  h-10 flex mb-2">
+        <div className="chatBody w-[95%] mx-auto">
+          <div className="chat chat-start">
+            <div className="chat-bubble  bg-[#20B486]  text-white">
+              It's over Anakin,
+              <br />I have the high ground.
+            </div>
+          </div>
+          <div className="chat chat-start">
+            <div className="chat-bubble  bg-[#20B486]  text-white">
+              It's over Anakin,
+              <br />I have the high ground.
+            </div>
+          </div>
 
-          <Input  className="w-[80%] rounded-lg " placeholder="Type Message here........."/>
+          <div className="chat chat-end ">
+            <div className="chat-bubble text-gray-800 bg-white">You underestimate my power!</div>
+          </div>
+
+                
+          <div className="chat chat-end ">
+            <div className="chat-bubble text-gray-800 bg-white">You underestimate my power!</div>
+          </div>
+                
+          <div className="chat chat-end ">
+            <div className="chat-bubble text-gray-800 bg-white">You underestimate my power!</div>
+          </div>
+        </div>
+
+        <div className="w-full ml-3  h-10 flex mb-2">
+          <Input
+            className="w-[80%] rounded-lg "
+            placeholder="Type Message here........."
+          />
           <Card className=" flex items-center justify-center ml-2 px-2 rounded-xl ">
-            <KeyboardVoiceIcon fontSize="inherit" className="text-[2rem]"/>
+            <KeyboardVoiceIcon fontSize="inherit" className="text-[2rem]" />
           </Card>
           <Card className=" flex items-center justify-center ml-2 px-2 rounded-xl ">
-            <AttachFileIcon fontSize="inherit" className="text-[2rem]"/>
+            <AttachFileIcon fontSize="inherit" className="text-[2rem]" />
           </Card>
           <Card className=" flex items-center justify-center ml-2 px-2 rounded-xl ">
-            <SendIcon fontSize="inherit" className="text-[2rem]"/>
+            <SendIcon fontSize="inherit" className="text-[2rem]" />
           </Card>
         </div>
       </div>

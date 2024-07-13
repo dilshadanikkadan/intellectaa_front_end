@@ -77,11 +77,12 @@ const ViewSingleCourse = () => {
               />
             ) : (
               <>
-                <img
-                  className="w-[95%] h-[95%] object-cover"
-                  src={currentView?.thumbnail || course.payload.thumbnail}
-                  alt=""
-                />
+                <video
+                className="w-[95%] h-[95%] object-cover"
+                src={currentView.trailer ?? currentView?.video}
+                controls
+                autoPlay
+              />
                 {currentView?.trailer && (
                   <button
                     onClick={handlePlay}
@@ -136,10 +137,10 @@ const ViewSingleCourse = () => {
           <div className="ml-10 flex gap-4">
 
           <img className="w-16 h-16 object-cover rounded-full" src={course?.payload?.instructor.profile} alt="" />
-          <h3 className="text-lg font-semibold">{course?.payload?.instructor?.username}</h3>
+          <h3 className="text-lg ">{course?.payload?.instructor?.username}</h3>
           </div>
         </Card>
-        <div className="w-[90%] mx-auto  flex justify-between mt-10">
+        <div className="w-[100%] mx-auto  flex justify-between mt-10 mb-10">
           <button className="py-2 px-5 rounded-md bg-gray-800 text-white">
             <PublishModal />
           </button>

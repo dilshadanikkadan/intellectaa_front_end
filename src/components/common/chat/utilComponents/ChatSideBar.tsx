@@ -18,9 +18,16 @@ const ChatSideBar = () => {
               <img src="/avt.png" className="w-12 h-12 rounded-full" alt="" />
               <span className="w-3 h-3 rounded-full bg-green-500 absolute bottom-0 right-0"></span>
             </div>
-            <div className="info text-gray-700">
-                <p >Muhammed Dilshad</p>
-                <p>hey <DoneAllIcon fontSize="inherit" className="text-blue-700 text-[0.87rem]"/></p>
+            <div className="info flex justify-between  w-full text-gray-700">
+              <div>
+
+                <p className="text-sm" >Muhammed Dilshad</p>
+                <p className="text-sm">hey <DoneAllIcon fontSize="inherit" className="text-blue-700 text-[0.87rem]"/></p>
+              </div>
+              <div>
+                <p className="text-main ">5:09 pm</p>
+                <span className="text-white bg-[#20B486] px-2 py-1 ml-3 rounded-full text-sm">7</span>
+              </div>
             </div>
           </div>
 
@@ -29,9 +36,16 @@ const ChatSideBar = () => {
               <img src="/avt.png" className="w-12 h-12 rounded-full" alt="" />
               <span className="w-3 h-3 rounded-full bg-green-500 absolute bottom-0 right-0"></span>
             </div>
-            <div className="info text-gray-700">
-                <p >Muhammed Dilshad</p>
-                <p>hey <DoneAllIcon fontSize="inherit" className="text-blue-700 text-[0.87rem]"/></p>
+            <div className="info flex justify-between  w-full text-gray-700">
+              <div>
+
+                <p className="text-sm">Muhammed Dilshad</p>
+                <p className="text-sm">hey <DoneAllIcon fontSize="inherit" className="text-blue-700 text-[0.87rem]"/></p>
+              </div>
+              <div>
+                <p className="text-main ">5:09 pm</p>
+                <span className="text-white bg-[#20B486] px-2 py-1 ml-3 rounded-full text-sm ">7</span>
+              </div>
             </div>
           </div>
 
@@ -40,9 +54,16 @@ const ChatSideBar = () => {
               <img src="/avt.png" className="w-12 h-12 rounded-full" alt="" />
               <span className="w-3 h-3 rounded-full bg-green-500 absolute bottom-0 right-0"></span>
             </div>
-            <div className="info text-gray-700">
-                <p >Muhammed Dilshad</p>
-                <p>hey <DoneAllIcon fontSize="inherit" className="text-blue-700 text-[0.87rem]"/></p>
+            <div className="info flex justify-between  w-full text-gray-700">
+              <div>
+
+                <p className="text-sm">Muhammed Dilshad</p>
+                <p className="text-sm">hey <DoneAllIcon fontSize="inherit" className="text-blue-700 text-[0.87rem]"/></p>
+              </div>
+              <div>
+                <p className="text-main ">5:09 pm</p>
+                <span className="text-white bg-[#20B486] px-2 py-1 ml-3 rounded-full text-sm ">7</span>
+              </div>
             </div>
           </div>
         </div>

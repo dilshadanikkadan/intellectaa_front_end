@@ -11,6 +11,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 const TaskAssign = () => {
   const [selectedTask, setSelectedTask] = useState<string[]>([]);
   const [error, setError] = useState<string>("");
+  const [success, setSuccess] = useState<string>("");
   const { data: allProblems, isLoading } = useQuery({
     queryKey: ["allProblems"],
     queryFn: allProblemsFetchHelper,
@@ -35,7 +36,7 @@ const TaskAssign = () => {
   const { mutate: taskAssignMutate } = useMutation({
     mutationFn: dailyTaskHelper,
     onSuccess: (data) => {
-      alert("task added");
+      setSuccess("task is added");
     },
     onError: (err: any) => {
       setError(err);
@@ -82,6 +83,8 @@ const TaskAssign = () => {
           <h3 className="text-xl  font-semibold mb-2">
             Assigned Task For Today
           </h3>
+
+          {success && <p className="my-2">{success}</p>}
           <Card className="h-40 w-[85%]">
             <div className="w-[90%] mx-auto flex mt-3 flex-wrap gap-5">
               {selectedTask?.map((problem: string, i: number) => (
@@ -101,9 +104,7 @@ const TaskAssign = () => {
               ))}
             </div>
           </Card>
-          {error && (
-            <p className="mt-2 text-red-500">{error}</p>
-          )}
+          {error && <p className="mt-2 text-red-500">{error}</p>}
           <button
             onClick={handleTasks}
             className="px-3 py-1.5 bg-gray-800 text-white mt-3 rounded-md"

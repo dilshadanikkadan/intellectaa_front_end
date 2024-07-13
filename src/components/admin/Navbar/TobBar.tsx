@@ -1,15 +1,32 @@
 
+"use client"
+import { useUserStore } from "@/store/storeProviders/UseUserStore";
+import { useRouter } from "next/navigation";
 import React from "react";
 const TopBar = () => {
+  const router= useRouter()
+  const user = useUserStore(state=> state.user)
   return (
-    <div className="wrapper flex h-[15vh] w-[100%]   mx-auto items-center">
+
+    <div className="wrapper flex h-[15vh] w-[90%] mx-auto    items-center">
       <div className="center flex-[2] flex gap-6 text-[1.2rem]  font-primary text-gray-600"></div>
-      <div className="right flex-[1] flex justify-center text-[1.1rem]  font-primary">
-      <button  
+      <div className="right flex-[1] flex justify-end text-[1.1rem]  font-primary">
+        {
+          user?.isInstructor ?
+          <button  onClick={()=> router.push('/')} 
           className=" text-white bg-gray-900 px-7 py-[6px]  "
         >
-          Admin Panel
+          Back To Home
         </button>
+        :
+        <button  
+        className=" text-white bg-gray-900 px-7 py-[6px]  "
+      >
+        Admin Panel
+      </button>
+        }
+   
+       
       </div>
     </div>
   );

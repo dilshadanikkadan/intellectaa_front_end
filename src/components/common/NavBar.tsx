@@ -59,7 +59,7 @@ const NavBar = () => {
     <NavWrapper className="relative z-50">
       <div className="wrapper flex h-[15vh]  w-full px-4 md:w-[80%] mx-auto items-center relative">
         <div className="left flex-[1]">
-          <img className="w-24 h-14 object-cover" src="/newlogo.PNG" alt="" />
+          <img className="w-24 h-14 object-cover" src="/logo3312.png" alt="" />
         </div>
 
         <div className="center flex-[2] hidden md:flex gap-6 text-[1.2rem]  text-gray-600">

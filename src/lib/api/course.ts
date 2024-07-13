@@ -78,6 +78,10 @@ const courseEndpoints = {
     method: "get" as const,
     path: "getInstroctorCourse/:id",
   },
+  deleteCourse: {
+    method: "post" as const,
+    path: "deleteCourse",
+  },
   updateCourse:{
     method: "post" as const,
     path: "updateCourse",

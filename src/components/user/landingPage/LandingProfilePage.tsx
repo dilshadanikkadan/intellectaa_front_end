@@ -20,6 +20,8 @@ export default function ProfilePage() {
     IComponents.WhatToday
   );
 
+  if(!user) return null
+
   return (
     <div>
       {/* <NavBar /> */}

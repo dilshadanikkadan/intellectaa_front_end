@@ -351,3 +351,21 @@ export const getMySubmittedQuestionHelper = async (id?: any) => {
     throw NewError(error);
   }
 };
+
+
+
+export const deleteCourseHelper = async (id: any) => {
+  console.log("_________deletting");
+    
+  try {
+    const response = await courseService.deleteCourse(id)
+    if (response.status === 200 || 201) {
+      return {
+        success: true,
+        payload: response.data,
+      };
+    }
+  } catch (error: any) {
+    throw NewError(error);
+  }
+}

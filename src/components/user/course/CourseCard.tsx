@@ -1,3 +1,4 @@
+"use client"
 import { Card, CardFooter, CardTitle } from "@/components/ui/card";
 import ComputerIcon from "@mui/icons-material/Computer";
 import { CardContent } from "@mui/material";
@@ -8,6 +9,8 @@ interface props{
     course?:any;
   }
 const CourseCard = ({className,course}:props) => {
+
+
   return (
     <>
     <Card className={` md:w-[23%] min-h-80 ${className} `}>
@@ -17,8 +20,8 @@ const CourseCard = ({className,course}:props) => {
       <h3>{course?.title} </h3>
     </CardTitle>
     <CardContent>
-      <p>
-        Lessons on design that cover the most recent developments.
+      <p className="line-clamp-3">
+        {course?.description}
       </p>
     </CardContent>
     <CardFooter>
