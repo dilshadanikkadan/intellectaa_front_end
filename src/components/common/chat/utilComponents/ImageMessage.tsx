@@ -8,7 +8,7 @@ interface Props {
 const ImageMessage = ({ msg }: Props) => {
   const user = useUserStore((state) => state.user);
   const isOwnMessage = user?._id === msg.senderId;
-
+ 
   return (
     <div
       className={`flex ${isOwnMessage ? "justify-end" : "justify-start"} mb-4`}
