@@ -8,6 +8,8 @@ import { getMyMessageHelper } from "@/helpers/chat/chatApiHelper";
 import { useUserStore } from "@/store/storeProviders/UseUserStore";
 import { SocketContext } from "@/store/storeProviders/SocketProvider";
 import moment from "moment";
+import { useStdudentStore } from "@/store/storeProviders/UseCallStore";
+import { useRouter } from "next/navigation";
 interface Props {
   setCurrentChat: any;
   cuurrentChat: any;
@@ -22,9 +24,11 @@ const ChatSideBar = ({
   setCurrentChatMemberNames,
   setCurrentRoom,
 }: Props) => {
-  const { socket } = useContext(SocketContext);
+  const setStudentId = useStdudentStore((state) => state.setStudentId);
+  const { socket, onlineUsers } = useContext(SocketContext);
   const user = useUserStore((state) => state.user);
   const [myChatrooms, setMyChatrooms] = useState<any>([]);
+
   const { data: myChat } = useQuery({
     queryKey: ["myChat", user?._id],
     queryFn: getMyMessageHelper,
@@ -47,6 +51,8 @@ const ChatSideBar = ({
       roomId: id,
       id: user?._id,
     });
+    const stduentId = partcipants?.find((id: any) => id !== user?._id);
+    setStudentId(stduentId);
   };
   useEffect(() => {
     if (socket) {
@@ -83,8 +89,11 @@ const ChatSideBar = ({
     }
   }, [myChat]);
 
-  console.log("^^^^^^^^^^^^^^^^", myChatrooms);
-
+  console.log("^^^^^^^^^^^^^^^^online users", onlineUsers);
+  const friend_id = (chat: any) => {
+    return chat?.participantDetails?.find((x: any) => x?._id !== user?._id)
+      ?._id;
+  };
   return (
     <div
       className={`flex w-full flex-[2] ${
@@ -106,23 +115,43 @@ const ChatSideBar = ({
                   chat?._id,
                   chat?.partcipants,
                   chat?.participantDetails,
-                  { roomProfile: chat?.roomProfile, roomName: chat?.roomName }
+                  {
+                    roomProfile:
+                      chat?.roomProfile ||
+                      chat?.participantDetails?.find(
+                        (x: any) => x?._id !== user?._id
+                      )?.profile,
+                    roomName: chat?.roomName,
+                  }
                 )
               }
               className="user flex gap-4 mt-2 border-b border-gray-200 pb-3 "
             >
-              <div className="profile realtive">
+              <div className="profile relative ">
+                {!chat?.roomProfile &&
+                  onlineUsers?.includes(String(friend_id(chat))) && (
+                    <p className="w-3 h-3 rounded-full bg-green-500 absolute bottom-0 right-0"></p>
+                  )}
                 <img
-                  src={chat?.roomProfile}
+                  src={
+                    chat?.roomProfile ||
+                    chat?.participantDetails?.find(
+                      (x: any) => x?._id !== user?._id
+                    )?.profile
+                  }
                   className="w-14 object-cover h-12 rounded-full"
                   alt=""
                 />
-                <span className="w-4 h-4 rounded-full bg-green-500 absolute bottom-0 right-0"></span>
               </div>
               <div className="info flex justify-between  w-full text-gray-700">
-                <div>
-                  <p className="text-[1rem] font-semibold">{chat?.roomName}</p>
-                  <p className="text-sm ">
+                <div className="relative">
+                  <p className="text-[1rem] font-semibold">
+                    {chat?.roomName ||
+                      chat?.participantDetails?.find(
+                        (x: any) => x?._id !== user?._id
+                      )?.username}
+                  </p>
+                  <p className="text-sm flex ">
                     <span className="line-clamp-1">
                       {!chat?.lastMessage?.startsWith("http")
                         ? chat?.lastMessage || chat?.message
@@ -130,7 +159,7 @@ const ChatSideBar = ({
                     </span>
                     <DoneAllIcon
                       fontSize="inherit"
-                      className="text-blue-700 text-[0.87rem]"
+                      className="text-blue-700 ml-3 text-[0.87rem]"
                     />
                   </p>
                 </div>

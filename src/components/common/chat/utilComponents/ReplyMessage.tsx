@@ -76,12 +76,18 @@ const ReplyMessage = ({
             </p>
           )}
           <div
-            className={`border-l-2 Px-2 ${
-              isOwnMessage ? "bg-[#5cdab0]" : "bg-gray-200"
+            style={{
+              border: `border-none `,
+              borderLeft: ` solid 3px ${!isOwnMessage ? userColor[username_of_msg_holder] : "white"}`,
+            }}
+            className={` Px-2 ${
+              isOwnMessage
+                ? "bg-[#5cdab0] border-white border-l-2"
+                : `bg-gray-200 border-r-2 `
             } py-1 rounded-md border-white`}
           >
-            <p className="px-2 line-clamp-1 text-[0.75rem] py-1 rounded-md object-cover">
-              {msg?.replyTo}
+            <p className="px-2 line-clamp-1 font-bold text-[0.75rem] py-1 rounded-md object-cover">
+              {msg?.replyTo === user?.username ? "me" : msg?.replyTo}
             </p>
             <p className="pl-2 text-[0.75rem] rounded-md object-cover">
               {msg?.replyMessage}

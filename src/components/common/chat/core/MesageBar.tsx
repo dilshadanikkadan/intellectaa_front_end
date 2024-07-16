@@ -3,7 +3,7 @@
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import React, { useContext, useEffect, useRef, useState } from "react";
-
+import PushPinIcon from "@mui/icons-material/PushPin";
 import { useQuery } from "@tanstack/react-query";
 import { getMessageHelper } from "@/helpers/chat/chatApiHelper";
 import TextMessage from "../utilComponents/TextMessage";
@@ -16,6 +16,8 @@ import { useUserStore } from "@/store/storeProviders/UseUserStore";
 import ReplyMessage from "../utilComponents/ReplyMessage";
 import ForwardMessages from "../utilComponents/ForwardMessages";
 import Camera from "../utilComponents/Camera";
+import VideocamIcon from "@mui/icons-material/Videocam";
+import { useRouter } from "next/navigation";
 interface Props {
   cuurrentChatId: any;
   currentChatMembers: any;
@@ -29,6 +31,7 @@ const MesageBar = ({
   cuurentRoom,
 }: Props) => {
   const [messages, setMessages] = useState<any>([]);
+  const router = useRouter();
   const { socket, rooms, onlineUsers } = useContext(SocketContext);
   const [image, setImage] = useState<string>("");
   const [imageFile, setImageFile] = useState<string>("");
@@ -79,6 +82,12 @@ const MesageBar = ({
     }
   }, [socket]);
 
+  const pinned_message = messages
+    ?.filter((msg: any) => msg?.pinned == true)
+    ?.at(-1);
+
+  console.log("|||||||||||||||||||", pinned_message);
+
   return (
     <div className="flex-[5] flex w-full">
       {!cuurrentChatId ? (
@@ -88,9 +97,11 @@ const MesageBar = ({
       ) : (
         <div
           style={{ backgroundImage: `url(/bgChat.png)` }}
-          className="wrapper relative h-[80vh] w-full flex flex-col bg-[#F0FAF7] justify-between border-r border-b border-gray-300"
+          className=" relative h-[80vh] w-full flex flex-col bg-[#F0FAF7]  border-r border-b border-gray-300"
         >
-          {cameraOn && <Camera setCameraOn={setCameraOn} cuurrentChatId={cuurrentChatId} />}
+          {cameraOn && (
+            <Camera setCameraOn={setCameraOn} cuurrentChatId={cuurrentChatId} />
+          )}
           {forWardMessage && (
             <ForwardMessages
               setForWardMessage={setForWardMessage}
@@ -108,7 +119,7 @@ const MesageBar = ({
             />
           )}
 
-          <Card className="w-full min-h-[5rem] rounded-none flex items-center">
+          <Card className="w-full h-[6rem]  rounded-none flex items-center">
             <div className="left flex-[1] flex ml-5  gap-5 ">
               <img
                 src={cuurentRoom?.roomProfile}
@@ -135,14 +146,33 @@ const MesageBar = ({
                 )}
               </div>
             </div>
-            <div className="right flex-[1]"></div>
+            <div className="right flex-[1] flex justify-end mr-10 cursor-pointer">
+              <VideocamIcon
+                onClick={() =>
+                  router.push(`/courses/66915ba51b8371f06fcddb22/chat/videoCall`)
+                }
+                fontSize="large"
+                className="text-gray-600"
+              />
+            </div>
           </Card>
-
-          <div className="chatBody w-[95%] overflow-y-scroll mx-auto">
+          {pinned_message && (
+            <Card className="h-12 cursor-pointer rounded-none flex gap-3 items-center  ">
+              <PushPinIcon
+                fontSize="inherit"
+                className="ml-3 text-[1.3rem] text-gray-500"
+              />
+              <p className="text-sm text-gray-500">{pinned_message?.message}</p>
+            </Card>
+          )}
+          <div className="chatBody w-[95%] h-[90%] mt-3 overflow-y-scroll mx-auto">
             {messages?.map((msg: any, i: any) => (
               <>
                 {msg?.typeMessage === "image" ? (
-                  <ImageMessage msg={msg} />
+                  <ImageMessage
+                    currentChatMembersName={currentChatMembersName}
+                    msg={msg}
+                  />
                 ) : msg?.typeMessage === "reply" ? (
                   <ReplyMessage
                     currentChatMembers={currentChatMembers}
@@ -155,6 +185,7 @@ const MesageBar = ({
                     messageRef={messageRef}
                     setIsReply={setIsReply}
                     msg={msg}
+                    cuurrentChatId={cuurrentChatId}
                     currentChatMembersName={currentChatMembersName}
                     onDelete={() => {}}
                     key={i}

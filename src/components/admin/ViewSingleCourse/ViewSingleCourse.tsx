@@ -79,7 +79,7 @@ const ViewSingleCourse = () => {
               <>
                 <video
                 className="w-[95%] h-[95%] object-cover"
-                src={currentView.trailer ?? currentView?.video}
+                src={currentView?.trailer ?? currentView?.video}
                 controls
                 autoPlay
               />
@@ -136,7 +136,7 @@ const ViewSingleCourse = () => {
           <h3 className="text-lg ml-10 font-semibold mb-5">Instructor Details</h3>
           <div className="ml-10 flex gap-4">
 
-          <img className="w-16 h-16 object-cover rounded-full" src={course?.payload?.instructor.profile} alt="" />
+          <img className="w-16 h-16 object-cover rounded-full" src={course?.payload?.instructor.profile ?? '/avt.png'} alt="" />
           <h3 className="text-lg ">{course?.payload?.instructor?.username}</h3>
           </div>
         </Card>

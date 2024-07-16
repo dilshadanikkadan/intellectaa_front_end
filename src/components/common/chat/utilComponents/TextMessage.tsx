@@ -1,17 +1,19 @@
 import { useUserStore } from "@/store/storeProviders/UseUserStore";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
 import moment from "moment";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import ReplyIcon from "@mui/icons-material/Reply";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ForwardIcon from "@mui/icons-material/Forward";
-
+import PushPinIcon from "@mui/icons-material/PushPin";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { SocketContext } from "@/store/storeProviders/SocketProvider";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface Props {
   msg: any;
@@ -19,6 +21,7 @@ interface Props {
   setForWardMessage: any;
   currentChatMembersName: any;
   messageRef: any;
+  cuurrentChatId: any;
   onReply: (msg: any) => void;
   onDelete: (msg: any, forEveryone: boolean) => void;
   onForward: (msg: any) => void;
@@ -30,6 +33,7 @@ const TextMessage = ({
   msg,
   setIsReply,
   currentChatMembersName,
+  cuurrentChatId,
   onReply,
   onDelete,
   onForward,
@@ -37,6 +41,7 @@ const TextMessage = ({
   const user = useUserStore((state) => state.user);
   const isOwnMessage = user?._id === msg.senderId;
   const [isHovered, setIsHovered] = useState(false);
+  const { socket, rooms } = useContext(SocketContext);
   const colors = {
     user1: "#007AFF",
     user2: "#4CAF50",
@@ -59,7 +64,16 @@ const TextMessage = ({
   const username_of_msg_holder = currentChatMembersName?.find(
     (user: any) => user?._id === msg?.senderId
   )?.username;
+  const queryClient = useQueryClient();
+  const pinMessage = (id: any, message: any) => {
+    socket?.emit("pin_message", {
+      messageId: id,
+      message,
+      roomId: cuurrentChatId,
+    });
 
+    queryClient.invalidateQueries(["messages"] as any);
+  };
   return (
     <div
       ref={messageRef}
@@ -111,7 +125,7 @@ const TextMessage = ({
               />
             </PopoverTrigger>
             <PopoverContent
-              className={`w-48 ${isOwnMessage ? "left-0" : "right-0"}`}
+              className={`w-48 ${isOwnMessage ? "left-0" : "right-0"}  `}
             >
               <div className="flex flex-col space-y-2">
                 <button
@@ -125,6 +139,14 @@ const TextMessage = ({
                 >
                   <ReplyIcon fontSize="small" />
                   <span>Reply</span>
+                </button>
+
+                <button
+                  onClick={() => pinMessage(msg?._id, msg?.message)}
+                  className="flex items-center space-x-2 hover:bg-gray-100 p-2 rounded"
+                >
+                  <PushPinIcon fontSize="small" />
+                  <span>Pin</span>
                 </button>
                 {isOwnMessage && (
                   <>
