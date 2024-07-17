@@ -18,6 +18,7 @@ import ForwardMessages from "../utilComponents/ForwardMessages";
 import Camera from "../utilComponents/Camera";
 import VideocamIcon from "@mui/icons-material/Videocam";
 import { useRouter } from "next/navigation";
+import VoiceMessage from "../utilComponents/voiceMessage";
 interface Props {
   cuurrentChatId: any;
   currentChatMembers: any;
@@ -149,7 +150,9 @@ const MesageBar = ({
             <div className="right flex-[1] flex justify-end mr-10 cursor-pointer">
               <VideocamIcon
                 onClick={() =>
-                  router.push(`/courses/66915ba51b8371f06fcddb22/chat/videoCall`)
+                  router.push(
+                    `/courses/66915ba51b8371f06fcddb22/chat/videoCall`
+                  )
                 }
                 fontSize="large"
                 className="text-gray-600"
@@ -178,6 +181,12 @@ const MesageBar = ({
                     currentChatMembers={currentChatMembers}
                     currentChatMembersName={currentChatMembersName}
                     msg={msg}
+                  />
+                ) : msg?.typeMessage === "audio" ? (
+                  <VoiceMessage
+                    msg={msg}
+                    currentChatMembers={currentChatMembers}
+                    currentChatMembersName={currentChatMembersName}
                   />
                 ) : (
                   <TextMessage

@@ -1,4 +1,4 @@
-  "use client"
+"use client";
 import React, { useState } from "react";
 import Link from "next/link";
 import HomeIcon from "@mui/icons-material/Home";
@@ -15,7 +15,7 @@ const AdminSideNav = () => {
     { icon: <PeopleIcon />, name: "Users", href: "/admin/users" },
     { icon: <PeopleIcon />, name: "Courses", href: "/admin/courses" },
     { icon: <PeopleIcon />, name: "Tasks", href: "/admin/tasks" },
-    { icon: <SettingsIcon />, name: "Settings", href: "/admin/settings" },
+    { icon: <PeopleIcon />, name: "Instructors", href: "/admin/instructor" },
     { icon: <LogoutIcon />, name: "Logout", href: "/logout" },
   ];
 
@@ -26,8 +26,14 @@ const AdminSideNav = () => {
       onMouseEnter={() => setIsExpanded(true)}
       onMouseLeave={() => setIsExpanded(false)}
     >
-      <div className={`wrapper ${isExpanded ? "w-[80%]" : "w-[100%]"} mx-auto pt-10 font-semibold`}>
-        <h3 className={`text-2xl text-white ${isExpanded ? "" : "text-center"}`}>
+      <div
+        className={`wrapper ${
+          isExpanded ? "w-[80%]" : "w-[100%]"
+        } mx-auto pt-10 font-semibold`}
+      >
+        <h3
+          className={`text-2xl text-white ${isExpanded ? "" : "text-center"}`}
+        >
           {isExpanded ? "Admin" : "A"}
         </h3>
         <nav className="w-full mt-10">

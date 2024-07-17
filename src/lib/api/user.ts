@@ -9,6 +9,10 @@ const userEndpoints = {
     method: "get" as const,
     path: "getAllUsers",
   },
+  getAllInstructor: {
+    method: "get" as const,
+    path: "getAllInstructor",
+  },
   instroctorCreate: {
     method: "put" as const,
     path: "createInstructor",

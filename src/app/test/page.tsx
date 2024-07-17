@@ -1,45 +1,45 @@
-import Foooter from "@/components/common/Foooter";
-import NavBar from "@/components/common/NavBar";
-import { Card } from "@/components/ui/card";
-import React from "react";
+import { Card } from '@/components/ui/card'
+import React from 'react'
 
-const page = () => {
+const Loading = () => {
   return (
-    <div>
-      <NavBar />
-      <div className="w-[80%] mx-auto flex flex-col h-[80vh]">
-        <Card className="bg-base-200 w-full h-40 mb-6 skeleton"></Card>
-
-        <div className="flex flex-col gap-4 mb-6">
-          <div className="flex items-center gap-4">
-            <div className="w-1/3 h-40 bg-base-200 skeleton"></div>
-            <div className="w-2/3 h-40 bg-base-200 skeleton flex flex-col justify-center gap-2 p-4">
-              <div className="w-1/2 h-4 bg-gray-300 skeleton"></div>
-              <div className="w-3/4 h-4 bg-gray-300 skeleton"></div>
-              <div className="w-1/3 h-4 bg-gray-300 skeleton"></div>
-            </div>
-          </div>
-          <div className="flex items-center gap-4">
-            <div className="w-2/3 h-40 bg-base-200 skeleton flex flex-col justify-center gap-2 p-4">
-              <div className="w-1/2 h-4 bg-gray-300 skeleton"></div>
-              <div className="w-3/4 h-4 bg-gray-300 skeleton"></div>
-              <div className="w-1/3 h-4 bg-gray-300 skeleton"></div>
-            </div>
-            <div className="w-1/3 h-40 bg-base-200 skeleton"></div>
-          </div>
-        </div>
-
-        <div className="w-full h-40 bg-base-200 skeleton mb-6"></div>
-
-        <div className="flex gap-4">
-          <div className="w-1/3 h-40 bg-base-200 skeleton"></div>
-          <div className="w-1/3 h-40 bg-base-200 skeleton"></div>
-          <div className="w-1/3 h-40 bg-base-200 skeleton"></div>
+    <div className="w-full max-w-6xl mx-auto p-4 flex flex-col md:flex-row gap-6">
+      <div className="w-full md:w-1/4 flex flex-col ">
+        <Card className="p-4 flex flex-col items-center">
+          <div className="w-20 h-20 rounded-full bg-base-300 skeleton mb-3"></div>
+          <div className="h-6 w-3/4 bg-base-300 skeleton mb-2"></div>
+          <div className="h-8 w-1/2 bg-base-300 skeleton mb-3"></div>
+        </Card>
+        <div className="flex flex-col ">
+          {[...Array(7)].map((_, index) => (
+            <Card key={index} className="p-2 flex items-center">
+              <div className="w-6 h-6 rounded-full bg-base-300 skeleton mr-2"></div>
+              <div className="h-4 w-2/3 bg-base-300 skeleton"></div>
+            </Card>
+          ))}
         </div>
       </div>
-      <Foooter />
+      
+      <div className="w-full md:w-3/4 flex flex-col gap-6">
+        <Card className="p-2 flex justify-between">
+          {[...Array(5)].map((_, index) => (
+            <div key={index} className="h-8 w-24 bg-base-300 skeleton"></div>
+          ))}
+        </Card>
+        
+          <Card className="p-4">
+          <div className="h-6 w-1/3 bg-base-300 skeleton mb-4"></div>
+          <div className="h-24 w-full bg-base-300 skeleton"></div>
+        </Card>
+        
+        {/* "Daily Challenges" section */}
+        <Card className="p-4">
+          <div className="h-6 w-1/3 bg-base-300 skeleton mb-4"></div>
+          <div className="h-40 w-full bg-base-300 skeleton"></div>
+        </Card>
+      </div>
     </div>
-  );
-};
+  )
+}
 
-export default page;
+export default Loading

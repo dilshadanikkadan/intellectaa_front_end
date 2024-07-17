@@ -1,7 +1,7 @@
 "use client";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import SendIcon from "@mui/icons-material/Send";
 import KeyboardVoiceIcon from "@mui/icons-material/KeyboardVoice";
@@ -12,7 +12,9 @@ import { SocketContext } from "@/store/storeProviders/SocketProvider";
 import ImageIcon from "@mui/icons-material/Image";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import ImageSend from "./ImageSend";
+import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 import CloseIcon from "@mui/icons-material/Close";
+import { UseCloudinaryAudio } from "@/hooks/useCloudinaryAudio";
 interface Props {
   cuurrentChatId: any;
   setMessages: any;
@@ -32,12 +34,17 @@ const SendMessageBar = ({
   currentChatMembers,
   isReply,
   setIsReply,
-  setCameraOn
+  setCameraOn,
 }: Props) => {
   const { socket, rooms } = useContext(SocketContext);
   const [msgValue, setMsgValue] = useState<string>("");
   const [showImageIcons, setShowImageIcons] = useState<boolean>(false);
+  const [isRecordOn, setisRecordOn] = useState<boolean>(false);
   const user = useUserStore((state) => state.user);
+  const audioChunk = useRef<any>([]);
+  const [audioBlobOne, setAudioBlobOne] = useState<any>(null);
+  const mediaRecordREf = useRef<any>(null);
+  const [recordings, setRecordings] = useState<any>([]);
   const queryClient = useQueryClient();
   const { mutate: newMessageMutate } = useMutation({
     mutationFn: sendNewMessageHelper,
@@ -45,6 +52,63 @@ const SendMessageBar = ({
       queryClient.invalidateQueries(["messages"] as any);
     },
   });
+  const startRec = async () => {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    const mediaRecorder = new MediaRecorder(stream);
+    mediaRecorder.ondataavailable = (e) => {
+      if (e.data.size > 0) {
+        audioChunk.current.push(e.data);
+      }
+    };
+
+    mediaRecorder.onstop = async (e) => {
+      const audioBlob = new Blob(audioChunk.current, { type: "audio/wav" });
+      console.log(audioBlob);
+      setAudioBlobOne(audioBlob);
+      const audioUrl = URL.createObjectURL(audioBlob);
+      try {
+        const url_of_audio = await UseCloudinaryAudio(audioBlob);
+        const isActiveRoom = rooms[cuurrentChatId]?.length > 1;
+console.log(">>>>>>>>>>>>>>>>>",url_of_audio);
+
+        newMessageMutate({
+          roomId: cuurrentChatId,
+          senderId: user?._id,
+          message: url_of_audio,
+          read: isActiveRoom ? true : false,
+
+          typeMessage: "audio",
+        });
+
+        socket?.emit("send_msg", {
+          roomId: cuurrentChatId,
+          message: url_of_audio,
+          senderId: user?._id,
+          partcipants: currentChatMembers,
+
+          typeMessage: "audio",
+        });
+      } catch (error) {}
+    };
+    mediaRecorder.start();
+    mediaRecordREf.current = mediaRecorder;
+  };
+
+  const endRec = async () => {
+    console.log(mediaRecordREf);
+    console.log(audioChunk);
+    if (
+      mediaRecordREf.current &&
+      mediaRecordREf.current.state === "recording"
+    ) {
+      // console.log(audioBlobOne);
+      mediaRecordREf.current.stop();
+      try {
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
 
   const handleSendMessage = () => {
     if (!msgValue) return;
@@ -116,7 +180,10 @@ const SendMessageBar = ({
                 className="hidden"
               />
             </Card>
-            <Card onClick={()=> setCameraOn(true)} className="flex items-center justify-center ml-2 py-2.5 px-2 rounded-xl cursor-pointer">
+            <Card
+              onClick={() => setCameraOn(true)}
+              className="flex items-center justify-center ml-2 py-2.5 px-2 rounded-xl cursor-pointer"
+            >
               <PhotoCameraIcon fontSize="inherit" className="text-[2rem]" />
             </Card>
           </div>
@@ -149,7 +216,25 @@ const SendMessageBar = ({
           placeholder="Type Message here........."
         />
         <Card className="flex items-center justify-center ml-2 px-2 rounded-xl">
-          <KeyboardVoiceIcon fontSize="inherit" className="text-[2rem]" />
+          {isRecordOn ? (
+            <RadioButtonCheckedIcon
+              onClick={() => {
+                setisRecordOn(false);
+                endRec();
+              }}
+              fontSize="inherit"
+              className="text-[2rem] text-red-500 animate-pulse"
+            />
+          ) : (
+            <KeyboardVoiceIcon
+              onClick={() => {
+                setisRecordOn(true);
+                startRec();
+              }}
+              fontSize="inherit"
+              className="text-[2rem]"
+            />
+          )}
         </Card>
         <Card
           className="flex items-center justify-center ml-2 px-2 rounded-xl cursor-pointer"
