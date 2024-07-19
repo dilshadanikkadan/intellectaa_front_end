@@ -9,16 +9,23 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { getAllUserHelper, userBlockHelper } from "@/helpers/user/userApiHelper";
+import {
+  getAllUserHelper,
+  userBlockHelper,
+} from "@/helpers/user/userApiHelper";
 import { useQuery } from "@tanstack/react-query";
 import UserBlockModal from "./UserDeleteModal";
 import { UserTablePagination } from "./UserTablePagination";
 
 const UsersTable = () => {
   const [pageNumber, setPageNumber] = useState(1);
-  const limit = 5;
+  const limit = 4;
 
-  const { data: AllUsers, isLoading, refetch } = useQuery({
+  const {
+    data: AllUsers,
+    isLoading,
+    refetch,
+  } = useQuery({
     queryFn: () => getAllUserHelper(pageNumber, limit),
     queryKey: ["users", pageNumber, limit],
   });
@@ -44,7 +51,7 @@ const UsersTable = () => {
             <TableRow key={user.email} className="shadow-sm">
               <TableCell className="font-medium">
                 <img
-                  src="/avt.png"
+                  src={user?.profile || "/avt.png"}
                   className="w-14 h-w-14 object-cover"
                   alt=""
                 />
@@ -52,7 +59,9 @@ const UsersTable = () => {
               <TableCell className="font-medium ">{user?.username}</TableCell>
               <TableCell>{user?.email}</TableCell>
               <TableCell>{user?.role}</TableCell>
-              <TableCell>{String(user?.isBlocked ? "blocked" : "active")}</TableCell>
+              <TableCell>
+                {String(user?.isBlocked ? "blocked" : "active")}
+              </TableCell>
               <TableCell className="text-right">
                 <UserBlockModal
                   id={`modal_${user.email}`}
@@ -66,8 +75,8 @@ const UsersTable = () => {
           ))}
         </TableBody>
       </Table>
-      <UserTablePagination 
-        setPageNumber={setPageNumber} 
+      <UserTablePagination
+        setPageNumber={setPageNumber}
         currentPage={pageNumber}
         totalPages={totalPages}
       />

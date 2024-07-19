@@ -85,7 +85,7 @@ const VoiceMessage = ({
             className={` `}
           ></div>
           <audio
-            className=" rounded-md object-cover ml-2 pb-2"
+            className=" rounded-md object-cover ml-2 pb-2 max-w-full"
             controls
             src={msg?.message}
           />

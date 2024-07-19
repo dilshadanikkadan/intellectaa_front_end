@@ -48,6 +48,7 @@ const ForwardMessages = ({
       message: forWardMessage,
       senderId: user?._id,
       partcipants: currentChatMembers,
+      forWard:true
     });
     setForWardMessage("");
   };

@@ -7,16 +7,24 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const CategorySelector = () => {
+interface Props {
+  setCategory?: any;
+}
+const CategorySelector = ({ setCategory }: Props) => {
+  const handleChange = (value: string) => {
+    setCategory(value);
+  };
+
   return (
     <div className="mt-2 w-[90%] mx-auto md:w-[35%] py-1">
-      <Select>
+      <Select onValueChange={handleChange}>
         <SelectTrigger className="w-[97%]">
-          <SelectValue placeholder="Language" />
+          <SelectValue placeholder="Category" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="javaScript">javaScript</SelectItem>
-          <SelectItem value="python">python</SelectItem>
+          <SelectItem onClick={()=> setCategory("")} value="All">All</SelectItem>
+          <SelectItem value="Java Script">javaScript</SelectItem>
+          <SelectItem value="Python">python</SelectItem>
         </SelectContent>
       </Select>
     </div>

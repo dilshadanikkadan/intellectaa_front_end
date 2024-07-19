@@ -4,8 +4,9 @@ import React, { useState } from "react";
 import CategorySelector from "./utilComponents/CategorySelector";
 interface Props{
   onSearch:any
+  setCategory:any
 }
-const CourseBreadC = ({ onSearch }:Props) => {
+const CourseBreadC = ({ onSearch,setCategory }:Props) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleInputChange = (e:any) => {
@@ -42,7 +43,7 @@ const CourseBreadC = ({ onSearch }:Props) => {
             </button>
           </div>
           <div className="w-[70%] hidden md:flex flex-col md:flex-row justify-between">
-            <CategorySelector />
+            <CategorySelector  setCategory={setCategory}/>
             <CategorySelector />
             <CategorySelector />
           </div>

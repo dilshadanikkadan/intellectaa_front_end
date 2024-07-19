@@ -1,5 +1,7 @@
 import courseService from "@/lib/api/course";
 import { NewError } from "../error/serializeError";
+import axios from "axios";
+import { baseApi_ } from "@/lib/api/buildClient/buildClient";
 
 export const codeExcuteHelper = async (payload: any) => {
   try {
@@ -49,13 +51,16 @@ export const submitCourseHelper = async (payload: any) => {
   }
 };
 
-export const getAllCourseHelper = async (payload?: any) => {
+export const getAllCourseHelper = async (pageNumber: number, limit: number) => {
   try {
-    const response = await courseService.getAllCourse(payload);
+    const response = await axios.get(
+      `${baseApi_}course/getAllCourses?_limit=${limit}&_page=${pageNumber}`
+    );
     if (response.status === 200) {
       return {
         success: true,
-        payload: response.data,
+        payload: response.data.courses,
+        totalCount: response.data.totalCount,
       };
     }
   } catch (error: any) {
@@ -113,9 +118,15 @@ export const publishCourseHelper = async (payload: any) => {
   }
 };
 
-export const getAllPublishCoursesHelper = async (payload: any) => {
+export const getAllPublishCoursesHelper = async (
+  searchQuery?: any,
+  category?: any
+) => {
   try {
-    const response = await courseService.getAllPublishedCourses(payload);
+    const response = await axios.get(
+      `${baseApi_}course/getAllPublishedCourses?_search=${searchQuery}&&_Category=${category}`
+    );
+    // const response = await courseService.getAllPublishedCourses(searchQuery);
     if (response.status === 200) {
       return {
         success: true,
@@ -271,7 +282,6 @@ export const getInstroctorCourseHelper = async (id?: any) => {
   }
 };
 
-
 export const updateCourseHelper = async (payload: any) => {
   try {
     const response = await courseService.updateCourse(payload);
@@ -314,14 +324,10 @@ export const updateProgressCourseHelper = async (payload: any) => {
   }
 };
 
-
 export const getMyEntrollHelper = async (id?: any) => {
   const userId = id.queryKey[1];
   try {
-    const response = await courseService.getMyEntroll(
-      {},
-      { id: userId }
-    );
+    const response = await courseService.getMyEntroll({}, { id: userId });
     if (response.status === 200 || 201) {
       return {
         success: true,
@@ -332,7 +338,6 @@ export const getMyEntrollHelper = async (id?: any) => {
     throw NewError(error);
   }
 };
-
 
 export const getMySubmittedQuestionHelper = async (id?: any) => {
   const userId = id.queryKey[1];
@@ -352,13 +357,11 @@ export const getMySubmittedQuestionHelper = async (id?: any) => {
   }
 };
 
-
-
 export const deleteCourseHelper = async (id: any) => {
   console.log("_________deletting");
-    
+
   try {
-    const response = await courseService.deleteCourse(id)
+    const response = await courseService.deleteCourse(id);
     if (response.status === 200 || 201) {
       return {
         success: true,
@@ -368,4 +371,4 @@ export const deleteCourseHelper = async (id: any) => {
   } catch (error: any) {
     throw NewError(error);
   }
-}
+};

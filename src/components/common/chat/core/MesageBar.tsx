@@ -63,7 +63,9 @@ const MesageBar = ({
   useEffect(() => {
     if (socket) {
       socket.on("recieve_msg", (data) => {
-        setMessages((prev: any) => [...prev, data]);
+        if (!data.forWard) {
+          setMessages((prev: any) => [...prev, data]);
+        }
       });
 
       socket.on("typing_recieve", ({ typerId }) => {

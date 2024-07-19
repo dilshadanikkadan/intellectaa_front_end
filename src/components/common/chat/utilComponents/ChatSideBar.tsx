@@ -28,6 +28,7 @@ const ChatSideBar = ({
   const { socket, onlineUsers } = useContext(SocketContext);
   const user = useUserStore((state) => state.user);
   const [myChatrooms, setMyChatrooms] = useState<any>([]);
+  const [unReadMessages, setunReadMessages] = useState<any>([]);
 
   const { data: myChat } = useQuery({
     queryKey: ["myChat", user?._id],
@@ -51,19 +52,24 @@ const ChatSideBar = ({
       roomId: id,
       id: user?._id,
     });
+    socket?.emit("update_roomMessage", {
+      roomId: id,
+      id: user?._id,
+    });
     const stduentId = partcipants?.find((id: any) => id !== user?._id);
     setStudentId(stduentId);
   };
   useEffect(() => {
     if (socket) {
       socket.on("recieve_msg", (data) => {
-        console.log("Received data:", data);
+        // console.log("Received data:", data);
         setMyChatrooms((prev: any) => {
           const updatedChatrooms = prev.map((chat: any) => {
             if (chat._id === data?.roomId) {
               return {
                 ...chat,
                 lastMessage: data?.message,
+                unReadMessage: data?.unReadMessage,
                 updatedAt: new Date().toISOString(),
               };
             }
@@ -74,6 +80,32 @@ const ChatSideBar = ({
             (a: any, b: any) =>
               new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
           );
+        });
+        setunReadMessages((prev: any) => {
+          const updatedMessages = { ...prev };
+
+          if (data.roomId in updatedMessages) {
+            updatedMessages[data.roomId] = [
+              ...updatedMessages[data.roomId],
+              ".",
+            ];
+          } else {
+            updatedMessages[data.roomId] = ["."];
+          }
+
+          return updatedMessages;
+        });
+      });
+
+      socket.on("messsge_seen", (data) => {
+        setunReadMessages((prev: any) => {
+          const updatedMessages = { ...prev };
+
+          if (data.roomId in updatedMessages) {
+            updatedMessages[data.roomId] = [];
+          }
+
+          return updatedMessages;
         });
       });
     }
@@ -86,10 +118,17 @@ const ChatSideBar = ({
           new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
       );
       setMyChatrooms(sortedChatrooms);
+      const unRead = myChat.payload?.reduce((acc: any, x: any) => {
+        var id = x._id;
+        var unread = x.unReadMessage;
+        acc[id] = unread;
+        return acc;
+      }, {});
+      setunReadMessages(unRead);
     }
   }, [myChat]);
+  console.log("*******", unReadMessages);
 
-  console.log("^^^^^^^^^^^^^^^^online users", onlineUsers);
   const friend_id = (chat: any) => {
     return chat?.participantDetails?.find((x: any) => x?._id !== user?._id)
       ?._id;
@@ -108,7 +147,7 @@ const ChatSideBar = ({
               placeholder="Search here"
             />
           </div>
-          {myChatrooms?.map((chat: any) => (
+          {myChatrooms?.map((chat: any, i: number) => (
             <div
               onClick={() =>
                 handleCurrentRoom(
@@ -137,7 +176,7 @@ const ChatSideBar = ({
                     chat?.roomProfile ||
                     chat?.participantDetails?.find(
                       (x: any) => x?._id !== user?._id
-                    )?.profile
+                    )?.profile || '/avt.png'
                   }
                   className="w-14 object-cover h-12 rounded-full"
                   alt=""
@@ -167,9 +206,12 @@ const ChatSideBar = ({
                   <p className="text-main text-sm">
                     {moment(chat?.updatedAt).format("HH:mm")}
                   </p>
-                  <span className="text-white bg-[#20B486] px-2 py-1 ml-3 rounded-full text-sm">
-                    7
-                  </span>
+                  {unReadMessages[chat?._id]?.length > 0 &&
+                    cuurrentChat !== chat?._id && (
+                      <span className="text-white bg-[#20B486] w-3 h-3 p-1 px-2 ml-3 rounded-full text-sm">
+                        {unReadMessages[chat?._id]?.length ?? 0}
+                      </span>
+                    )}
                 </div>
               </div>
             </div>

@@ -21,10 +21,10 @@ const AvatarBar = ({ user }: AvatarBarProps) => {
           objectFit="cover"
           onError={() => console.error("Image failed to load")}
         />
-        <p>{user?.username ?? user?.name}</p>
+        <p className="font-semibold">{user?.username ?? user?.name}</p>
       </div>
-      <button className=" text-[#20B486] mt-3 bg-white border border-[#20B486] px-7 py-[6px]  ">
-        <EditProfile/>
+      <button className=" text-[#20B486] mt-3 font-semibold  rounded-md  bg-[#EFF9F2] px-7 py-[4px]  ">
+        <EditProfile />
       </button>
       <div className="w-full mt-3">
         <div className="flex gap-5">

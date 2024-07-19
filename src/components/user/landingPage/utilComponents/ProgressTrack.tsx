@@ -8,13 +8,17 @@ import React from "react";
 
 const ProgressTrack = () => {
   const user = useUserStore((state) => state.user);
-  const { data: MyEntroll } = useQuery({
+  const { data: MyEntroll,isLoading } = useQuery({
     queryFn: getMyEntrollHelper,
     queryKey: ["myEntroll", user?._id],
   });
   const router = useRouter();
   console.log("____________********&", MyEntroll);
-
+if(isLoading){
+  return (
+    <div>loading.......</div>
+  )
+}
   return (
     <div className="w-[95%] transition-all  duration-700 mx-auto mt-5">
       <h4 className="text-xl font-semibold my-2">My Courses</h4>

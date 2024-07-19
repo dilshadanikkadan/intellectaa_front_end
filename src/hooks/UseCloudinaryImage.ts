@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const UseCloudinaryImage = async (image: string,setprogressImg?:any ) => {
+export const UseCloudinaryImage = async (image: any,setprogressImg?:any ) => {
   try {
     const data = new FormData();
     data.append("file", image);
