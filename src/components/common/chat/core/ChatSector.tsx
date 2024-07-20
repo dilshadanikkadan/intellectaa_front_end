@@ -33,7 +33,7 @@ const ChatSector = () => {
   }, [socket]);
 
   return (
-    <div className="w-[80%] mx-auto mt-2 md:flex">
+    <div className="w-[85%] mx-auto mt-2 md:flex">
       <ChatSideBar
         setCurrentChat={setCurrentChat}
         cuurrentChat={cuurrentChat}

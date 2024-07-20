@@ -26,8 +26,8 @@ const AllCourses = () => {
       <div className="mt-10">
         <ContainerFuild>
           <div className="w-full flex flex-wrap gap-7">
-            {allCourses?.payload?.map((item: any) => (
-              <CourseCard key={item.id} course={item} />
+            {allCourses?.payload?.map((item: any ,i:number) => (
+              <CourseCard key={item.id} course={item}  i={i}/>
             ))}
           </div>
         </ContainerFuild>

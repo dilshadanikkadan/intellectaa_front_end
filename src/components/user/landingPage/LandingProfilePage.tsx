@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { flushSync } from "react-dom";
 import ProgressTrack from "./utilComponents/ProgressTrack";
 import LeaderBoard from "./utilComponents/LeaderBoard";
+
 enum IComponents {
   WhatToday = "WhatToday",
   Course = "course",

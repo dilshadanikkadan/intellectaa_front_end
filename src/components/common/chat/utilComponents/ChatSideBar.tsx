@@ -206,12 +206,12 @@ const ChatSideBar = ({
                   <p className="text-main text-sm">
                     {moment(chat?.updatedAt).format("HH:mm")}
                   </p>
-                  {unReadMessages[chat?._id]?.length > 0 &&
+                  {/* {unReadMessages[chat?._id]?.length > 0 &&
                     cuurrentChat !== chat?._id && (
                       <span className="text-white bg-[#20B486] w-3 h-3 p-1 px-2 ml-3 rounded-full text-sm">
                         {unReadMessages[chat?._id]?.length ?? 0}
                       </span>
-                    )}
+                    )} */}
                 </div>
               </div>
             </div>

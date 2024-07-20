@@ -39,7 +39,7 @@ const NavBar = () => {
     { href: "/about", label: "About" },
     { href: "/courses", label: "Courses" },
     { href: user?.isInstructor ? "/instructor" : "/teachus", label: user?.isInstructor ? "Instructor" : "Teach Us" },
-    { href: "/contact", label: "Contact Me" },
+    { href: "/blogs", label: "Blogs" },
   ];
 
   const NavLink = ({ href, label, onClick }:any) => {

@@ -3,33 +3,37 @@ import { Card } from "@/components/ui/card";
 import { getMyEntrollHelper } from "@/helpers/course/courseApiHelper";
 import { useUserStore } from "@/store/storeProviders/UseUserStore";
 import { useQuery } from "@tanstack/react-query";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import Image from "next/image";
 
 const ProgressTrack = () => {
   const user = useUserStore((state) => state.user);
-  const { data: MyEntroll,isLoading } = useQuery({
+  const { data: MyEntroll, isLoading } = useQuery({
     queryFn: getMyEntrollHelper,
     queryKey: ["myEntroll", user?._id],
   });
   const router = useRouter();
   console.log("____________********&", MyEntroll);
-if(isLoading){
+  if (isLoading) {
+    return <div>loading.......</div>;
+  }
   return (
-    <div>loading.......</div>
-  )
-}
-  return (
-    <div className="w-[95%] transition-all  duration-700 mx-auto mt-5">
+    <div className="w-[95%]  mx-auto mt-5">
       <h4 className="text-xl font-semibold my-2">My Courses</h4>
       <div className="wfull flex flex-wrap gap-4">
         {MyEntroll?.payload.map((myCorurse: any) => (
-          <Card className="w-[26%]   rounded-md border border-gray-300 pb-5 ">
-            <img
-              src={myCorurse?.courseId?.thumbnail}
-              className="h-[45%] object-cover w-[90%] mx-auto mt-3"
-              alt=""
-            />
+          <Card className="w-[26%]    rounded-md border border-gray-300 pb-5 ">
+            <div className="w-[90%] relative h-28 rounded-md mx-auto">
+              <Image
+                src={myCorurse?.courseId?.thumbnail}
+                className="object-cover  mx-auto mt-3"
+                alt=""
+                layout="fill"
+              />
+            </div>
             <p className="font-semibold ml-3 text-noraml mt-3">
               {myCorurse?.courseId?.title}
             </p>
@@ -38,15 +42,13 @@ if(isLoading){
               Lesson Complted {myCorurse?.courseId?.lessons.length}/
               {myCorurse?.progress?.completedLessons?.length}
             </p>
-            <button
-              onClick={() =>
-                router.push(`/courses/${myCorurse?.courseId?._id}`)
-              }
-              className="px-5 py-2 bg-black text-white mt-3 ml-3 rounded-md"
-            >
-              {" "}
-              Continue
-            </button>
+
+            <Link href={`/courses/${myCorurse?.courseId?._id}`}>
+              <button className="flex items-center ml-3 text-[#20B486] hover:text-[#1a9370] transition-colors duration-300">
+                continue
+                <ArrowForwardIcon className="ml-1" fontSize="small" />
+              </button>
+            </Link>
           </Card>
         ))}
       </div>
