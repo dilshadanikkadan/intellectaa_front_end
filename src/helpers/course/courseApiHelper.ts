@@ -2,8 +2,9 @@ import courseService from "@/lib/api/course";
 import { NewError } from "../error/serializeError";
 import axios from "axios";
 import { baseApi_ } from "@/lib/api/buildClient/buildClient";
+import { TOBE } from "@/types/constants/Tobe";
 
-export const codeExcuteHelper = async (payload: any) => {
+export const codeExcuteHelper = async (payload: TOBE) => {
   try {
     const response = await courseService.codeExcute(payload);
     if (response.status === 201) {
@@ -12,14 +13,14 @@ export const codeExcuteHelper = async (payload: any) => {
         payload: response.data,
       };
     }
-  } catch (error: any) {
+  } catch (error: TOBE) {
     // console.log(error.response.data.m  essage);
 
     throw error.response.data.message;
   }
 };
 
-export const allProblemsFetchHelper = async (payload: any) => {
+export const allProblemsFetchHelper = async (payload: TOBE) => {
   try {
     const response = await courseService.allProblemsFetch(payload);
     if (response.status === 200) {
@@ -28,14 +29,14 @@ export const allProblemsFetchHelper = async (payload: any) => {
         payload: response.data,
       };
     }
-  } catch (error: any) {
+  } catch (error: TOBE) {
     console.log(error.response.data.message);
 
     throw NewError(error);
   }
 };
 
-export const submitCourseHelper = async (payload: any) => {
+export const submitCourseHelper = async (payload: TOBE) => {
   try {
     const response = await courseService.submitCourse(payload);
     if (response.status === 201) {
@@ -44,7 +45,7 @@ export const submitCourseHelper = async (payload: any) => {
         payload: response.data,
       };
     }
-  } catch (error: any) {
+  } catch (error: TOBE) {
     console.log(error.response.data.message);
 
     throw NewError(error);
@@ -63,14 +64,14 @@ export const getAllCourseHelper = async (pageNumber: number, limit: number) => {
         totalCount: response.data.totalCount,
       };
     }
-  } catch (error: any) {
+  } catch (error: TOBE) {
     console.log(error.response.data.message);
 
     throw NewError(error);
   }
 };
 
-export const getCourseeHelper = async (id?: any) => {
+export const getCourseeHelper = async (id?: TOBE) => {
   const courseId = id.queryKey[1];
   try {
     const response = await courseService.getCourse({}, { id: courseId });
@@ -80,14 +81,14 @@ export const getCourseeHelper = async (id?: any) => {
         payload: response.data,
       };
     }
-  } catch (error: any) {
+  } catch (error: TOBE) {
     console.log(error.response.data.message);
 
     throw NewError(error);
   }
 };
 
-export const codeFetchHelper = async (id: any) => {
+export const codeFetchHelper = async (id: TOBE) => {
   const question = id.queryKey[1];
   const langauge = id.queryKey[2];
   try {
@@ -98,13 +99,13 @@ export const codeFetchHelper = async (id: any) => {
         payload: response.data,
       };
     }
-  } catch (error: any) {
+  } catch (error: TOBE) {
     console.log(error.response.data.message);
 
     throw NewError(error);
   }
 };
-export const publishCourseHelper = async (payload: any) => {
+export const publishCourseHelper = async (payload: TOBE) => {
   try {
     const response = await courseService.publishCourse(payload);
     if (response.status === 201) {
@@ -113,18 +114,23 @@ export const publishCourseHelper = async (payload: any) => {
         payload: response.data,
       };
     }
-  } catch (error: any) {
+  } catch (error: TOBE) {
     throw NewError(error);
   }
 };
 
 export const getAllPublishCoursesHelper = async (
-  searchQuery?: any,
-  category?: any
+  searchQuery?: TOBE,
+  category?: TOBE,
+  pageNumber?: TOBE,
+  limit?: TOBE
 ) => {
   try {
     const response = await axios.get(
-      `${baseApi_}course/getAllPublishedCourses?_search=${searchQuery}&&_Category=${category}`
+      `${baseApi_}course/getAllPublishedCourses?_search=${searchQuery}&&_Category=${category}&&_limit=${limit}&_page=${pageNumber}`,
+      {
+        withCredentials: true,
+      }
     );
     // const response = await courseService.getAllPublishedCourses(searchQuery);
     if (response.status === 200) {
@@ -133,12 +139,12 @@ export const getAllPublishCoursesHelper = async (
         payload: response.data,
       };
     }
-  } catch (error: any) {
+  } catch (error: TOBE) {
     throw NewError(error);
   }
 };
 
-export const myCourseHelper = async (id?: any) => {
+export const myCourseHelper = async (id?: TOBE) => {
   const courseId = id.queryKey[1];
   try {
     const response = await courseService.myCourse({}, { id: courseId });
@@ -148,14 +154,14 @@ export const myCourseHelper = async (id?: any) => {
         payload: response.data,
       };
     }
-  } catch (error: any) {
+  } catch (error: TOBE) {
     console.log(error.response.data.message);
 
     throw NewError(error);
   }
 };
 
-export const createSubmissionHelper = async (payload: any) => {
+export const createSubmissionHelper = async (payload: TOBE) => {
   try {
     const response = await courseService.submisson(payload);
     if (response.status === 200 || 201) {
@@ -164,12 +170,12 @@ export const createSubmissionHelper = async (payload: any) => {
         payload: response.data,
       };
     }
-  } catch (error: any) {
+  } catch (error: TOBE) {
     throw NewError(error);
   }
 };
 
-export const getSubmissionsHelper = async (id?: any) => {
+export const getSubmissionsHelper = async (id?: TOBE) => {
   const submissionId = id.queryKey[1];
   try {
     const response = await courseService.getSubmission(
@@ -182,14 +188,14 @@ export const getSubmissionsHelper = async (id?: any) => {
         payload: response.data,
       };
     }
-  } catch (error: any) {
+  } catch (error: TOBE) {
     console.log(error.response.data.message);
 
     throw NewError(error);
   }
 };
 
-export const getMySubmissionHelper = async (id?: any) => {
+export const getMySubmissionHelper = async (id?: TOBE) => {
   const submissionId = id.queryKey[1];
   try {
     const response = await courseService.getMySubmission(
@@ -202,12 +208,12 @@ export const getMySubmissionHelper = async (id?: any) => {
         payload: response.data,
       };
     }
-  } catch (error: any) {
+  } catch (error: TOBE) {
     throw NewError(error);
   }
 };
 
-export const likeSubmissionHelper = async (payload: any) => {
+export const likeSubmissionHelper = async (payload: TOBE) => {
   try {
     const response = await courseService.manageLike(payload);
     if (response.status === 200 || 201) {
@@ -216,12 +222,12 @@ export const likeSubmissionHelper = async (payload: any) => {
         payload: response.data,
       };
     }
-  } catch (error: any) {
+  } catch (error: TOBE) {
     throw NewError(error);
   }
 };
 
-export const dailyTaskHelper = async (payload: any) => {
+export const dailyTaskHelper = async (payload: TOBE) => {
   try {
     const response = await courseService.assignTask(payload);
     if (response.status === 200 || 201) {
@@ -230,12 +236,12 @@ export const dailyTaskHelper = async (payload: any) => {
         payload: response.data,
       };
     }
-  } catch (error: any) {
+  } catch (error: TOBE) {
     throw error.response.data.message;
   }
 };
 
-export const getTodaysTasksHelper = async (payload: any) => {
+export const getTodaysTasksHelper = async (payload: TOBE) => {
   try {
     const response = await courseService.getTodaysTask(payload);
     if (response.status === 200) {
@@ -244,12 +250,12 @@ export const getTodaysTasksHelper = async (payload: any) => {
         payload: response.data,
       };
     }
-  } catch (error: any) {
+  } catch (error: TOBE) {
     throw NewError(error);
   }
 };
 
-export const getMyAttendenceHelper = async (id?: any) => {
+export const getMyAttendenceHelper = async (id?: TOBE) => {
   const userId = id.queryKey[1];
   try {
     const response = await courseService.getAttendence({}, { id: userId });
@@ -259,12 +265,12 @@ export const getMyAttendenceHelper = async (id?: any) => {
         payload: response.data,
       };
     }
-  } catch (error: any) {
+  } catch (error: TOBE) {
     throw NewError(error);
   }
 };
 
-export const getInstroctorCourseHelper = async (id?: any) => {
+export const getInstroctorCourseHelper = async (id?: TOBE) => {
   const userId = id.queryKey[1];
   try {
     const response = await courseService.getInstroctorCourse(
@@ -277,12 +283,12 @@ export const getInstroctorCourseHelper = async (id?: any) => {
         payload: response.data,
       };
     }
-  } catch (error: any) {
+  } catch (error: TOBE) {
     throw NewError(error);
   }
 };
 
-export const updateCourseHelper = async (payload: any) => {
+export const updateCourseHelper = async (payload: TOBE) => {
   try {
     const response = await courseService.updateCourse(payload);
     if (response.status === 200 || 201) {
@@ -291,12 +297,12 @@ export const updateCourseHelper = async (payload: any) => {
         payload: response.data,
       };
     }
-  } catch (error: any) {
+  } catch (error: TOBE) {
     throw NewError(error);
   }
 };
 
-export const rejectCourseHelper = async (payload: any) => {
+export const rejectCourseHelper = async (payload: TOBE) => {
   try {
     const response = await courseService.rejectCourse(payload);
     if (response.status === 200 || 201) {
@@ -305,12 +311,12 @@ export const rejectCourseHelper = async (payload: any) => {
         payload: response.data,
       };
     }
-  } catch (error: any) {
+  } catch (error: TOBE) {
     throw NewError(error);
   }
 };
 
-export const updateProgressCourseHelper = async (payload: any) => {
+export const updateProgressCourseHelper = async (payload: TOBE) => {
   try {
     const response = await courseService.updateProgressCourse(payload);
     if (response.status === 200 || 201) {
@@ -319,12 +325,12 @@ export const updateProgressCourseHelper = async (payload: any) => {
         payload: response.data,
       };
     }
-  } catch (error: any) {
+  } catch (error: TOBE) {
     throw NewError(error);
   }
 };
 
-export const getMyEntrollHelper = async (id?: any) => {
+export const getMyEntrollHelper = async (id?: TOBE) => {
   const userId = id.queryKey[1];
   try {
     const response = await courseService.getMyEntroll({}, { id: userId });
@@ -334,12 +340,12 @@ export const getMyEntrollHelper = async (id?: any) => {
         payload: response.data,
       };
     }
-  } catch (error: any) {
+  } catch (error: TOBE) {
     throw NewError(error);
   }
 };
 
-export const getMySubmittedQuestionHelper = async (id?: any) => {
+export const getMySubmittedQuestionHelper = async (id?: TOBE) => {
   const userId = id.queryKey[1];
   try {
     const response = await courseService.getMySubmittedQuestion(
@@ -352,12 +358,12 @@ export const getMySubmittedQuestionHelper = async (id?: any) => {
         payload: response.data,
       };
     }
-  } catch (error: any) {
+  } catch (error: TOBE) {
     throw NewError(error);
   }
 };
 
-export const deleteCourseHelper = async (id: any) => {
+export const deleteCourseHelper = async (id: TOBE) => {
   console.log("_________deletting");
 
   try {
@@ -368,7 +374,21 @@ export const deleteCourseHelper = async (id: any) => {
         payload: response.data,
       };
     }
-  } catch (error: any) {
+  } catch (error: TOBE) {
+    throw NewError(error);
+  }
+};
+
+export const getLeaderBoardHelper = async (id?: TOBE) => {
+  try {
+    const response = await courseService.getLeaderBoard({}, {});
+    if (response.status === 200 || 201) {
+      return {
+        success: true,
+        payload: response.data,
+      };
+    }
+  } catch (error: TOBE) {
     throw NewError(error);
   }
 };

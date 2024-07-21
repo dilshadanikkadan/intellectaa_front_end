@@ -9,6 +9,7 @@ import { useParams, useRouter } from "next/navigation";
 import { loadStripe } from "@stripe/stripe-js";
 import { getCourseeHelper } from "@/helpers/course/courseApiHelper";
 import { useQuery } from "@tanstack/react-query";
+import { TOBE } from "@/types/constants/Tobe";
 
 const PaymentPacks = () => {
   const user = useUserStore((state) => state.user);
@@ -21,7 +22,7 @@ const PaymentPacks = () => {
   });
   console.log("__________________________%%%%%%%%%%###############_", course?.payload);
 
-  const handlePayment = async (payload: any) => {
+  const handlePayment = async (payload: TOBE) => {
     try {
       const stripe = await loadStripe(
         process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string
@@ -68,7 +69,7 @@ const PaymentPacks = () => {
         <p className="text-center">
           Basically we create this package for those who are really interested
           and get benifited from our courses or books. We want to make a low
-          cost package for them. So that they can purchase any courses with the
+          cost package for them. So that they can purchase TOBE courses with the
           package they buy from us. Also will get free books from every
           packages.
         </p>

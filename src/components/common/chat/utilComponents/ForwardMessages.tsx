@@ -6,12 +6,13 @@ import {
 } from "@/helpers/chat/chatApiHelper";
 import { SocketContext } from "@/store/storeProviders/SocketProvider";
 import { useUserStore } from "@/store/storeProviders/UseUserStore";
+import { TOBE } from "@/types/constants/Tobe";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import React, { useContext, useState } from "react";
 interface Props {
-  currentChatMembers: any;
-  forWardMessage: any;
-  setForWardMessage: any;
+  currentChatMembers: TOBE;
+  forWardMessage: TOBE;
+  setForWardMessage: TOBE;
 }
 const ForwardMessages = ({
   currentChatMembers,
@@ -58,7 +59,7 @@ const ForwardMessages = ({
       <Card className="h-96 w-72">
         <p className="font-semibold py-3 ml-3">Forward to ...</p>
         <div className="flex flex-col w-[90%]  h-[70%] mx-auto">
-          {myChat?.payload?.map((chat: any) => (
+          {myChat?.payload?.map((chat: TOBE) => (
             <div
               onClick={() => setForWardRoom(chat?._id)}
               className={`user flex gap-4 mt-2 border-b border-gray-200 pb-3 ${

@@ -17,7 +17,7 @@ const LanguageCode = ({setSelectedLanguage}:any) => {
   return (
     <div className="mt-2 w-[35%] py-1">
       <Select  onValueChange={handleLanguageChange}>
-        <SelectTrigger className="w-[97%]">
+        <SelectTrigger className="w-[97%] py-1">
           <SelectValue placeholder="Language" />
         </SelectTrigger>
         <SelectContent>

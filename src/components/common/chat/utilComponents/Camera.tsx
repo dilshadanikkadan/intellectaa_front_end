@@ -4,14 +4,16 @@ import { sendNewMessageHelper } from "@/helpers/chat/chatApiHelper";
 import { UseCloudinaryImage } from "@/hooks/UseCloudinaryImage";
 import { SocketContext } from "@/store/storeProviders/SocketProvider";
 import { useUserStore } from "@/store/storeProviders/UseUserStore";
+import { TOBE } from "@/types/constants/Tobe";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useContext, useRef, useState } from "react";
 import WebCam from "react-webcam";
 interface Props {
-  cuurrentChatId: any;
-  setCameraOn: any;
+  cuurrentChatId: TOBE;
+  setCameraOn: TOBE;
+  setLoading: TOBE;
 }
-const Camera = ({ cuurrentChatId, setCameraOn }: Props) => {
+const Camera = ({ cuurrentChatId, setCameraOn,setLoading }: Props) => {
   const webcamRef = useRef<WebCam>(null);
   const [image, setImage] = useState<any>(null);
   const [progress, setprogressImg] = useState<any>();
@@ -32,6 +34,7 @@ const Camera = ({ cuurrentChatId, setCameraOn }: Props) => {
   });
 
   const handleSend = async () => {
+    setLoading(true)
     const uploadedImage = await UseCloudinaryImage(image, setprogressImg);
     const isActiveRoom = rooms[cuurrentChatId]?.length > 1;
     newMessageMutate({
@@ -48,6 +51,7 @@ const Camera = ({ cuurrentChatId, setCameraOn }: Props) => {
       senderId: user?._id,
     });
     setImage("");
+    setLoading(false)
     setCameraOn(false);
   };
   return (

@@ -17,6 +17,7 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { UseCloudinaryImage } from "@/hooks/UseCloudinaryImage";
 import { useMutation } from "@tanstack/react-query";
 import { userPrfilePatchHelper } from "@/helpers/user/userApiHelper";
+import { TOBE } from "@/types/constants/Tobe";
 
 export function EditProfile() {
   const user = useUserStore(state => state.user);
@@ -26,7 +27,7 @@ export function EditProfile() {
   const [lastName, setLastaName] = useState(user?.lastaName || "");
   const [uploadProgress, setUploadProgress] = useState(0);
 const loginSucees = useUserStore(state=> state.loginSuccess)
-  const handleImageUpload = async (e:any) => {
+  const handleImageUpload = async (e:TOBE) => {
     const file = e.target.files[0];
     if (file) {
       const imageUrl = await UseCloudinaryImage(file, setUploadProgress);

@@ -15,6 +15,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import Link from "next/link";
+import { TOBE } from "@/types/constants/Tobe";
 const AllMyCourses = () => {
   const user = useUserStore((state) => state.user);
   const allCorses = new Array(4).fill(".");
@@ -32,7 +33,7 @@ const AllMyCourses = () => {
   const {mutate:deleteMutate}= useMutation({
     mutationFn:deleteCourseHelper,
     onSuccess:(data)=>{
-     queryCleint.invalidateQueries(["myCourse"] as any)
+     queryCleint.invalidateQueries(["myCourse"] as TOBE)
     }
   })
 
@@ -66,7 +67,7 @@ const AllMyCourses = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {myCourse?.payload.map((course: any) => (
+          {myCourse?.payload.map((course: TOBE) => (
             <TableRow key={course?.tilte} className="shadow-sm">
               <TableCell className="font-medium">
                 <img

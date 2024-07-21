@@ -5,14 +5,20 @@ import CourseCard from "./CourseCard";
 import { useQuery } from "@tanstack/react-query";
 import { getAllPublishCoursesHelper } from "@/helpers/course/courseApiHelper";
 import CourseBreadC from "./CourseBreadC";
+import { CoursePagination } from "./utilComponents/CoursePagination";
 
 const AllCourses = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [category, setCategory] = useState<string>("");
+  const [pageNumber, setPageNumber] = useState(1);
+  const limit = 4;
   const { data: allCourses } = useQuery({
-    queryFn: () => getAllPublishCoursesHelper(searchTerm,category),
-    queryKey: ["allPublishedCourses", searchTerm,category],
+    queryFn: () =>
+      getAllPublishCoursesHelper(searchTerm, category, pageNumber, limit),
+    queryKey: ["allPublishedCourses", searchTerm, category, pageNumber, limit],
   });
+
+  const totalPages = Math.ceil((allCourses?.payload.totalCount || 0) / limit);
 
   console.log("********", category);
 
@@ -24,13 +30,18 @@ const AllCourses = () => {
     <div className="">
       <CourseBreadC setCategory={setCategory} onSearch={handleSearch} />
       <div className="mt-10">
-        <ContainerFuild>
+        <div className="flex mx-auto w-[80%] flex-col gap-5" >
           <div className="w-full flex flex-wrap gap-7">
-            {allCourses?.payload?.map((item: any ,i:number) => (
-              <CourseCard key={item.id} course={item}  i={i}/>
+            {allCourses?.payload?.courses?.map((item: any, i: number) => (
+              <CourseCard key={item.id} course={item} i={i} />
             ))}
           </div>
-        </ContainerFuild>
+          <CoursePagination
+            setPageNumber={setPageNumber}
+            currentPage={pageNumber}
+            totalPages={totalPages}
+          />
+        </div>
       </div>
     </div>
   );

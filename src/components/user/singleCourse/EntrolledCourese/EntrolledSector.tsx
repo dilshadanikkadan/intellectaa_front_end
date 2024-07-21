@@ -13,12 +13,13 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import ChatIcon from "@mui/icons-material/Chat";
+import { TOBE } from "@/types/constants/Tobe";
 
-const EnrolledSector = ({ course, myCourse }: any) => {
-  const [current, setCurrent] = useState<any>(null);
+const EnrolledSector = ({ course, myCourse }: TOBE) => {
+  const [current, setCurrent] = useState<TOBE>(null);
   const [videoKey, setVideoKey] = useState(0);
   const videoWrapperRef = useRef<HTMLDivElement>(null);
-  const { id }: any = useParams();
+  const { id }: TOBE = useParams();
   const router = useRouter();
   const user = useUserStore((state) => state.user);
 
@@ -125,7 +126,7 @@ const EnrolledSector = ({ course, myCourse }: any) => {
       <div className="right flex-[2]">
         <div className="bg-gray-100 rounded-lg p-6">
           <h3 className="text-xl font-semibold mb-4">Course Content</h3>
-          {course?.lessons.map((lesson: any, i: number) => (
+          {course?.lessons.map((lesson: TOBE, i: number) => (
             <div key={i} className="mb-4">
               <button
                 onClick={() => {

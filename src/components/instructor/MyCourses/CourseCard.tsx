@@ -2,9 +2,10 @@ import { Card, CardFooter, CardTitle } from "@/components/ui/card";
 import ComputerIcon from "@mui/icons-material/Computer";
 import { CardContent } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { TOBE } from "@/types/constants/Tobe";
 interface props {
   className?: string;
-  item:any
+  item:TOBE
 }
 const CourseCard = ({ className ,item}: props) => {
   return (

@@ -15,6 +15,8 @@ import {
   userBlockHelper,
 } from "@/helpers/user/userApiHelper";
 import { useQuery } from "@tanstack/react-query";
+import { TOBE } from "@/types/constants/Tobe";
+import Link from "next/link";
 
 const InstroctorTable = () => {
   const {
@@ -41,11 +43,11 @@ const InstroctorTable = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {AllUsers?.payload.map((user: any) => (
+          {AllUsers?.payload.map((user: TOBE) => (
             <TableRow key={user.email} className="shadow-sm">
               <TableCell className="font-medium">
                 <img
-                  src={ user?.profile || "/avt.png"}
+                  src={user?.profile || "/avt.png"}
                   className="w-14 h-w-14 object-cover"
                   alt=""
                 />
@@ -56,7 +58,14 @@ const InstroctorTable = () => {
               <TableCell>
                 {String(user?.isBlocked ? "blocked" : "active")}
               </TableCell>
-              <TableCell className="text-right"></TableCell>
+              <TableCell className="text-right">
+                <Link
+                  href={`/admin/instructor/${user?._id}`}
+                  className="bg-gray-800  text-white py-1 px-3 text-sm rounded-md"
+                >
+                  View Courses
+                </Link>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

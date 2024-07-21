@@ -20,7 +20,7 @@ const TopBarProfile: React.FC<Props> = ({setCurrentView, currentView}) => {
 
   return (
     <nav className="max-w-full overflow-x-auto border shadow-md border-gray-300 rounded-md mt-6 ml-5">
-      <ul className="flex items-center h-20">
+      <ul className="flex items-center h-20 ">
         {menuItems.map((item) => (
           <li key={item.id} className="flex-1">
             <button
@@ -30,8 +30,8 @@ const TopBarProfile: React.FC<Props> = ({setCurrentView, currentView}) => {
                   ? "text-main " 
                   : "text-gray-600 hover:bg-gray-50 py-1.5 rounded-xl"}`}
             >
-              <item.icon className="text-2xl" />
-              <span>{item.label}</span>
+              <item.icon className="text-2xl " />
+              <span className="hidden md:block">{item.label}</span>
             </button>
           </li>
         ))}

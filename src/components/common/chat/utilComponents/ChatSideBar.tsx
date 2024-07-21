@@ -10,12 +10,13 @@ import { SocketContext } from "@/store/storeProviders/SocketProvider";
 import moment from "moment";
 import { useStdudentStore } from "@/store/storeProviders/UseCallStore";
 import { useRouter } from "next/navigation";
+import { TOBE } from "@/types/constants/Tobe";
 interface Props {
-  setCurrentChat: any;
-  cuurrentChat: any;
-  setCurrentChatMembers: any;
-  setCurrentChatMemberNames: any;
-  setCurrentRoom: any;
+  setCurrentChat: TOBE;
+  cuurrentChat: TOBE;
+  setCurrentChatMembers: TOBE;
+  setCurrentChatMemberNames: TOBE;
+  setCurrentRoom: TOBE;
 }
 const ChatSideBar = ({
   setCurrentChat,
@@ -37,9 +38,9 @@ const ChatSideBar = ({
 
   const handleCurrentRoom = (
     id: string,
-    partcipants: any,
-    participantDetails: any,
-    { roomName, roomProfile }: any
+    partcipants: TOBE,
+    participantDetails: TOBE,
+    { roomName, roomProfile }: TOBE
   ) => {
     setCurrentChat(id);
     setCurrentChatMembers(partcipants);
@@ -56,15 +57,15 @@ const ChatSideBar = ({
       roomId: id,
       id: user?._id,
     });
-    const stduentId = partcipants?.find((id: any) => id !== user?._id);
+    const stduentId = partcipants?.find((id: TOBE) => id !== user?._id);
     setStudentId(stduentId);
   };
   useEffect(() => {
     if (socket) {
       socket.on("recieve_msg", (data) => {
         // console.log("Received data:", data);
-        setMyChatrooms((prev: any) => {
-          const updatedChatrooms = prev.map((chat: any) => {
+        setMyChatrooms((prev: TOBE) => {
+          const updatedChatrooms = prev.map((chat: TOBE) => {
             if (chat._id === data?.roomId) {
               return {
                 ...chat,
@@ -77,11 +78,11 @@ const ChatSideBar = ({
           });
 
           return updatedChatrooms.sort(
-            (a: any, b: any) =>
+            (a: TOBE, b: TOBE) =>
               new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
           );
         });
-        setunReadMessages((prev: any) => {
+        setunReadMessages((prev: TOBE) => {
           const updatedMessages = { ...prev };
 
           if (data.roomId in updatedMessages) {
@@ -98,7 +99,7 @@ const ChatSideBar = ({
       });
 
       socket.on("messsge_seen", (data) => {
-        setunReadMessages((prev: any) => {
+        setunReadMessages((prev: TOBE) => {
           const updatedMessages = { ...prev };
 
           if (data.roomId in updatedMessages) {
@@ -114,11 +115,11 @@ const ChatSideBar = ({
   useEffect(() => {
     if (myChat?.success) {
       const sortedChatrooms = myChat.payload.sort(
-        (a: any, b: any) =>
+        (a: TOBE, b: TOBE) =>
           new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
       );
       setMyChatrooms(sortedChatrooms);
-      const unRead = myChat.payload?.reduce((acc: any, x: any) => {
+      const unRead = myChat.payload?.reduce((acc: TOBE, x: TOBE) => {
         var id = x._id;
         var unread = x.unReadMessage;
         acc[id] = unread;
@@ -129,8 +130,8 @@ const ChatSideBar = ({
   }, [myChat]);
   console.log("*******", unReadMessages);
 
-  const friend_id = (chat: any) => {
-    return chat?.participantDetails?.find((x: any) => x?._id !== user?._id)
+  const friend_id = (chat: TOBE) => {
+    return chat?.participantDetails?.find((x: TOBE) => x?._id !== user?._id)
       ?._id;
   };
   return (
@@ -147,7 +148,7 @@ const ChatSideBar = ({
               placeholder="Search here"
             />
           </div>
-          {myChatrooms?.map((chat: any, i: number) => (
+          {myChatrooms?.map((chat: TOBE, i: number) => (
             <div
               onClick={() =>
                 handleCurrentRoom(
@@ -158,7 +159,7 @@ const ChatSideBar = ({
                     roomProfile:
                       chat?.roomProfile ||
                       chat?.participantDetails?.find(
-                        (x: any) => x?._id !== user?._id
+                        (x: TOBE) => x?._id !== user?._id
                       )?.profile,
                     roomName: chat?.roomName,
                   }
@@ -175,7 +176,7 @@ const ChatSideBar = ({
                   src={
                     chat?.roomProfile ||
                     chat?.participantDetails?.find(
-                      (x: any) => x?._id !== user?._id
+                      (x: TOBE) => x?._id !== user?._id
                     )?.profile || '/avt.png'
                   }
                   className="w-14 object-cover h-12 rounded-full"
@@ -187,7 +188,7 @@ const ChatSideBar = ({
                   <p className="text-[1rem] font-semibold">
                     {chat?.roomName ||
                       chat?.participantDetails?.find(
-                        (x: any) => x?._id !== user?._id
+                        (x: TOBE) => x?._id !== user?._id
                       )?.username}
                   </p>
                   <p className="text-sm flex ">

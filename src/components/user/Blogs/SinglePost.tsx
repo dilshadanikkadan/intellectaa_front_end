@@ -4,8 +4,9 @@ import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { PiSpinnerBold } from "react-icons/pi";
+import { TOBE } from "@/types/constants/Tobe";
 const SinglePost = () => {
-  const [blog, setBlog] = useState<any>(null);
+  const [blog, setBlog] = useState<TOBE>(null);
   const router = useRouter();
   const { id } = useParams();
 

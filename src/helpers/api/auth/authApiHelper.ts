@@ -1,9 +1,10 @@
 import { NewError } from "@/helpers/error/serializeError";
 import authService from "@/lib/api/auth";
 import { useUserStore } from "@/store/storeProviders/UseUserStore";
+import { TOBE } from "@/types/constants/Tobe";
 import { redirect } from "next/navigation";
 
-export const signupHelper = async (payload: any) => {
+export const signupHelper = async (payload: TOBE) => {
   try {
     const response = await authService.signup(payload);
     if (response.status === 200) {
@@ -12,12 +13,12 @@ export const signupHelper = async (payload: any) => {
         payload: response.data,
       };
     }
-  } catch (error: any) {
+  } catch (error: TOBE) {
     throw NewError(error);
   }
 };
 
-export const currentUserHelper = async (payload: any) => {
+export const currentUserHelper = async (payload: TOBE) => {
   try {
     const response = await authService.currentuser(payload);
     if (response.status === 200) {
@@ -26,12 +27,12 @@ export const currentUserHelper = async (payload: any) => {
         payload: response.data
       };
     }
-  } catch (error: any) {
+  } catch (error: TOBE) {
     throw NewError(error);
   }
 };
 
-export const verifyOtpHelper = async (payload: any) => {
+export const verifyOtpHelper = async (payload: TOBE) => {
   try {
     const response = await authService.verifyOtp(payload);
     if (response.status === 200) {
@@ -58,7 +59,7 @@ export const logoutHelper = async () => {
     throw NewError(error);
   }
 };
-export const googleAuthHelper = async (payload: any) => {
+export const googleAuthHelper = async (payload: TOBE) => {
   try {
  
     const response = await authService.googleSignup({
@@ -72,16 +73,16 @@ export const googleAuthHelper = async (payload: any) => {
         payload: response, 
       };
     }
-  } catch (error: any) {
+  } catch (error: TOBE) {
     throw error;
   }
 };
 
-export const authGooglePayload = (payload?: any) => {
+export const authGooglePayload = (payload?: TOBE) => {
   return payload;
 };
 
-export const resentOtpHelper = async (payload: any) => {
+export const resentOtpHelper = async (payload: TOBE) => {
   try {
     console.log("payload from helpwe", payload);
 
@@ -97,7 +98,7 @@ export const resentOtpHelper = async (payload: any) => {
   }
 };
 
-export const forgotPasswordpHelper = async (payload: any) => {
+export const forgotPasswordpHelper = async (payload: TOBE) => {
   try {
     const response = await authService.forgotPassword(payload);
     if (response.status === 200) {
@@ -111,7 +112,7 @@ export const forgotPasswordpHelper = async (payload: any) => {
   }
 };
 
-export const resetPasswordpHelper = async (payload: any) => {
+export const resetPasswordpHelper = async (payload: TOBE) => {
   try {
     const response = await authService.resetPassword(payload);
     if (response.status === 200) {
@@ -125,7 +126,7 @@ export const resetPasswordpHelper = async (payload: any) => {
   }
 };
 
-export const loginHelper = async (payload: any) => {
+export const loginHelper = async (payload: TOBE) => {
   try {
     const response = await authService.login(payload);
     if (response.status === 200) {

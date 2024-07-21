@@ -77,7 +77,7 @@ const BlogsPage = () => {
                 onClick={() =>
                   router.push(`/blogs/${blog.link.split("/").at(-1)}`)
                 }
-                className="w-[48%] py-2"
+                className="w-[100%] md:w-[48%] py-2"
               >
                 <div className="wrapper w-[90%] mx-auto">
                   <CardHeader className="h-20">

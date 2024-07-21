@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Image from "next/image";
+import { TOBE } from "@/types/constants/Tobe";
 
 const ProgressTrack = () => {
   const user = useUserStore((state) => state.user);
@@ -24,8 +25,8 @@ const ProgressTrack = () => {
     <div className="w-[95%]  mx-auto mt-5">
       <h4 className="text-xl font-semibold my-2">My Courses</h4>
       <div className="wfull flex flex-wrap gap-4">
-        {MyEntroll?.payload.map((myCorurse: any) => (
-          <Card className="w-[26%]    rounded-md border border-gray-300 pb-5 ">
+        {MyEntroll?.payload.map((myCorurse: TOBE) => (
+          <Card className=" w-[40%] md:w-[26%]   rounded-md border border-gray-300 pb-5 ">
             <div className="w-[90%] relative h-28 rounded-md mx-auto">
               <Image
                 src={myCorurse?.courseId?.thumbnail}

@@ -37,7 +37,7 @@ const courseEndpoints = {
     method: "get" as const,
     path: "getMyCourse/:id",
   },
-  submisson:{
+  submisson: {
     method: "post" as const,
     path: "addSubmission",
   },
@@ -57,11 +57,11 @@ const courseEndpoints = {
     method: "get" as const,
     path: "myEntrolledCourse/:id",
   },
-  manageLike:{
+  manageLike: {
     method: "post" as const,
     path: "like",
   },
-  assignTask:{
+  assignTask: {
     method: "post" as const,
     path: "addtask",
   },
@@ -82,21 +82,24 @@ const courseEndpoints = {
     method: "post" as const,
     path: "deleteCourse",
   },
-  updateCourse:{
+  updateCourse: {
     method: "post" as const,
     path: "updateCourse",
   },
-  rejectCourse:{
+  rejectCourse: {
     method: "post" as const,
     path: "rejectCourse",
   },
-  updateProgressCourse:{
+  updateProgressCourse: {
     method: "post" as const,
     path: "updateProgress",
+  },
+  getLeaderBoard: {
+    method: "get" as const,
+    path: "leaderBoard",
   },
 };
 
 const courseService = createApiService("course", courseEndpoints);
 
 export default courseService;
-

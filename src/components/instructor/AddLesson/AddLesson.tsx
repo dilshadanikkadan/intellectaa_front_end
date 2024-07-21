@@ -11,6 +11,7 @@ import AddProblems from "./AddProblems";
 import { Progress } from "@/components/ui/progress";
 import { useRouter } from "next/navigation";
 import UploadModal from "../AddCourse/utilComponent/UploadModal";
+import { TOBE } from "@/types/constants/Tobe";
 
 const AddLesson = () => {
   const [lessons, setLessons] = useState([
@@ -29,7 +30,7 @@ const AddLesson = () => {
   const setKeyValue = useFormStore((state) => state.setKeyValue);
   const [progressImg, setprogressImg] = useState<number>(0);
   const [overallProgress, setOverallProgress] = useState(0);
-  const handleInputChange = (lessonIndex: number, key: string, value: any) => {
+  const handleInputChange = (lessonIndex: number, key: string, value: TOBE) => {
     setLessons((prevLessons) =>
       prevLessons.map((lesson, index) =>
         index === lessonIndex ? { ...lesson, [key]: value } : lesson
@@ -37,11 +38,11 @@ const AddLesson = () => {
     );
   };
 
-  const handleThumbnailChange = (lessonIndex: number, value: any) => {
+  const handleThumbnailChange = (lessonIndex: number, value: TOBE) => {
     handleInputChange(lessonIndex, "thumbnail", value);
   };
 
-  const handleResourceChange = (lessonIndex: number, value: any) => {
+  const handleResourceChange = (lessonIndex: number, value: TOBE) => {
     handleInputChange(lessonIndex, "resource", value);
   };
   const addLesson = async () => {
@@ -62,17 +63,17 @@ const AddLesson = () => {
           }
           setIsModalOpen(true);
 
-          const updateProgress = (uploadIndex:any, progress:any) => {
+          const updateProgress = (uploadIndex:TOBE, progress:TOBE) => {
             const baseProgress = (completedUploads / totalUploads) * 100;
             const currentProgress = (progress / 100) * (1 / totalUploads) * 100;
             setOverallProgress((prev) => Math.max(prev, Math.min(baseProgress + currentProgress, 100)));
           };
   
-          const thumbnailImage = await UseCloudinaryImage(thumbnail, (progress:any) => updateProgress(0, progress));
+          const thumbnailImage = await UseCloudinaryImage(thumbnail, (progress:TOBE) => updateProgress(0, progress));
           completedUploads++;
           updateProgress(0, 100);
   
-          const {secure_url,duration}:any = await UseCloudinaryVideo(resource, (progress:any) => updateProgress(1, progress));
+          const {secure_url,duration}:TOBE = await UseCloudinaryVideo(resource, (progress:TOBE) => updateProgress(1, progress));
           completedUploads++;
           updateProgress(1, 100);
               
@@ -96,7 +97,7 @@ const AddLesson = () => {
       setOverallProgress(100);
       router.push("/instructor/myCourses/addCourse/addLesson/preview");
       setIsModalOpen(false);
-    } catch (error: any) {
+    } catch (error: TOBE) {
       console.error("Error adding lessons:", error);
       setError(error.message || "Error adding lessons. Please try again.");
     } finally {
@@ -123,11 +124,11 @@ console.log("over allProgress",overallProgress);
           <section className="flex-1 flex flex-col">
             <h1 className="mb-3">Lesson {index + 1}: Python Tutorial</h1>
             <ThumbnailComponent
-              setThumbnail={(value: any) => handleThumbnailChange(index, value)}
+              setThumbnail={(value: TOBE) => handleThumbnailChange(index, value)}
               thumbnail={lesson.thumbnail}
             />
             <VideoUlploadComponent
-              setResource={(value: any) => handleResourceChange(index, value)}
+              setResource={(value: TOBE) => handleResourceChange(index, value)}
               resourse={lesson.resource}
             />
             {lessonForm.map((input, i) => (

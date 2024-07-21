@@ -19,11 +19,12 @@ import Camera from "../utilComponents/Camera";
 import VideocamIcon from "@mui/icons-material/Videocam";
 import { useRouter } from "next/navigation";
 import VoiceMessage from "../utilComponents/voiceMessage";
+import { TOBE } from "@/types/constants/Tobe";
 interface Props {
-  cuurrentChatId: any;
-  currentChatMembers: any;
-  currentChatMembersName: any;
-  cuurentRoom: any;
+  cuurrentChatId: TOBE;
+  currentChatMembers: TOBE;
+  currentChatMembersName: TOBE;
+  cuurentRoom: TOBE;
 }
 const MesageBar = ({
   cuurrentChatId,
@@ -31,19 +32,19 @@ const MesageBar = ({
   currentChatMembersName,
   cuurentRoom,
 }: Props) => {
-  const [messages, setMessages] = useState<any>([]);
+  const [messages, setMessages] = useState<TOBE>([]);
   const router = useRouter();
   const { socket, rooms, onlineUsers } = useContext(SocketContext);
   const [image, setImage] = useState<string>("");
   const [imageFile, setImageFile] = useState<string>("");
   const [isTyping, setIsTyping] = useState<boolean>(false);
   const [typerId, setTyperId] = useState<string>("");
-  const [isReply, setIsReply] = useState<any>(null);
-  const [forWardMessage, setForWardMessage] = useState<any>(null);
+  const [isReply, setIsReply] = useState<TOBE>(null);
+  const [forWardMessage, setForWardMessage] = useState<TOBE>(null);
   const [cameraOn, setCameraOn] = useState<boolean>(false);
-
+  const [loading, setLoading] = useState<TOBE>(false);
   const user = useUserStore((state) => state.user);
-  const messageRef = useRef<any>();
+  const messageRef = useRef<TOBE>();
   const { data: currentChatMessages } = useQuery({
     queryKey: ["messages", cuurrentChatId],
     queryFn: getMessageHelper,
@@ -64,7 +65,7 @@ const MesageBar = ({
     if (socket) {
       socket.on("recieve_msg", (data) => {
         if (!data.forWard) {
-          setMessages((prev: any) => [...prev, data]);
+          setMessages((prev: TOBE) => [...prev, data]);
         }
       });
 
@@ -77,8 +78,8 @@ const MesageBar = ({
       });
       flushSync(() => {
         socket.on("messsge_seen", () => {
-          setMessages((prev: any) =>
-            prev.map((msg: any) => ({ ...msg, read: true }))
+          setMessages((prev: TOBE) =>
+            prev.map((msg: TOBE) => ({ ...msg, read: true }))
           );
         });
       });
@@ -86,7 +87,7 @@ const MesageBar = ({
   }, [socket]);
 
   const pinned_message = messages
-    ?.filter((msg: any) => msg?.pinned == true)
+    ?.filter((msg: TOBE) => msg?.pinned == true)
     ?.at(-1);
 
   console.log("|||||||||||||||||||", pinned_message);
@@ -102,8 +103,11 @@ const MesageBar = ({
           style={{ backgroundImage: `url(/bgChat.png)` }}
           className=" relative h-[80vh] w-full flex flex-col bg-[#F0FAF7]  border-r border-b border-gray-300"
         >
-          {cameraOn && (
-            <Camera setCameraOn={setCameraOn} cuurrentChatId={cuurrentChatId} />
+          {cameraOn &&  !loading &&(
+            <Camera 
+             setCameraOn={setCameraOn} 
+             setLoading={setLoading}
+             cuurrentChatId={cuurrentChatId} />
           )}
           {forWardMessage && (
             <ForwardMessages
@@ -112,13 +116,14 @@ const MesageBar = ({
               currentChatMembers={currentChatMembers}
             />
           )}
-          {image && (
+          {image && !loading && (
             <ImageSend
               cuurrentChatId={cuurrentChatId}
               image={image}
               setMessages={setMessages}
               setImage={setImage}
               imageFile={imageFile}
+              setLoading={setLoading}
             />
           )}
 
@@ -135,14 +140,14 @@ const MesageBar = ({
                   <p className="text-main text-sm">
                     {
                       currentChatMembersName?.find(
-                        (x: any) => x._id === typerId
+                        (x: TOBE) => x._id === typerId
                       ).username
                     }{" "}
                     typing.....
                   </p>
                 ) : (
                   <div className="flex ">
-                    {currentChatMembersName?.map((user: any) => (
+                    {currentChatMembersName?.map((user: TOBE) => (
                       <p className="text-sm">{user?.username} ,</p>
                     ))}
                   </div>
@@ -171,7 +176,7 @@ const MesageBar = ({
             </Card>
           )}
           <div className="chatBody w-[95%] h-[90%] mt-3 overflow-y-scroll mx-auto">
-            {messages?.map((msg: any, i: any) => (
+            {messages?.map((msg: TOBE, i: TOBE) => (
               <>
                 {msg?.typeMessage === "image" ? (
                   <ImageMessage
@@ -208,6 +213,7 @@ const MesageBar = ({
             ))}
           </div>
           <SendMessageBar
+            loading={loading}
             setCameraOn={setCameraOn}
             setMessages={setMessages}
             isReply={isReply}

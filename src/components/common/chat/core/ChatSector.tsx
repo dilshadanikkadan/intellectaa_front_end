@@ -3,32 +3,34 @@ import React, { useContext, useEffect, useState } from "react";
 import ChatSideBar from "../utilComponents/ChatSideBar";
 import MesageBar from "./MesageBar";
 import { SocketContext } from "@/store/storeProviders/SocketProvider";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useStdudentStore } from "@/store/storeProviders/UseCallStore";
 import { flushSync } from "react-dom";
+import { TOBE } from "@/types/constants/Tobe";
 
 const ChatSector = () => {
   const [cuurrentChat, setCurrentChat] = useState(null);
-  const [currentChatMembers, setCurrentChatMembers] = useState<any>([]);
-  const [currentChatMembersName, setCurrentChatMemberNames] = useState<any>([]);
-  const [cuurentRoom, setCurrentRoom] = useState<any>();
+  const [currentChatMembers, setCurrentChatMembers] = useState<TOBE>([]);
+  const [currentChatMembersName, setCurrentChatMemberNames] = useState<TOBE>(
+    []
+  );
+  const [cuurentRoom, setCurrentRoom] = useState<TOBE>();
   const { socket } = useContext(SocketContext);
   const router = useRouter();
+  const { id } = useParams();
   const setStudnetId = useStdudentStore((state) => state.setStudentId);
   const setCallerSignal = useStdudentStore((state) => state.setCallerSignal);
   const setIncomingCall = useStdudentStore((state) => state.setIncomingCall);
   useEffect(() => {
-    console.log("hellooooooooooooooooooooooooooooooooo");
-
     socket?.on("offer", (data) => {
       setStudnetId(data.fromCall);
-      console.log("<<<<<<<<<<<<<<<<<<<^^^^&&&&&&&&&&, got call",data.signal);
+      console.log("<<<<<<<<<<<<<<<<<<<^^^^&&&&&&&&&&, got call", data.signal);
 
       flushSync(() => {
         setCallerSignal(data.signal);
       });
-      setIncomingCall(true)
-      router.push(`/courses/668e1404a2beef24966912ba/chat/videoCall`);
+      setIncomingCall(true);
+      router.push(`/courses/${id}/chat/videoCall`);
     });
   }, [socket]);
 

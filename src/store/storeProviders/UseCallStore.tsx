@@ -13,8 +13,8 @@ type StdudentStore = {
   callerSignal: any;
   incomingCall: any;
   studentIdToCall: ICall | null;
-  setStudentId: (payload: ICall) => void;
-  setCallerSignal: (payload: ICall) => void;
+  setStudentId: (payload: any) => void;
+  setCallerSignal: (payload: any) => void;
   setIncomingCall: (payload: any) => void;
 };
 
@@ -23,12 +23,12 @@ export const useStdudentStore = create<StdudentStore>((set) => ({
   studentIdToCall: null,
   incomingCall: false,
   callerSignal: null,
-  setStudentId: (payload: ICall) => {
+  setStudentId: (payload: any) => {
     set((state) => ({
       student: payload,
     }));
   },
-  setCallerSignal: (payload: ICall) => {
+  setCallerSignal: (payload: any) => {
     set((state) => ({
       callerSignal: payload,
     }));

@@ -13,6 +13,7 @@ import {
   Videocam,
   VideocamOff,
 } from "@mui/icons-material";
+import { useParams, useRouter } from "next/navigation";
 
 const VideoCallPage = () => {
   const [myStream, setMyStream] = useState<MediaStream | undefined>(undefined);
@@ -22,7 +23,8 @@ const VideoCallPage = () => {
   const peerRef = useRef<any>();
   const { socket } = useContext(SocketContext);
   const student = useStdudentStore((state) => state.student);
-
+  const setStudentId = useStdudentStore((state) => state.setStudentId);
+  const { id } = useParams();
   const incomingCall = useStdudentStore((state) => state.incomingCall);
   const setIncomingCall = useStdudentStore((state) => state.setIncomingCall);
   const callerSignal = useStdudentStore((state) => state.callerSignal);
@@ -31,7 +33,7 @@ const VideoCallPage = () => {
   const [isMuted, setIsMuted] = useState(false);
   const [callAccepted, setCallAccepted] = useState(false);
   const [isVideoOff, setIsVideoOff] = useState(false);
-
+  const router = useRouter();
   useEffect(() => {
     const startMediaStream = async () => {
       try {
@@ -47,7 +49,9 @@ const VideoCallPage = () => {
         console.error("Error accessing media devices:", error);
       }
     };
-
+    socket?.on("endCall", () => {
+      endCall();
+    });
     socket?.on("offer", (offerSignal) => {
       setCallerSignal(offerSignal.signal);
       setIncomingCall(true);
@@ -59,6 +63,17 @@ const VideoCallPage = () => {
       if (myStream) {
         myStream.getTracks().forEach((track) => track.stop());
       }
+      if (myVideoRef.current) {
+        myVideoRef.current.srcObject = null;
+      }
+      if (peerVideoRef.current) {
+        peerVideoRef.current.srcObject = null;
+      }
+      if (peerRef.current) {
+        peerRef.current.destroy();
+      }
+      socket?.off("offer");
+      socket?.off("endCall");
     };
   }, [socket]);
 
@@ -84,6 +99,11 @@ const VideoCallPage = () => {
     peer.on("stream", (stream) => {
       peerVideoRef!.current.srcObject = stream;
     });
+
+    peer.on("close", () => {
+      endCall();
+    });
+
     peerRef.current = peer;
     setIsConnected(true);
   };
@@ -135,11 +155,34 @@ const VideoCallPage = () => {
       setIsVideoOff(!videoTrack.enabled);
     }
   };
-  const endCall = () => {
+  const endCall = async () => {
     if (peerRef.current) {
       peerRef.current.destroy();
     }
+
+    if (myStream) {
+      myStream.getTracks().forEach((track) => track.stop());
+    }
+
+    if (myVideoRef.current) {
+      myVideoRef.current.srcObject = null;
+    }
+    if (peerVideoRef.current) {
+      peerVideoRef.current.srcObject = null;
+    }
+    socket?.emit("endCall", { to: student });
+    setMyStream(undefined);
     setIsConnected(false);
+    setCallAccepted(false);
+    setIncomingCall(null);
+    setCallerSignal(null);
+    setIsMuted(false);
+    setIsVideoOff(false);
+    setStudentId(null)
+
+    await new Promise((resolve) => setTimeout(resolve, 100));
+
+    router.push(`/courses/${id}/chat`);
   };
   console.log("_________________________________");
   console.log(callerSignal);

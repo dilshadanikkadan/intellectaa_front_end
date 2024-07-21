@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/table";
 import Link from "next/link";
 import { CoursePagination } from "./CoursePagination";
+import { TOBE } from "@/types/constants/Tobe";
 const CoursesPage = () => {
   const [pageNumber, setPageNumber] = useState(1);
   const limit = 4;
@@ -39,7 +40,7 @@ const CoursesPage = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {allCourses?.payload?.map((course: any) => (
+          {allCourses?.payload?.map((course: TOBE) => (
             <TableRow key={course?.tilte} className="shadow-sm">
               <TableCell className="font-medium">
                 <img

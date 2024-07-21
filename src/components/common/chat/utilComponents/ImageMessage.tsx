@@ -1,9 +1,10 @@
 import { useUserStore } from "@/store/storeProviders/UseUserStore";
 import React from "react";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
+import { TOBE } from "@/types/constants/Tobe";
 interface Props {
-  msg: any;
-  currentChatMembersName: any;
+  msg: TOBE;
+  currentChatMembersName: TOBE;
 }
 
 const ImageMessage = ({ msg, currentChatMembersName }: Props) => {
@@ -15,12 +16,12 @@ const ImageMessage = ({ msg, currentChatMembersName }: Props) => {
     user3: "#FA6533",
   };
 
-  const userColor: any = {};
+  const userColor: TOBE = {};
 
-  function getRandomValue(obj: any) {
+  function getRandomValue(obj: TOBE) {
     const values = Object.values(obj);
     const roomMembers = currentChatMembersName.map(
-      (user: any) => user.username
+      (user: TOBE) => user.username
     );
     for (let i = 0; i < roomMembers.length; i++) {
       userColor[roomMembers[i]] = values[i];
@@ -29,7 +30,7 @@ const ImageMessage = ({ msg, currentChatMembersName }: Props) => {
 
   getRandomValue(colors);
   const username_of_msg_holder = currentChatMembersName?.find(
-    (user: any) => user?._id === msg?.senderId
+    (user: TOBE) => user?._id === msg?.senderId
   )?.username;
   return (
     <div

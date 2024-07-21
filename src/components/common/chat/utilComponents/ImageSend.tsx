@@ -5,14 +5,16 @@ import { sendNewMessageHelper } from "@/helpers/chat/chatApiHelper";
 import { UseCloudinaryImage } from "@/hooks/UseCloudinaryImage";
 import { SocketContext } from "@/store/storeProviders/SocketProvider";
 import { useUserStore } from "@/store/storeProviders/UseUserStore";
+import { TOBE } from "@/types/constants/Tobe";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useContext, useState } from "react";
 interface Props {
-  image: any;
-  setMessages: any;
-  setImage: any;
-  cuurrentChatId: any;
-  imageFile: any;
+  image: TOBE;
+  setMessages: TOBE;
+  setImage: TOBE;
+  cuurrentChatId: TOBE;
+  imageFile: TOBE;
+  setLoading: TOBE;
 }
 const ImageSend = ({
   image,
@@ -20,20 +22,23 @@ const ImageSend = ({
   setImage,
   cuurrentChatId,
   imageFile,
+  setLoading
 }: Props) => {
   const user = useUserStore((state) => state.user);
   console.log("my image", image);
   const queryClient = useQueryClient();
-  const [progress, setprogressImg] = useState<any>();
+  const [progress, setprogressImg] = useState<TOBE>();
   const [description,setDescription] = useState<string>("")
   const { socket, rooms } = useContext(SocketContext);
+  
   const { mutate: newMessageMutate } = useMutation({
     mutationFn: sendNewMessageHelper,
     onSuccess: (data) => {
-      queryClient.invalidateQueries(["messages"] as any);
+      queryClient.invalidateQueries(["messages"] as TOBE);
     },
   });
   const handleSend = async () => {
+    setLoading(true)
     const uploadedImage = await UseCloudinaryImage(imageFile, setprogressImg);
     const isActiveRoom = rooms[cuurrentChatId]?.length > 1;
     newMessageMutate({
@@ -52,6 +57,7 @@ const ImageSend = ({
       description
     });
     setImage("");
+    setLoading(false)
   };
 
   return (

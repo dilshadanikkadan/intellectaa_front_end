@@ -1,7 +1,10 @@
+"use client"
 import { Card } from "@/components/ui/card";
+import { useParams } from "next/navigation";
 import React from "react";
 
 const ProblemInfo = ({readFile,testCase,outPut}:any) => {
+const {id}:any = useParams()
 const readMd = readFile?.readMd.split("__").map((x:any)=> x.trim())
 const allOut = outPut?.expectedOut.split("__").map((x:any)=> x.trim())
 const allTestCase = testCase?.testCases
@@ -13,7 +16,7 @@ console.log(readMd);
     <Card className="h-[90vh] ">
       <div className="wrapper w-[90%] mx-auto">
         <div className="info mt-10 flex flex-col gap-4">
-          <h3 className="text-xl font-semibold">1. Two Sum</h3>
+          <h3 className="text-xl font-semibold">1. {id.split("_") as any}</h3>
        {
         readMd?.map((item:any)=>(
             <p>{item}</p>

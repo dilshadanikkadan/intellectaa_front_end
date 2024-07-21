@@ -6,7 +6,8 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import XIcon from "@mui/icons-material/X";
 import { useRouter } from "next/navigation";
-const CoursePurchaseCard = ({ item }: any) => {
+import { TOBE } from "@/types/constants/Tobe";
+const CoursePurchaseCard = ({ item }: TOBE) => {
   const router = useRouter()
   return (
     <Card className="w-[70vw] mt-5 md:mt-0 md:w-[20vw] pb-5">

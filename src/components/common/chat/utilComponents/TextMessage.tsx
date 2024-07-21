@@ -14,17 +14,18 @@ import {
 } from "@/components/ui/popover";
 import { SocketContext } from "@/store/storeProviders/SocketProvider";
 import { useQueryClient } from "@tanstack/react-query";
+import { TOBE } from "@/types/constants/Tobe";
 
 interface Props {
-  msg: any;
-  setIsReply: any;
-  setForWardMessage: any;
-  currentChatMembersName: any;
-  messageRef: any;
-  cuurrentChatId: any;
-  onReply: (msg: any) => void;
-  onDelete: (msg: any, forEveryone: boolean) => void;
-  onForward: (msg: any) => void;
+  msg: TOBE;
+  setIsReply: TOBE;
+  setForWardMessage: TOBE;
+  currentChatMembersName: TOBE;
+  messageRef: TOBE;
+  cuurrentChatId: TOBE;
+  onReply: (msg: TOBE) => void;
+  onDelete: (msg: TOBE, forEveryone: boolean) => void;
+  onForward: (msg: TOBE) => void;
 }
 
 const TextMessage = ({
@@ -48,12 +49,12 @@ const TextMessage = ({
     user3: "#FA6533",
   };
 
-  const userColor: any = {};
+  const userColor: TOBE = {};
 
-  function getRandomValue(obj: any) {
+  function getRandomValue(obj: TOBE) {
     const values = Object.values(obj);
     const roomMembers = currentChatMembersName.map(
-      (user: any) => user.username
+      (user: TOBE) => user.username
     );
     for (let i = 0; i < roomMembers.length; i++) {
       userColor[roomMembers[i]] = values[i];
@@ -62,17 +63,17 @@ const TextMessage = ({
 
   getRandomValue(colors);
   const username_of_msg_holder = currentChatMembersName?.find(
-    (user: any) => user?._id === msg?.senderId
+    (user: TOBE) => user?._id === msg?.senderId
   )?.username;
   const queryClient = useQueryClient();
-  const pinMessage = (id: any, message: any) => {
+  const pinMessage = (id: TOBE, message: TOBE) => {
     socket?.emit("pin_message", {
       messageId: id,
       message,
       roomId: cuurrentChatId,
     });
 
-    queryClient.invalidateQueries(["messages"] as any);
+    queryClient.invalidateQueries(["messages"] as TOBE);
   };
   return (
     <div
