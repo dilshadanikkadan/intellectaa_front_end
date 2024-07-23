@@ -16,7 +16,7 @@ const CategorySelector = ({ setCategory }: Props) => {
   };
 
   return (
-    <div className="mt-2 w-[90%] mx-auto md:w-[35%] py-1">
+    <div className="mt-2 w-[90%] md:w-[35%] py-1">
       <Select onValueChange={handleChange}>
         <SelectTrigger className="w-[97%]">
           <SelectValue placeholder="Category" />

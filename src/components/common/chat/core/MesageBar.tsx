@@ -20,6 +20,7 @@ import VideocamIcon from "@mui/icons-material/Videocam";
 import { useRouter } from "next/navigation";
 import VoiceMessage from "../utilComponents/voiceMessage";
 import { TOBE } from "@/types/constants/Tobe";
+import { currentUserHelper } from "@/helpers/api/auth/authApiHelper";
 interface Props {
   cuurrentChatId: TOBE;
   currentChatMembers: TOBE;
@@ -43,6 +44,7 @@ const MesageBar = ({
   const [forWardMessage, setForWardMessage] = useState<TOBE>(null);
   const [cameraOn, setCameraOn] = useState<boolean>(false);
   const [loading, setLoading] = useState<TOBE>(false);
+  const currentUser = useUserStore((state) => state.user);
   const user = useUserStore((state) => state.user);
   const messageRef = useRef<TOBE>();
   const { data: currentChatMessages } = useQuery({
@@ -103,11 +105,12 @@ const MesageBar = ({
           style={{ backgroundImage: `url(/bgChat.png)` }}
           className=" relative h-[80vh] w-full flex flex-col bg-[#F0FAF7]  border-r border-b border-gray-300"
         >
-          {cameraOn &&  !loading &&(
-            <Camera 
-             setCameraOn={setCameraOn} 
-             setLoading={setLoading}
-             cuurrentChatId={cuurrentChatId} />
+          {cameraOn && !loading && (
+            <Camera
+              setCameraOn={setCameraOn}
+              setLoading={setLoading}
+              cuurrentChatId={cuurrentChatId}
+            />
           )}
           {forWardMessage && (
             <ForwardMessages
@@ -147,9 +150,15 @@ const MesageBar = ({
                   </p>
                 ) : (
                   <div className="flex ">
-                    {currentChatMembersName?.map((user: TOBE) => (
-                      <p className="text-sm">{user?.username} ,</p>
-                    ))}
+                    {currentChatMembersName
+                      ?.filter(
+                        (user: TOBE) => user.username !== currentUser?.username
+                      )
+                      .map((user: TOBE, i: number) => (
+                        <p key={i} className="text-sm">
+                          {user?.username} ,
+                        </p>
+                      ))}
                   </div>
                 )}
               </div>
@@ -180,11 +189,13 @@ const MesageBar = ({
               <>
                 {msg?.typeMessage === "image" ? (
                   <ImageMessage
+                    key={i}
                     currentChatMembersName={currentChatMembersName}
                     msg={msg}
                   />
                 ) : msg?.typeMessage === "reply" ? (
                   <ReplyMessage
+                  key={i}
                     currentChatMembers={currentChatMembers}
                     currentChatMembersName={currentChatMembersName}
                     msg={msg}
@@ -192,11 +203,13 @@ const MesageBar = ({
                 ) : msg?.typeMessage === "audio" ? (
                   <VoiceMessage
                     msg={msg}
+                    key={i}
                     currentChatMembers={currentChatMembers}
                     currentChatMembersName={currentChatMembersName}
                   />
                 ) : (
                   <TextMessage
+               
                     setForWardMessage={setForWardMessage}
                     messageRef={messageRef}
                     setIsReply={setIsReply}
@@ -213,6 +226,7 @@ const MesageBar = ({
             ))}
           </div>
           <SendMessageBar
+          
             loading={loading}
             setCameraOn={setCameraOn}
             setMessages={setMessages}

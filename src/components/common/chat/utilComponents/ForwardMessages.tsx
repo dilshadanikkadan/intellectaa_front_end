@@ -49,18 +49,19 @@ const ForwardMessages = ({
       message: forWardMessage,
       senderId: user?._id,
       partcipants: currentChatMembers,
-      forWard:true
+      forWard: true,
     });
     setForWardMessage("");
   };
 
   return (
     <div className="h-full overflow-hidden   absolute left-1/2 top-1/2 z-50 translate-x-[-50%] translate-y-[-50%] flex items-center justify-center">
-      <Card className="h-96 w-72">
+      <Card className="h-96 overflow-y-scroll w-72">
         <p className="font-semibold py-3 ml-3">Forward to ...</p>
         <div className="flex flex-col w-[90%]  h-[70%] mx-auto">
-          {myChat?.payload?.map((chat: TOBE) => (
+          {myChat?.payload?.map((chat: TOBE,i:number) => (
             <div
+            key={i}
               onClick={() => setForWardRoom(chat?._id)}
               className={`user flex gap-4 mt-2 border-b border-gray-200 pb-3 ${
                 forWardRoom === chat?._id ? "bg-green-100" : ""
@@ -68,14 +69,25 @@ const ForwardMessages = ({
             >
               <div className="profile realtive">
                 <img
-                  src={chat?.roomProfile}
+                  src={
+                    chat?.roomProfile ||
+                    chat?.participantDetails?.find(
+                      (x: TOBE) => x?._id !== user?._id
+                    )?.profile ||
+                    "/avt.png"
+                  }
                   className="w-14 object-cover h-12 rounded-full"
                   alt=""
                 />
               </div>
               <div className="info flex justify-between  w-full text-gray-700">
                 <div>
-                  <p className="text-[1rem] font-semibold">{chat?.roomName}</p>
+                  <p className="text-[1rem] font-semibold">
+                    {chat?.roomName ||
+                      chat?.participantDetails?.find(
+                        (x: TOBE) => x?._id !== user?._id
+                      )?.username}
+                  </p>
                 </div>
               </div>
             </div>
@@ -83,7 +95,7 @@ const ForwardMessages = ({
         </div>
         <button
           onClick={() => handleFoeWard()}
-          className="px-3 ml-[70%] py-1.5 bg-[#20B486] rounded-md text-white"
+          className="px-3 fixed ml-[70%] py-1.5 bg-[#20B486] rounded-md text-white"
         >
           Send
         </button>

@@ -55,7 +55,7 @@ const TestCase = ({ testCase, sumbmission, subMissionErr ,setsubmissonResult}: P
           )}
           <div className="wrapper w-[90%] mx-auto flex gap-5">
             {allTestCase?.map((item: any, i: number) => (
-              <div>
+              <div key={i}>
                 <div
                   onClick={() => setTestIndex(i)}
                   className={`py-1.5 flex items-center px-3 cursor-pointer transition-all duration-200  ${

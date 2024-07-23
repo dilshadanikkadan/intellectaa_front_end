@@ -123,11 +123,12 @@ export const getAllPublishCoursesHelper = async (
   searchQuery?: TOBE,
   category?: TOBE,
   pageNumber?: TOBE,
-  limit?: TOBE
+  limit?: TOBE,
+  language?: TOBE
 ) => {
   try {
     const response = await axios.get(
-      `${baseApi_}course/getAllPublishedCourses?_search=${searchQuery}&&_Category=${category}&&_limit=${limit}&_page=${pageNumber}`,
+      `${baseApi_}course/getAllPublishedCourses?_search=${searchQuery}&&_Category=${category}&&_limit=${limit}&_page=${pageNumber}&&language=${language}`,
       {
         withCredentials: true,
       }

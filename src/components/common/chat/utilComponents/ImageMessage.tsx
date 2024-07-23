@@ -53,7 +53,7 @@ const ImageMessage = ({ msg, currentChatMembersName }: Props) => {
           className={`relative  ${
             isOwnMessage
               ? "bg-[#20B486] text-white rounded-tl-2xl rounded-tr-md rounded-b-2xl rounded-bl-2xl"
-              : "bg-gray-200 text-black rounded-tl-md rounded-tr-2xl rounded-bl-2xl rounded-br-2xl"
+              : "bg-white text-black rounded-tl-md rounded-tr-2xl rounded-bl-2xl rounded-br-2xl"
           }`}
           style={{
             minWidth: "150px",

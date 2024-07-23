@@ -136,7 +136,7 @@ const ChatSideBar = ({
   };
   return (
     <div
-      className={`flex w-full flex-[2] ${
+      className={`flex w-full flex-[2] overflow-y-auto ${
         cuurrentChat && "hidden md:flex"
       }  h-[80vh]`}
     >
@@ -150,6 +150,7 @@ const ChatSideBar = ({
           </div>
           {myChatrooms?.map((chat: TOBE, i: number) => (
             <div
+            key={i}
               onClick={() =>
                 handleCurrentRoom(
                   chat?._id,
@@ -160,7 +161,7 @@ const ChatSideBar = ({
                       chat?.roomProfile ||
                       chat?.participantDetails?.find(
                         (x: TOBE) => x?._id !== user?._id
-                      )?.profile,
+                      )?.profile || '/avt.png',
                     roomName: chat?.roomName,
                   }
                 )

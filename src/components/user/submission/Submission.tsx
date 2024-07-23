@@ -37,8 +37,8 @@ const Submission = () => {
     <div className="w-[80%] mx-auto mt-5">
       <h3 className="text-2xl font-semibold mb-7">Submission</h3>
       <div className="wrapper flex gap-5 flex-wrap  ">
-        {allSubmission?.payload.map((submission: any) => (
-          <Card className="w-[48%] h-72">
+        {allSubmission?.payload.map((submission: any,i:number) => (
+          <Card  key={i} className="w-[48%] h-72">
             <div className="wrapper w-[90%] mx-auto">
               <div className="user flex gap-3 mt-5 border-b border-gray-300 pb-3">
                 <img

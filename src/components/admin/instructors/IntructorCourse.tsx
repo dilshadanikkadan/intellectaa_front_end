@@ -20,8 +20,9 @@ const IntructorCourse = () => {
       <h3 className="font-semibold text-2xl mb-4">courses</h3>
       {InstructorCourse?.payload.length > 0 ? (
         <div className="flex flex-wrap">
-          {InstructorCourse?.payload?.map((course: TOBE) => (
+          {InstructorCourse?.payload?.map((course: TOBE,i:number) => (
             <Card
+            key={i}
               className={`w-full md:w-[23%] overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 `}
             >
               <div className="relative w-full pb-[56.25%]">

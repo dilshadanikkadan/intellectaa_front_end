@@ -12,7 +12,10 @@ import { Progress } from "@/components/ui/progress";
 import { useRouter } from "next/navigation";
 import UploadModal from "../AddCourse/utilComponent/UploadModal";
 import { TOBE } from "@/types/constants/Tobe";
-
+interface TitleDescription {
+  title: string;
+  description: string;
+}
 const AddLesson = () => {
   const [lessons, setLessons] = useState([
     {
@@ -25,7 +28,7 @@ const AddLesson = () => {
   const [error, setError] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const router = useRouter()
+  const router = useRouter();
   const [progressBar, setProgressBar] = useState(0);
   const setKeyValue = useFormStore((state) => state.setKeyValue);
   const [progressImg, setprogressImg] = useState<number>(0);
@@ -49,51 +52,64 @@ const AddLesson = () => {
     setOverallProgress(0);
     try {
       const totalLessons = lessons.length;
-      const totalUploads = totalLessons * lessons.length; // 2 uploads per lesson (thumbnail and video)
+      const totalUploads = totalLessons * lessons.length;
       let completedUploads = 0;
-  
+
       const processedLessons = await Promise.all(
         lessons.map(async (lesson, lessonIndex) => {
-          const { titleDescription, thumbnail, resource, selectedProblems } = lesson;
+          const { titleDescription, thumbnail, resource, selectedProblems } =
+            lesson;
           if (!titleDescription.title || !titleDescription.description) {
-            throw new Error("Please fill in title and description for all lessons");
+            throw new Error(
+              "Please fill in title and description for all lessons"
+            );
           }
           if (!thumbnail || !resource) {
-            throw new Error("Thumbnail or resource not provided for all lessons");
+            throw new Error(
+              "Thumbnail or resource not provided for all lessons"
+            );
           }
           setIsModalOpen(true);
 
-          const updateProgress = (uploadIndex:TOBE, progress:TOBE) => {
+          const updateProgress = (uploadIndex: TOBE, progress: TOBE) => {
             const baseProgress = (completedUploads / totalUploads) * 100;
             const currentProgress = (progress / 100) * (1 / totalUploads) * 100;
-            setOverallProgress((prev) => Math.max(prev, Math.min(baseProgress + currentProgress, 100)));
+            setOverallProgress((prev) =>
+              Math.max(prev, Math.min(baseProgress + currentProgress, 100))
+            );
           };
-  
-          const thumbnailImage = await UseCloudinaryImage(thumbnail, (progress:TOBE) => updateProgress(0, progress));
+
+          const thumbnailImage = await UseCloudinaryImage(
+            thumbnail,
+            (progress: TOBE) => updateProgress(0, progress)
+          );
           completedUploads++;
           updateProgress(0, 100);
-  
-          const {secure_url,duration}:TOBE = await UseCloudinaryVideo(resource, (progress:TOBE) => updateProgress(1, progress));
+
+          const { secure_url, duration }: TOBE = await UseCloudinaryVideo(
+            resource,
+            (progress: TOBE) => updateProgress(1, progress)
+          );
           completedUploads++;
           updateProgress(1, 100);
-              
+
           return {
             ...titleDescription,
             thumbnail: thumbnailImage,
             video: secure_url,
             duration,
             problems: selectedProblems,
-            lessonNumber:lessonIndex+1 
+            lessonNumber: lessonIndex + 1,
           };
         })
       );
-  
+
       setKeyValue({ lessons: processedLessons });
-  
+
       const updatedFormData = useFormStore.getState().formData;
       console.log("Updated FormData:", updatedFormData);
       UseLocalStorage("lessonDraft", updatedFormData);
-  
+
       setOverallProgress(100);
       router.push("/instructor/myCourses/addCourse/addLesson/preview");
       setIsModalOpen(false);
@@ -114,7 +130,7 @@ const AddLesson = () => {
       },
     ]);
   };
-console.log("over allProgress",overallProgress);
+  console.log("over allProgress", overallProgress);
 
   return (
     <div className="w-[90%] mx-auto flex flex-col">
@@ -124,7 +140,9 @@ console.log("over allProgress",overallProgress);
           <section className="flex-1 flex flex-col">
             <h1 className="mb-3">Lesson {index + 1}: Python Tutorial</h1>
             <ThumbnailComponent
-              setThumbnail={(value: TOBE) => handleThumbnailChange(index, value)}
+              setThumbnail={(value: TOBE) =>
+                handleThumbnailChange(index, value)
+              }
               thumbnail={lesson.thumbnail}
             />
             <VideoUlploadComponent
@@ -138,7 +156,11 @@ console.log("over allProgress",overallProgress);
               >
                 <input
                   name={input.name}
-                  value={lesson.titleDescription[input.name] || ""}
+                  value={
+                    lesson.titleDescription[
+                      input.name as keyof TitleDescription
+                    ] || ""
+                  }
                   onChange={(e) => {
                     setError("");
                     handleInputChange(index, "titleDescription", {
@@ -181,10 +203,10 @@ console.log("over allProgress",overallProgress);
         </button>
       </div>
       <UploadModal
-            isOpen={isModalOpen}
-            onOpenChange={setIsModalOpen}
-            percentage={overallProgress}
-          />
+        isOpen={isModalOpen}
+        onOpenChange={setIsModalOpen}
+        percentage={overallProgress}
+      />
     </div>
   );
 };

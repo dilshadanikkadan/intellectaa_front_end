@@ -103,8 +103,8 @@ const ViewSingleCourse = () => {
           </div>
           <div className="info mt-5 flex flex-col gap-3">
             <h2 className="text-lg font-semibold">Problems Attached</h2>
-            {currentView?.problems?.map((prb: any) => (
-              <Card className=" h-10 w-[33%] flex items-center rounded-sm  py-1 px-4 ">
+            {currentView?.problems?.map((prb: any,i:number) => (
+              <Card key={i} className=" h-10 w-[33%] flex items-center rounded-sm  py-1 px-4 ">
                 {prb}
               </Card>
             ))}
@@ -136,7 +136,7 @@ const ViewSingleCourse = () => {
           <h3 className="text-lg ml-10 font-semibold mb-5">Instructor Details</h3>
           <div className="ml-10 flex gap-4">
 
-          <img className="w-16 h-16 object-cover rounded-full" src={course?.payload?.instructor.profile ?? '/avt.png'} alt="" />
+          <img className="w-16 h-16 object-cover rounded-full" src={course?.payload?.instructor?.profile ?? '/avt.png'} alt="" />
           <h3 className="text-lg ">{course?.payload?.instructor?.username}</h3>
           </div>
         </Card>

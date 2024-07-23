@@ -33,8 +33,8 @@ const LeaderBoard = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {leaderBoard?.payload.map((user: TOBE) => (
-            <TableRow className=" p-2   ">
+          {leaderBoard?.payload.map((user: TOBE,i:number) => (
+            <TableRow key={i} className=" p-2   ">
               <TableCell className="font-medium p-2  ">
                 <img
                   src={user?.profile || "/avt.png"}

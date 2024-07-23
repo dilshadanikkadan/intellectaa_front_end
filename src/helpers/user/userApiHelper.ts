@@ -71,13 +71,20 @@ export const userPrfilePatchHelper = async (payload: TOBE) => {
   }
 };
 
-export const getAllInstructorHelper = async (id?: TOBE) => {
+export const getAllInstructorHelper = async (pageNumber: number, limit: number) => {
   try {
-    const response = await userService.getAllInstructor({}, {});
+    // const response = await userService.getAllInstructor({}, {});
+    const response = await axios.get(
+      `${baseApi_}user/getAllInstructor?_limit=${limit}&_page=${pageNumber}`,
+      {
+        withCredentials: true,
+      }
+    );
     if (response.status === 200) {
       return {
         success: true,
-        payload: response.data,
+        payload: response.data.users,
+        totalCount: response.data.totalCount,
       };
     }
   } catch (error: TOBE) {

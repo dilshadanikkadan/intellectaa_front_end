@@ -16,7 +16,7 @@ import { useRouter } from "next/navigation";
 import { PiSpinnerBold } from "react-icons/pi";
 import toast from "react-hot-toast";
 import { useUserStore } from "@/store/storeProviders/UseUserStore";
-import GoogleForm from "./GoogleForm";
+import GoogleForm from "../signup/GoogleForm";
 type FormData = z.infer<typeof LoginValidationSchema>;
 const LoginForm = () => {
   const {

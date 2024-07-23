@@ -13,16 +13,12 @@ import { UseCloudinaryVideo } from "@/hooks/UseCloudinaryVideo";
 import { useRouter } from "next/navigation";
 import { UseLocalStorage, UseLocalStroageValue } from "@/hooks/UseLocalStorage";
 import DraftCourse from "./DraftCourse";
-import AddProgressBar from "./AddProgressBar";
 import { useProgress } from "@/hooks/UseProgress";
-import { PiSpinnerBold } from "react-icons/pi";
 import { Progress } from "@/components/ui/progress";
 import UploadModal from "./utilComponent/UploadModal";
-import UploadComponent from "./utilComponent/UploadComponent";
 
 const AddCourse = () => {
   const savedDraft = UseLocalStroageValue("courseDraft");
-  if (savedDraft) return <DraftCourse />;
 
   const [error, setError] = useState<string>("");
   const [thumbnail, setThumbnail] = useState<string>("");
@@ -62,7 +58,10 @@ const AddCourse = () => {
     setIsModalOpen(true);
     setProgress(25);
     const thumbnailImage = await UseCloudinaryImage(thumbnail, setprogressImg);
-    const {secure_url,duration}:any = await UseCloudinaryVideo(trailer, setprogressBar);
+    const { secure_url, duration }: any = await UseCloudinaryVideo(
+      trailer,
+      setprogressBar
+    );
     setProgress(100);
     const newData = {
       ...tileDescription,
@@ -103,6 +102,9 @@ const AddCourse = () => {
     }
     return null;
   }, [trailer]);
+
+  if (savedDraft) return <DraftCourse />;
+
   return (
     <>
       <div className="w-[90%] mx-auto  flex ">

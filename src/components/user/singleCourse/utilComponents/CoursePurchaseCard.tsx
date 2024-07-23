@@ -30,10 +30,11 @@ const CoursePurchaseCard = ({ item }: TOBE) => {
             Accessl All Time
           </p>
           <p>
-            <VerifiedIcon className="text-[#20B486] mr-3" /> Accessl All Time
+            <VerifiedIcon className="text-[#20B486] mr-3" /> Code during 
+            Course
           </p>
           <p>
-            <VerifiedIcon className="text-[#20B486] mr-3" /> Accessl All Time
+            <VerifiedIcon className="text-[#20B486] mr-3" /> Read Blogs
           </p>
         </div>
 

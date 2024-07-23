@@ -14,6 +14,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import ChatIcon from "@mui/icons-material/Chat";
 import { TOBE } from "@/types/constants/Tobe";
+import { Certificate } from "./Certificate";
 
 const EnrolledSector = ({ course, myCourse }: TOBE) => {
   const [current, setCurrent] = useState<TOBE>(null);
@@ -154,6 +155,19 @@ const EnrolledSector = ({ course, myCourse }: TOBE) => {
             <ChatIcon className="mr-2" /> Chat Room
           </button>
         )}
+        <button
+          onClick={() => {
+            Certificate(
+              "John Doe",
+              "Advanced React Development",
+              "July 23, 2024"
+            );
+          }}
+          className="px-3 py-2 bg-teal-700 rounded-md text-white"
+        >
+          {" "}
+          Download
+        </button>
       </div>
     </div>
   );

@@ -20,15 +20,15 @@ const ApplyDoctor = () => {
         </div>
         <div className="flex gap-5 flex-col mt-10">
           <h3 className="text-2xl ">Intstructor Requirements</h3>
-          <li>
+          <p>
             <ArrowForwardIcon className="text-[#20B486] mr-2" /> Good Knowlegde
-          </li>
-          <li>
+          </p>
+          <p>
             <ArrowForwardIcon className="text-[#20B486] mr-2" /> better Mind set
-          </li>
-          <li>
+          </p>
+          <p>
             <ArrowForwardIcon className="text-[#20B486] mr-2" /> Immense Profile
-          </li>
+          </p>
         </div>
     <ApplicationButton/>
       </div>

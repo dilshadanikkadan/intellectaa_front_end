@@ -17,17 +17,20 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { TOBE } from "@/types/constants/Tobe";
 import Link from "next/link";
+import { InstrutorPagination } from "./InstructorPagination";
 
 const InstroctorTable = () => {
+  const [pageNumber, setPageNumber] = useState(1);
+  const limit = 4;
   const {
     data: AllUsers,
     isLoading,
     refetch,
   } = useQuery({
-    queryFn: getAllInstructorHelper,
-    queryKey: ["users"],
+    queryFn: () => getAllInstructorHelper(pageNumber, limit),
+    queryKey: ["users", pageNumber, limit],
   });
-
+  const totalPages = Math.ceil((AllUsers?.totalCount || 0) / limit);
   return (
     <div className="w-[90%] mx-auto relative">
       <Table className="relative z-0">
@@ -70,6 +73,11 @@ const InstroctorTable = () => {
           ))}
         </TableBody>
       </Table>
+      <InstrutorPagination
+        setPageNumber={setPageNumber}
+        currentPage={pageNumber}
+        totalPages={totalPages}
+      />
     </div>
   );
 };

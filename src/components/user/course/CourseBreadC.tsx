@@ -2,14 +2,16 @@ import { ContainerFuild } from "@/styles/layouts/Wrappers";
 import Input from "@/styles/ui/Input";
 import React, { useState } from "react";
 import CategorySelector from "./utilComponents/CategorySelector";
-interface Props{
-  onSearch:any
-  setCategory:any
+import LannguageSelector from "./utilComponents/LanguageSelector";
+interface Props {
+  onSearch: any;
+  setCategory: any;
+  setLanguage: any;
 }
-const CourseBreadC = ({ onSearch,setCategory }:Props) => {
+const CourseBreadC = ({ onSearch, setCategory, setLanguage }: Props) => {
   const [searchTerm, setSearchTerm] = useState("");
 
-  const handleInputChange = (e:any) => {
+  const handleInputChange = (e: any) => {
     setSearchTerm(e.target.value);
     onSearch(e.target.value);
   };
@@ -20,7 +22,7 @@ const CourseBreadC = ({ onSearch,setCategory }:Props) => {
 
   return (
     <ContainerFuild>
-      <div 
+      <div
         className="w-full relative py-12 bg-cover bg-center"
         style={{ backgroundImage: "url('/cBeadcrumbs.png')" }}
       >
@@ -35,17 +37,16 @@ const CourseBreadC = ({ onSearch,setCategory }:Props) => {
               onChange={handleInputChange}
               className="border-[1px] max-w-[44rem] rounded-sm placeholder:text-gray-300 shadow-sm border-gray-300 w-[100%] h-12 text-sm bg-white/80 backdrop-blur-sm"
             />
-            <button 
+            <button
               className="px-6 hidden md:block h-12 bg-[#20B486] text-white rounded-md ml-3 hover:bg-[#1a9069] transition-colors"
               onClick={handleSearchClick}
             >
               Search
             </button>
           </div>
-          <div className="w-[70%] hidden md:flex flex-col md:flex-row justify-between">
-            <CategorySelector  setCategory={setCategory}/>
-            <CategorySelector />
-            <CategorySelector />
+          <div className="w-[70%] hidden md:flex justify-around">
+            <CategorySelector setCategory={setCategory} />
+            <LannguageSelector setLanguage={setLanguage} />
           </div>
         </div>
       </div>

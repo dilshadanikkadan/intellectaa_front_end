@@ -8,15 +8,7 @@ import React from "react";
 const page = () => {
   return (
     <div>
-      <NavBar />
-      <div className="flex w-[80%] mx-auto">
-        {/* <AvatarBar user={} /> */}
-        <div className="flex flex-col w-full">
-          <TopBarProfile />
-          <Attendence /> 
-          <DailyTask/>        
-        </div>
-      </div>
+
     </div>
   );
 };
