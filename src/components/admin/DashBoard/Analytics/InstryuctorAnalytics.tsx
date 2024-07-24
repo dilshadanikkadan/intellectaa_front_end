@@ -7,7 +7,7 @@ import { instructorAnalyticsHelper } from "@/helpers/user/userApiHelper";
 import { TOBE } from "@/types/constants/Tobe";
 import { Card } from "@/components/ui/card";
 
-const InstructorGraph = () => {
+const InstructorGraph = ({ setInstructorCount }: any) => {
   const { data: instructorDataAnalstics } = useQuery({
     queryKey: ["instructor Analytics"],
     queryFn: instructorAnalyticsHelper,
@@ -29,7 +29,6 @@ const InstructorGraph = () => {
           "#34495e",
           "#e67e22",
         ],
-   
       },
     ],
   });
@@ -52,6 +51,11 @@ const InstructorGraph = () => {
           },
         ],
       });
+      const numberinstructor = instructorDataAnalstics?.payload?.reduce(
+        (acc: number, curr: { count: number }) => acc + curr.count,
+        0
+      );
+      setInstructorCount(numberinstructor);
     }
   }, [instructorDataAnalstics]);
 

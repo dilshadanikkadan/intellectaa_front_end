@@ -7,7 +7,7 @@ import { userAnalyticsHelper } from "@/helpers/user/userApiHelper";
 import { TOBE } from "@/types/constants/Tobe";
 import { Card } from "@/components/ui/card";
 
-const UserGraph = () => {
+const UserGraph = ({ setUserCount }: TOBE) => {
   const { data: userDataAnalstics } = useQuery({
     queryKey: ["user Analaystics"],
     queryFn: userAnalyticsHelper,
@@ -20,16 +20,15 @@ const UserGraph = () => {
         label: "Users Analystics",
         data: [],
         backgroundColor: [
-          "#3498db", // Bright blue
-          "#2ecc71", // Emerald green
-          "#e74c3c", // Soft red
-          "#f39c12", // Orange
-          "#9b59b6", // Purple
-          "#1abc9c", // Turquoise
-          "#34495e", // Dark blue-gray
-          "#e67e22", // Dark orange
+          "#3498db",
+          "#2ecc71",
+          "#e74c3c",
+          "#f39c12",
+          "#9b59b6",
+          "#1abc9c",
+          "#34495e",
+          "#e67e22",
         ],
-    
       },
     ],
   });
@@ -42,7 +41,6 @@ const UserGraph = () => {
           monthCurrent: monthNames[x.month - 1],
         }))
         .sort((a: TOBE, b: TOBE) => a.month - b.month);
-
       setUserData({
         labels: userDataAnalysed.map((data: TOBE) => data.monthCurrent),
         datasets: [
@@ -52,6 +50,12 @@ const UserGraph = () => {
           },
         ],
       });
+      const numberUsers = userDataAnalstics?.payload?.reduce(
+        (acc: number, curr: { count: number }) => acc + curr.count,
+        0
+      );
+
+      setUserCount(numberUsers);
     }
   }, [userDataAnalstics]);
 

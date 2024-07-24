@@ -3,13 +3,15 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { currentUserHelper } from "@/helpers/api/auth/authApiHelper";
 import { useUserStore } from "@/store/storeProviders/UseUserStore";
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
 
 import { CiWavePulse1 } from "react-icons/ci";
 import UserGraph from "../Analytics/UserAnalytics";
 import InstructorGraph from "../Analytics/InstryuctorAnalytics";
 import CourseGraph from "../Analytics/CourseAnalaytics";
 const OverViewBoard = () => {
+  const [userCount, setUserCount] = useState<number>(0);
+  const [instructorCount, setInstructorCount] = useState<number>(0);
   const user = useUserStore((state) => state.user);
   const { data: currentUser } = useQuery({
     queryKey: ["current"],
@@ -63,22 +65,22 @@ const OverViewBoard = () => {
         <Card className="w-[30%]  h-32 mb-5 ">
           <CardHeader>
             <CardTitle>Users</CardTitle>
-            <CardContent>7</CardContent>
+            <CardContent>{userCount}</CardContent>
           </CardHeader>
         </Card>
 
         <Card className="w-[30%]  h-32 mb-5">
           <CardHeader>
             <CardTitle>Total Course</CardTitle>
-            <CardContent>10</CardContent>
+            <CardContent>{instructorCount}</CardContent>
           </CardHeader>
         </Card>
       </div>
       <div className="w-[90%] mx-auto">
-        <UserGraph />
+        <UserGraph setUserCount={setUserCount} />
       </div>
       <div className="w-[90%] mx-auto">
-        <InstructorGraph />
+        <InstructorGraph setInstructorCount={setInstructorCount} />
       </div>
       <div className="w-[90%] mx-auto">
         <CourseGraph />
