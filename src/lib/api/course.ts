@@ -98,6 +98,14 @@ const courseEndpoints = {
     method: "get" as const,
     path: "leaderBoard",
   },
+  getEntrollAnalatytics: {
+    method: "get" as const,
+    path: "getEntrollAnalatytics",
+  },
+  getInstructorOwnAnalytics: {
+    method: "get" as const,
+    path: "getInstructorOwnAnalytics/:id",
+  },
 };
 
 const courseService = createApiService("course", courseEndpoints);

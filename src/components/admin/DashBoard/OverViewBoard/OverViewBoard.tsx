@@ -6,6 +6,9 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 
 import { CiWavePulse1 } from "react-icons/ci";
+import UserGraph from "../Analytics/UserAnalytics";
+import InstructorGraph from "../Analytics/InstryuctorAnalytics";
+import CourseGraph from "../Analytics/CourseAnalaytics";
 const OverViewBoard = () => {
   const user = useUserStore((state) => state.user);
   const { data: currentUser } = useQuery({
@@ -70,6 +73,15 @@ const OverViewBoard = () => {
             <CardContent>10</CardContent>
           </CardHeader>
         </Card>
+      </div>
+      <div className="w-[90%] mx-auto">
+        <UserGraph />
+      </div>
+      <div className="w-[90%] mx-auto">
+        <InstructorGraph />
+      </div>
+      <div className="w-[90%] mx-auto">
+        <CourseGraph />
       </div>
     </section>
   );

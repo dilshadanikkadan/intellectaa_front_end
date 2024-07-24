@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import {
   Select,
   SelectContent,
@@ -6,18 +6,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-const LanguageCode = ({setSelectedLanguage}:any) => {
-
+const LanguageCode = ({ setSelectedLanguage }: any) => {
   const handleLanguageChange = (value: string) => {
-    console.log("********",value);
-    setSelectedLanguage(
-      value
-    )
+    console.log("********", value);
+    setSelectedLanguage(value);
   };
   return (
     <div className="mt-2 w-[35%] py-1">
-      <Select  onValueChange={handleLanguageChange}>
-        <SelectTrigger className="w-[97%] py-1">
+      <Select onValueChange={handleLanguageChange}>
+        <SelectTrigger className="w-[97%] py-1.5">
           <SelectValue placeholder="Language" />
         </SelectTrigger>
         <SelectContent>

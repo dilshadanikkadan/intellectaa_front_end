@@ -30,7 +30,6 @@ const TestCase = ({ testCase, sumbmission, subMissionErr ,setsubmissonResult}: P
     }
   }, [sumbmission]);
 
-  console.log("______________________", Array.isArray(sumbmission));
   return (
     <Card className="w-full  py-5">
       {subMissionErr ? (

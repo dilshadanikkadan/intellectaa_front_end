@@ -71,7 +71,10 @@ export const userPrfilePatchHelper = async (payload: TOBE) => {
   }
 };
 
-export const getAllInstructorHelper = async (pageNumber: number, limit: number) => {
+export const getAllInstructorHelper = async (
+  pageNumber: number,
+  limit: number
+) => {
   try {
     // const response = await userService.getAllInstructor({}, {});
     const response = await axios.get(
@@ -90,6 +93,40 @@ export const getAllInstructorHelper = async (pageNumber: number, limit: number) 
   } catch (error: TOBE) {
     console.log(error.response.data.message);
 
+    throw NewError(error);
+  }
+};
+
+export const userAnalyticsHelper = async (payload?: TOBE) => {
+  try {
+    const response = await userService.getUserAnalytics();
+
+    if (response.status === 200) {
+      return {
+        success: true,
+        payload: response.data,
+      };
+    }
+  } catch (error: TOBE) {
+    throw NewError(error);
+  }
+};
+
+export const instructorAnalyticsHelper = async (payload?: TOBE) => {
+  console.log();
+  
+  try {
+    const response = await userService.getInstructorAnalytics();
+
+    // console.log("_________^^^^^^^^^", response.data);
+
+    if (response.status === 200) {
+      return {
+        success: true,
+        payload: response.data,
+      };
+    }
+  } catch (error: TOBE) {
     throw NewError(error);
   }
 };

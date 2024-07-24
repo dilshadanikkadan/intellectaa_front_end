@@ -100,7 +100,7 @@ console.log(">>>>>>>>>>>>>>>>>",data?.payload);
             <PlayArrowIcon /> Run
           </button>
         )}
-        <button disabled={!submissonResult} onClick={handleSubmission} className="bg-[#F0F0F0] rounded-md py-1 text-sm px-3 text-[#20B486]">
+        <button disabled={!submissonResult} onClick={handleSubmission} className="bg-[#F0F0F0] rounded-md py-1  text-sm px-3 text-[#20B486]">
           <CloudUploadIcon /> submit
         </button>
       </div>

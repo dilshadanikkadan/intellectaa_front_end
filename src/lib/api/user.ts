@@ -13,6 +13,14 @@ const userEndpoints = {
     method: "get" as const,
     path: "getAllInstructor",
   },
+  getUserAnalytics: {
+    method: "get" as const,
+    path: "userStatics",
+  },
+  getInstructorAnalytics: {
+    method: "get" as const,
+    path: "instructorStatics",
+  },
   instroctorCreate: {
     method: "put" as const,
     path: "createInstructor",

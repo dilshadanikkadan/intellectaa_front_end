@@ -393,3 +393,40 @@ export const getLeaderBoardHelper = async (id?: TOBE) => {
     throw NewError(error);
   }
 };
+
+export const getEntrollAnalatytics = async (payload?: TOBE) => {
+  console.log();
+
+  try {
+    const response = await courseService.getEntrollAnalatytics();
+
+    if (response.status === 200) {
+      return {
+        success: true,
+        payload: response.data,
+      };
+    }
+  } catch (error: TOBE) {
+    throw NewError(error);
+  }
+};
+
+export const getInstructorOwnAnalytics = async (userId?: TOBE) => {
+  console.log();
+
+  try {
+    const response = await courseService.getInstructorOwnAnalytics(
+      {},
+      { id: userId }
+    );
+
+    if (response.status === 200) {
+      return {
+        success: true,
+        payload: response.data,
+      };
+    }
+  } catch (error: TOBE) {
+    throw NewError(error);
+  }
+};
