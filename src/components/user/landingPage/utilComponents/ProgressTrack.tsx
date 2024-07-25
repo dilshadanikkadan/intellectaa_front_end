@@ -19,14 +19,29 @@ const ProgressTrack = () => {
   const router = useRouter();
   console.log("____________********&", MyEntroll);
   if (isLoading) {
-    return <div>loading.......</div>;
+    return (
+      <div className="w-[95%]  mx-auto mt-5">
+        <h4 className="text-xl font-semibold my-2"></h4>
+        <Card className=" w-[40%] md:w-[26%] h-44 skeleton  rounded-md border border-gray-300 pb-5 ">
+          <div className="w-[90%] relative h-28 rounded-md mx-auto"></div>
+          <p className="font-semibold ml-3 text-noraml mt-3"></p>
+
+          <p className="my-2 w-[90%] mx-auto"></p>
+
+          <button className="flex items-center ml-3 text-[#20B486] hover:text-[#1a9370] transition-colors duration-300"></button>
+        </Card>
+      </div>
+    );
   }
   return (
     <div className="w-[95%]  mx-auto mt-5">
       <h4 className="text-xl font-semibold my-2">My Courses</h4>
       <div className="wfull flex flex-wrap gap-4">
-        {MyEntroll?.payload.map((myCorurse: TOBE,i:number) => (
-          <Card key={i} className=" w-[40%] md:w-[26%]   rounded-md border border-gray-300 pb-5 ">
+        {MyEntroll?.payload.map((myCorurse: TOBE, i: number) => (
+          <Card
+            key={i}
+            className=" w-[40%] md:w-[26%]   rounded-md border border-gray-300 pb-5 "
+          >
             <div className="w-[90%] relative h-28 rounded-md mx-auto">
               <Image
                 src={myCorurse?.courseId?.thumbnail}

@@ -12,10 +12,10 @@ const Productivity = () => {
               Accelerate innovation
             </span>
             <h3 className="text-2xl md:text-5xl   ">
-              Our AI-powered platform increases the pace of software
-              development.
+              Our productivity suite is designed to help you stay organized,
+              manage your time effectively
             </h3>
-          </div >
+          </div>
           <div className="relative">
             <img
               data-aos="fade-up"
@@ -25,7 +25,6 @@ const Productivity = () => {
             />
             <img
               data-aos="fade-left"
-              
               className="rounded-lg shadow-white shadow-md   w-[40%] absolute top-[25%] right-[5%]"
               src="/sub.png"
               alt=""

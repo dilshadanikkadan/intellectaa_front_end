@@ -1,5 +1,7 @@
 import { ContainerFuild } from "@/styles/layouts/Wrappers";
 import React from "react";
+import { SupportAgent, Code, School } from "@mui/icons-material";
+import { aboutData } from "@/types/constants/about";
 import AboutCard from "./AboutCard";
 
 const AboutSection = () => {
@@ -11,10 +13,16 @@ const AboutSection = () => {
             Learn More About Us
           </h3>
         </div>
-        <div className="cardWrapper w-full flex gap-7 h-full flex-wrap items-center  justify-center">
-          <AboutCard />
-          <AboutCard />
-          <AboutCard  className="hidden md:block"/>
+        <div className="cardWrapper w-full flex gap-7 h-full flex-wrap items-center justify-center">
+          {aboutData.map((item, index) => (
+            <AboutCard
+              key={index}
+              title={item.title}
+              description={item.description}
+              Icon={item.Icon}
+              className={index === 2 ? "hidden md:block" : ""}
+            />
+          ))}
         </div>
       </section>
     </ContainerFuild>

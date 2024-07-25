@@ -19,10 +19,12 @@ const MainBanner = () => {
             online Feels like Real Class
           </h3>
           <p className=" font-normal">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio
-            veniam mollitia hic doloribus, aspernatur sit, eius, nesciunt omnis
-            maiores dolor et reprehenderit obcaecati illo provident expedita.
-            Enim repellendus sunt quibusdam.
+            Our “Learn from Online Feels Like Real Class” feature brings the
+            classroom experience to your screen with unmatched authenticity and
+            interactivity. Designed to bridge the gap between virtual and
+            physical learning environments, this feature combines cutting-edge
+            technology with engaging content to create a classroom experience
+            that feels both immersive and effective.
           </p>
           <div className=" flex gap-9">
             <Button
@@ -43,7 +45,6 @@ const MainBanner = () => {
             alt="main"
           />
         </div>
-  
       </div>
     </section>
   );

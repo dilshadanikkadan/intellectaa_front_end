@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -11,8 +12,25 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { addCategoryHelper } from "@/helpers/course/courseApiHelper";
+import { TOBE } from "@/types/constants/Tobe";
 
 const AddCategory = () => {
+  const [title, setTitle] = useState<string>("");
+
+  const queryClient = useQueryClient();
+  const { mutate: addMutate } = useMutation({
+    mutationFn: addCategoryHelper,
+    onSuccess: (data) => {
+      queryClient.invalidateQueries(["all category"] as TOBE);
+    },
+  });
+  const handleAddCategory = () => {
+    addMutate({
+      title,
+    });
+  };
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -31,15 +49,18 @@ const AddCategory = () => {
               Category
             </Label>
             <Input
+              onChange={(e) => setTitle(e.target.value)}
               id="name"
-              value=""
+              value={title}
               placeholder="Type here..."
               className="col-span-3"
             />
           </div>
         </div>
         <DialogFooter>
-          <Button type="submit">Save changes</Button>
+          <Button onClick={handleAddCategory} type="submit">
+            Save changes
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

@@ -37,7 +37,6 @@ const LoginForm = () => {
     mutationFn: loginHelper,
     onSuccess: (data) => {
       if (data?.success) {
-        console.log("%^%$$%%%^^%^^%&*(*&^&*()(*&^%", data.payload);
         router.replace("/");
         loginSuccess(data.payload);
         setIsAuth();
@@ -62,7 +61,7 @@ const LoginForm = () => {
             <form
               onSubmit={handleSubmit(onSubmit)}
               action=""
-              className="flex flex-col w-[95%] md:w-[75%] mx-auto h-[90%]  items-center justify-center dark:bg-gray-900  rounded-xl shadow-xl"
+              className="flex flex-col w-[95%] md:w-[75%] mx-auto h-[90%]  items-center justify-center dark:bg-gray-900  rounded-xl shadow-md"
             >
               <h3 className="text-[1.4rem] text-main font-semibold mb-5">
                 Login

@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { flushSync } from "react-dom";
 import ProgressTrack from "./utilComponents/ProgressTrack";
 import LeaderBoard from "./utilComponents/LeaderBoard";
+import SubmissionMine from "./utilComponents/SubmissionMine";
 
 enum IComponents {
   WhatToday = "WhatToday",
@@ -38,6 +39,8 @@ export default function ProfilePage() {
             <ProgressTrack />
           ) : currentView === "LeaderBoard" ? (
             <LeaderBoard />
+          ) : currentView === "Submission" ? (
+            <SubmissionMine />
           ) : currentView === "WhatToday" ? (
             <>
               <Attendence />

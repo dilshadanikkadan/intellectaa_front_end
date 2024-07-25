@@ -430,3 +430,71 @@ export const getInstructorOwnAnalytics = async (userId?: TOBE) => {
     throw NewError(error);
   }
 };
+
+export const getAllCategoryHelper = async (id?: TOBE) => {
+  try {
+    const response = await courseService.getAllCategory({}, {});
+    if (response.status === 200 || 201) {
+      return {
+        success: true,
+        payload: response.data,
+      };
+    }
+  } catch (error: TOBE) {
+    throw NewError(error);
+  }
+};
+export const deleteCategoryHelper = async (payload?: TOBE) => {
+  try {
+    const response = await courseService.deleteCategory({}, { id: payload.id });
+    if (response.status === 200 || 201) {
+      return {
+        success: true,
+        payload: response.data,
+      };
+    }
+  } catch (error: TOBE) {
+    throw NewError(error);
+  }
+};
+export const addCategoryHelper = async (payload?: TOBE) => {
+  try {
+    const response = await courseService.addCategory(payload);
+    if (response.status === 200 || 201) {
+      return {
+        success: true,
+        payload: response.data,
+      };
+    }
+  } catch (error: TOBE) {
+    throw NewError(error);
+  }
+};
+
+export const updateCategoryHelper = async (payload?: TOBE) => {
+  try {
+    const response = await courseService.updateCategory(payload);
+    if (response.status === 200 || 201) {
+      return {
+        success: true,
+        payload: response.data,
+      };
+    }
+  } catch (error: TOBE) {
+    throw NewError(error);
+  }
+};
+
+export const getInstructorTrendCourse = async (id?: TOBE) => {
+  try {
+    const response = await courseService.getInstructorTrendCourse({}, { id });
+    if (response.status === 200 || 201) {
+      return {
+        success: true,
+        payload: response.data,
+      };
+    }
+  } catch (error: TOBE) {
+    throw NewError(error);
+  }
+};

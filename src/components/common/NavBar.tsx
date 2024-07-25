@@ -20,7 +20,7 @@ const NavBar = () => {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   useEffect(() => {
-    const closeMenu = (e:any) => {
+    const closeMenu = (e: any) => {
       if (isMenuOpen && !(e.target as HTMLElement).closest(".mobile-menu")) {
         setIsMenuOpen(false);
       }
@@ -31,19 +31,25 @@ const NavBar = () => {
 
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? "hidden" : "unset";
-    return () => { document.body.style.overflow = "unset"; };
+    return () => {
+      document.body.style.overflow = "unset";
+    };
   }, [isMenuOpen]);
 
   const navItems = [
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
     { href: "/courses", label: "Courses" },
-    { href: user?.isInstructor ? "/instructor" : "/teachus", label: user?.isInstructor ? "Instructor" : "Teach Us" },
+    {
+      href: user?.isInstructor ? "/instructor" : "/teachus",
+      label: user?.isInstructor ? "Instructor" : "Teach Us",
+    },
     { href: "/blogs", label: "Blogs" },
   ];
 
-  const NavLink = ({ href, label, onClick }:any) => {
-    const isActive = href === '/' ? pathName === '/' : pathName.startsWith(href);
+  const NavLink = ({ href, label, onClick }: any) => {
+    const isActive =
+      href === "/" ? pathName === "/" : pathName.startsWith(href);
     return (
       <Link
         href={href}
@@ -56,13 +62,21 @@ const NavBar = () => {
   };
 
   return (
-    <NavWrapper className="relative z-50">
+    <nav className="relative flex w-full z-50 ">
       <div className="wrapper flex h-[15vh]  w-full px-4 md:w-[80%] mx-auto items-center relative">
-        <div className="left flex-[1]">
-          <img className="w-24 h-14 object-cover" src="/logo3312.png" alt="" />
+        <div className="logo-container flex-[1]">
+          <img
+            className="h-14 object-cover dark:hidden"
+            src="/finalLogoLight.png"
+            alt="Light Mode Logo"
+          />
+          <img
+            className="h-14 object-cover hidden dark:block"
+            src="/finalLogoDark.png"
+            alt="Dark Mode Logo"
+          />
         </div>
-
-        <div className="center flex-[2] hidden md:flex gap-6 text-[1.2rem]  text-gray-600">
+        <div className="center flex-[2] hidden md:flex gap-6 text-[1.2rem]  text-gray-600 dark:text-white">
           {navItems.map((item) => (
             <NavLink key={item.href} {...item} />
           ))}
@@ -103,7 +117,7 @@ const NavBar = () => {
           ></div>
         )}
       </div>
-    </NavWrapper>
+    </nav>
   );
 };
 

@@ -106,6 +106,26 @@ const courseEndpoints = {
     method: "get" as const,
     path: "getInstructorOwnAnalytics/:id",
   },
+  addCategory: {
+    method: "post" as const,
+    path: "category",
+  },
+  getAllCategory: {
+    method: "get" as const,
+    path: "category",
+  },
+  updateCategory: {
+    method: "put" as const,
+    path: "category",
+  },
+  deleteCategory: {
+    method: "delete" as const,
+    path: "category/:id",
+  },
+  getInstructorTrendCourse: {
+    method: "get" as const,
+    path: "getInstructorTrendCourse/:id",
+  },
 };
 
 const courseService = createApiService("course", courseEndpoints);

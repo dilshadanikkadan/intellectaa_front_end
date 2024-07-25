@@ -55,13 +55,13 @@ const SignUpForm = () => {
     console.log("hey");
     console.log(data);
   };
-useEffect(() => {
-  if(errorMsg){
-    toast.error('email already exist', {
-      position: "top-center",
-    });
-  }
-}, [])
+  useEffect(() => {
+    if (errorMsg) {
+      toast.error("email already exist", {
+        position: "top-center",
+      });
+    }
+  }, []);
 
   return (
     <ContainerFuild>
@@ -73,7 +73,9 @@ useEffect(() => {
             action=""
             className="flex flex-col w-[95%] md:w-[75%] mx-auto h-[90%]  items-center justify-center dark:bg-gray-900  rounded-xl shadow-md"
           >
-            <h3 className="text-[1.4rem] text-main font-semibold">Sign Up</h3>
+            <h3 className="text-[1.4rem] text-main font-semibold mb-2">
+              Sign Up
+            </h3>
             <GoogleForm />
             {error && (
               <p className="text-red-500 text-sm lowercase mt-1 w-[65%] text-left">

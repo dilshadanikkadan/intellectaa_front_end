@@ -1,6 +1,7 @@
 import { GoalWrapper } from "@/styles/layouts/Wrappers";
 import React from "react";
 import AboutCard from "./AboutCard";
+import { aboutData } from "@/types/constants/about";
 
 const AboutGoals = () => {
   return (
@@ -13,9 +14,15 @@ const AboutGoals = () => {
             </h3>
           </div>
           <div className="cardWrapper flex flex-wrap  gap-7 h-full  items-center  justify-center">
-            <AboutCard />
-            <AboutCard className="relative top-14"/>
-            <AboutCard />
+            {aboutData.map((item, index) => (
+              <AboutCard
+                key={index}
+                title={item.title}
+                description={item.description}
+                Icon={item.Icon}
+                className={index === 1 ? "relative top-14" : ""}
+              />
+            ))}
           </div>
         </div>
       </GoalWrapper>
