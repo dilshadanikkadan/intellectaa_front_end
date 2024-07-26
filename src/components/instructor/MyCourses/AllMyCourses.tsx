@@ -3,7 +3,10 @@ import React from "react";
 import CourseCard from "./CourseCard";
 import { useRouter } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { deleteCourseHelper, getInstroctorCourseHelper } from "@/helpers/course/courseApiHelper";
+import {
+  deleteCourseHelper,
+  getInstroctorCourseHelper,
+} from "@/helpers/course/courseApiHelper";
 import { useUserStore } from "@/store/storeProviders/UseUserStore";
 import {
   Table,
@@ -25,26 +28,24 @@ const AllMyCourses = () => {
     queryFn: getInstroctorCourseHelper,
   });
 
+  console.log("_________(((((((())))))))))", myCourse?.payload);
 
-  console.log("_________(((((((())))))))))",myCourse?.payload);
-  
-  const queryCleint= useQueryClient();
+  const queryCleint = useQueryClient();
 
-  const {mutate:deleteMutate}= useMutation({
-    mutationFn:deleteCourseHelper,
-    onSuccess:(data)=>{
-     queryCleint.invalidateQueries(["myCourse"] as TOBE)
-    }
-  })
+  const { mutate: deleteMutate } = useMutation({
+    mutationFn: deleteCourseHelper,
+    onSuccess: (data) => {
+      queryCleint.invalidateQueries(["myCourse"] as TOBE);
+    },
+  });
 
-  const handleDelete=(courseId:string)=>{
-   
+  const handleDelete = (courseId: string) => {
     deleteMutate({
-      id:courseId
-    })
-  }
+      id: courseId,
+    });
+  };
   return (
-    <div className="w-[90%] mx-auto  relative">
+    <div className="w-[90%] mx-auto   relative">
       <div className="flex justify-between mb-3">
         <h3 className="text-lg font-semibold mb-3">My Courses</h3>
         <button
@@ -54,14 +55,14 @@ const AllMyCourses = () => {
           Add Course
         </button>
       </div>
-      <Table className="relative z-0">
+      <Table className="relative z-0 ">
         <TableCaption>A list Users</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead>Thumbnail</TableHead>
-            <TableHead className="w-[100px]">Title</TableHead>
-            <TableHead>Language</TableHead>
-            <TableHead>Category</TableHead>
+            <TableHead className="">Title</TableHead>
+            <TableHead className="hidden ">Language</TableHead>
+            <TableHead className="hidden md:block">Category</TableHead>
             <TableHead>Status</TableHead>
             <TableHead className="text-right">Action</TableHead>
           </TableRow>
@@ -77,8 +78,12 @@ const AllMyCourses = () => {
                 />
               </TableCell>
               <TableCell className="font-medium ">{course?.title}</TableCell>
-              <TableCell>{course?.language}</TableCell>
-              <TableCell>{course?.category}</TableCell>
+              <TableCell className="hidden ">
+                {course?.language}
+              </TableCell>
+              <TableCell className="hidden md:block">
+                {course?.category}
+              </TableCell>
               <TableCell>
                 {String(
                   course?.isRejected
@@ -98,7 +103,7 @@ const AllMyCourses = () => {
                   </Link>
                 ) : (
                   <button
-                    onClick={()=> handleDelete(course._id)}
+                    onClick={() => handleDelete(course._id)}
                     className="py-2 px-5 rounded-md bg-gray-800 text-white text-sm"
                   >
                     Delete

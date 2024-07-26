@@ -19,22 +19,22 @@ const InstructorDashboard = ({}) => {
 
   return (
     <div>
-      <div className="w-[90%] mx-auto  flex gap-5">
-        <Card className="w-[30%]  h-32 mb-5">
+      <div className="w-[90%] mx-auto  flex flex-col md:flex-row gap-5 overflow-hidden">
+        <Card className="w-[70%] md:w-[30%]  h-32 mb-5">
           <CardHeader>
             <CardTitle>Profit</CardTitle>
             <CardContent>$ {currentUser?.payload?.profit}</CardContent>
           </CardHeader>
         </Card>
 
-        <Card className="w-[30%]  h-32 mb-5 ">
+        <Card className="w-[70%] md:w-[30%]  h-32 mb-5 ">
           <CardHeader>
             <CardTitle>Students</CardTitle>
             <CardContent>7</CardContent>
           </CardHeader>
         </Card>
 
-        <Card className="w-[30%]  h-32 mb-5">
+        <Card className="w-[70%] md:w-[30%]  h-32 mb-5">
           <CardHeader>
             <CardTitle>Total Course</CardTitle>
             <CardContent>10</CardContent>

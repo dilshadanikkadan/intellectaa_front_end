@@ -18,7 +18,7 @@ const Submission = () => {
     queryFn: getSubmissionsHelper,
   });
 
-  console.log("**************************************",allSubmission);
+  console.log("**************************************", allSubmission);
   const queryClient = useQueryClient();
 
   const { mutate: submissionLikeMutate } = useMutation({
@@ -28,17 +28,17 @@ const Submission = () => {
     },
   });
 
-  const handleLikes =(submissionId:string)=>{
-      submissionLikeMutate({
-        submissionId
-      })
-  }
+  const handleLikes = (submissionId: string) => {
+    submissionLikeMutate({
+      submissionId,
+    });
+  };
   return (
     <div className="w-[80%] mx-auto mt-5">
       <h3 className="text-2xl font-semibold mb-7">Submission</h3>
       <div className="wrapper flex gap-5 flex-wrap  ">
-        {allSubmission?.payload.map((submission: any,i:number) => (
-          <Card  key={i} className="w-[48%] h-72">
+        {allSubmission?.payload.map((submission: any, i: number) => (
+          <Card key={i} className="w-[90%] md:w-[48%] h-72">
             <div className="wrapper w-[90%] mx-auto">
               <div className="user flex gap-3 mt-5 border-b border-gray-300 pb-3">
                 <img
@@ -60,9 +60,15 @@ const Submission = () => {
               <div>
                 <button className="mt-3 flex items-center bg-base-200 px-3 py-1.5 rounded-md">
                   {submission?.likes?.includes(user?._id) ? (
-                    <ThumbUpIcon onClick={()=> handleLikes(submission?._id)} className="mr-1" />
+                    <ThumbUpIcon
+                      onClick={() => handleLikes(submission?._id)}
+                      className="mr-1"
+                    />
                   ) : (
-                    <ThumbUpOffAltIcon onClick={()=> handleLikes(submission?._id)}   className="mr-1" />
+                    <ThumbUpOffAltIcon
+                      onClick={() => handleLikes(submission?._id)}
+                      className="mr-1"
+                    />
                   )}
                   Likes {submission?.likes.length}
                 </button>

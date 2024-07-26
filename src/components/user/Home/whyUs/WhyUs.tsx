@@ -6,20 +6,23 @@ const WhyUs = () => {
     <div className="mt-36">
       <ContainerFuild>
         <div className="flex flex-col gap-10 ">
-          <h3 className="text-3xl md:text-5xl ">Why Choose Us ?</h3>
+          <h3 className="text-3xl md:text-5xl font-semibold ">
+            Why Choose Us ?
+          </h3>
           <div data-aos="fade-up">
-            <span className="text-3xl md:text-5xl  text-[#20B486] ">
+            <span className="text-3xl md:text-5xl font-semibold  text-[#20B486] ">
               Accelerate innovation
             </span>
-            <h3 className="text-3xl md:text-5xl ">
+            <h3 className="text-2xl md:text-5xl ">
               Our productivity suite is designed to help you stay organized,
               manage your time effectively
             </h3>
           </div>
           <div className="relative">
             <div className="w-full h-[70vh] rounded-xl bg-gray-900">
-              <h3 className="text-2xl md:text-3xl  text-base-300 ml-[7%] w-[90%]  md:w-[60%] pt-10">
-                Empower developers With Intellectaa, you can secure code in minutes.
+              <h3 className="text-2xl md:text-3xl font-semibold text-base-300 ml-[7%] w-[90%]  md:w-[60%] pt-10">
+                Empower developers With Intellectaa, you can secure code in
+                minutes.
               </h3>
 
               <div className="wrapper flex flex-wrap flex-col md:flex-row w-[80%] mx-auto mt-10 gap-5">

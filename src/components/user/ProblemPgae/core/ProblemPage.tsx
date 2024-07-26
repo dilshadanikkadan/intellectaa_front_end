@@ -23,7 +23,7 @@ const ProblemPage = () => {
   console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^",selectedLanguage);
   
   return (
-    <div className="w-[80%] mx-auto flex gap-3 mt-5">
+    <div className="w-[80%] mx-auto flex flex-col md:flex-row gap-3 mt-5">
       <div className="left flex-[1]">
         <ProblemInfo
           readFile={currentCode?.payload[3]}

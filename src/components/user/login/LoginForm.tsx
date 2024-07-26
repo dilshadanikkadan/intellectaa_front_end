@@ -61,7 +61,7 @@ const LoginForm = () => {
             <form
               onSubmit={handleSubmit(onSubmit)}
               action=""
-              className="flex flex-col w-[95%] md:w-[75%] mx-auto h-[90%]  items-center justify-center dark:bg-gray-900  rounded-xl shadow-md"
+              className="flex flex-col w-[100%] md:w-[75%] mx-auto h-[90%]  items-center  justify-start mt-10 md:mt-0 md:justify-center dark:bg-gray-900  rounded-xl shadow-none  md:shadow-md"
             >
               <h3 className="text-[1.4rem] text-main font-semibold mb-5">
                 Login
@@ -76,7 +76,7 @@ const LoginForm = () => {
                   <Input
                     {...register(input.name)}
                     type={`${input.name === "password" ? "password" : "text"}`}
-                    className="border-[1px] border-dotted border-[#20B486]  w-[65%] h-9  mt-4 text-sm"
+                    className="border-[1px] border-dotted border-[#20B486]  w-[88%] md:w-[65%] h-9  mt-4 text-sm"
                     placeholder={input.placeholder}
                     name={input.name}
                   />
@@ -89,7 +89,7 @@ const LoginForm = () => {
               ))}
               <button
                 type="submit"
-                className="bg-[#20B486] text-white w-[65%] py-1.5 rounded-sm mt-4 flex items-center justify-center "
+                className="bg-[#20B486] text-white w-[88%] md:w-[65%] py-1.5 rounded-sm mt-4 flex items-center justify-center "
                 value="Register"
               >
                 Login

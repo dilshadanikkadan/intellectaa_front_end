@@ -1,5 +1,3 @@
-
-
 "use client";
 import React from "react";
 import { GoogleLogin } from "@react-oauth/google";
@@ -11,9 +9,8 @@ const GoogleForm = () => {
   const loginSuccess = useUserStore((state) => state.loginSuccess);
   const router = useRouter();
   return (
-    <main className="w-[63%]">
+    <main className="w-auto  md:mr-0 md:w-[63%] mx-auto">
       <GoogleLogin
-      
         onSuccess={async (credentialResponse) => {
           console.log("_______________________");
           const res = await googleAuthHelper({

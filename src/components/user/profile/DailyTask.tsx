@@ -34,7 +34,7 @@ const DailyTask = () => {
       </h3>
       <div className="w-full flex gap-5">
         {dailyTask?.payload.problems?.map((problem: any, i: any) => (
-          <Card key={i} className="w-[45%] py-3">
+          <Card key={i} className="md:w-[45%] py-3">
             <CardContent className="w-[100%] mx-auto mt-4">
               <img src="/Daily.png" alt="" />
               <p className="my-2 ">{problem?.split("_").join(" ")}</p>

@@ -22,7 +22,7 @@ const ProgressTrack = () => {
     return (
       <div className="w-[95%]  mx-auto mt-5">
         <h4 className="text-xl font-semibold my-2"></h4>
-        <Card className=" w-[40%] md:w-[26%] h-44 skeleton  rounded-md border border-gray-300 pb-5 ">
+        <Card className=" w-[60%] mx-auto md:mx-0 md:w-[26%] h-44 skeleton  rounded-md border border-gray-300 pb-5 ">
           <div className="w-[90%] relative h-28 rounded-md mx-auto"></div>
           <p className="font-semibold ml-3 text-noraml mt-3"></p>
 

@@ -20,7 +20,10 @@ const PaymentPacks = () => {
     queryKey: ["course", id],
     queryFn: getCourseeHelper,
   });
-  console.log("__________________________%%%%%%%%%%###############_", course?.payload);
+  console.log(
+    "__________________________%%%%%%%%%%###############_",
+    course?.payload
+  );
 
   const handlePayment = async (payload: TOBE) => {
     try {
@@ -38,7 +41,7 @@ const PaymentPacks = () => {
         {
           userId: user?._id,
           courseId: course?.payload._id,
-          instructor:course?.payload?.instructor?._id,
+          instructor: course?.payload?.instructor?._id,
           amount: payload.amount,
           courseTitle: course?.payload.title,
           courseThumbnail: course?.payload.thumbnail,
@@ -61,7 +64,7 @@ const PaymentPacks = () => {
   };
 
   return (
-    <div className="w-[60%] mx-auto mt-10">
+    <div className="w-[85%] md:w-[60%] mx-auto mt-10">
       <div className="info flex flex-col gap-4">
         <h3 className="text-2xl font-semibold text-center">
           We create a monthly pricing package for all standard students
@@ -74,8 +77,8 @@ const PaymentPacks = () => {
           packages.
         </p>
       </div>
-      <div className="w-full mt-5 flex gap-10 justify-center">
-        <Card className="w-[35%] ">
+      <div className="w-full mt-5 flex flex-col md:flex-row gap-10 justify-center">
+        <Card className=" md:w-[35%] ">
           <CardTitle className="flex text-xl mt-7 gap-4 w-[90%] mx-auto">
             <Inventory2Icon className="text-[#20B486]" fontSize="large" />
             <h3>Basic Pack</h3>
@@ -89,15 +92,15 @@ const PaymentPacks = () => {
 
             <p>
               <VerifiedIcon className="text-[#20B486] mr-3" />
-              Access All Time
+              Questions With lessons
             </p>
             <p>
               <VerifiedIcon className="text-[#20B486] mr-3" />
-              Access All Time
+              View LeaderBoard
             </p>
             <p>
               <VerifiedIcon className="text-[#20B486] mr-3" />
-              Access All Time
+              Read Blogs
             </p>
             <h3 className="text-lg text-start font-semibold ml-[3%]">
               $ <span className="ml-3">799</span>
@@ -118,7 +121,7 @@ const PaymentPacks = () => {
           </CardFooter>
         </Card>
 
-        <Card className="w-[35%] ">
+        <Card className="md:w-[35%] ">
           <CardTitle className="flex text-xl mt-7 gap-4 w-[90%] mx-auto">
             <Inventory2Icon className="text-[#20B486]" fontSize="large" />
             <h3>Premium Pack</h3>
@@ -141,7 +144,7 @@ const PaymentPacks = () => {
               <VerifiedIcon className="text-[#20B486] mr-3" />
               chat Room
             </p>
-        
+
             <h3 className="text-lg text-start font-semibold ml-[3%]">
               $ <span className="ml-3">999</span>
             </h3>

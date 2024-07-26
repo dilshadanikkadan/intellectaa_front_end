@@ -11,7 +11,7 @@ const GlobWithchild = () => {
             <img
               data-aos="fade-up"
               src="/childglob.png"
-              className="h-full w-[70%] object-cover"
+              className="h-full w-[100% ] md:w-[70%] object-cover"
               alt=""
             />
           </div>

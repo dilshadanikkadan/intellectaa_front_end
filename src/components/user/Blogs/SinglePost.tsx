@@ -58,7 +58,7 @@ const SinglePost = () => {
       </div>
 
       <div
-        className="prose prose-lg max-w-none space-y-3"
+        className="prose prose-lg max-w-[90%] mx-auto md:mx-0 md:max-w-none space-y-3"
         dangerouslySetInnerHTML={{ __html: blog?.content }}
       />
 

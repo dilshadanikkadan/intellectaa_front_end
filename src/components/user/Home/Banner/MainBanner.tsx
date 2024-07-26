@@ -5,7 +5,7 @@ const MainBanner = () => {
   return (
     <section
       data-aos="fade-up"
-      className="w-[90%] mx-auto mt-7  relative  bg-gradient-to-r   "
+      className="w-[90%] mx-auto mt-7  relative  bg-gradient-to-r h-screen md:h-auto  flex  "
     >
       <img
         className="w-40 absolute top-0 z-[-999] left-0 h-36 object-cover"

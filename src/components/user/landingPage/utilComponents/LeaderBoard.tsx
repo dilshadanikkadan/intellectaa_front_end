@@ -20,7 +20,7 @@ const LeaderBoard = () => {
     queryFn: getLeaderBoardHelper,
   });
   return (
-    <Card className="w-[98%] mt-3 ml-5 ">
+    <Card className="w-[90%] mx-auto mb-10 md:w-[98%] mt-3 ml-5 ">
       <p className="py-2 font-semibold  ml-3 *:">Leader Board</p>
       <Table className=" z-0">
         <TableCaption>A list of Users</TableCaption>
@@ -33,7 +33,7 @@ const LeaderBoard = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {leaderBoard?.payload.map((user: TOBE,i:number) => (
+          {leaderBoard?.payload.map((user: TOBE, i: number) => (
             <TableRow key={i} className=" p-2   ">
               <TableCell className="font-medium p-2  ">
                 <img
