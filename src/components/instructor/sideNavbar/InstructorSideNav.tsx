@@ -6,6 +6,7 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import PeopleIcon from "@mui/icons-material/People";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
+import ChatIcon from "@mui/icons-material/Chat";
 
 const InstructorSideNav = () => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -13,8 +14,8 @@ const InstructorSideNav = () => {
   const navItems = [
     { icon: <DashboardIcon />, name: "Dashboard", href: "/instructor" },
     { icon: <PeopleIcon />, name: "My Courses", href: "/instructor/myCourses" },
-    { icon: <PeopleIcon />, name: "Students", href: "/instructor/students" },
-    { icon: <SettingsIcon />, name: "Messages", href: "/instructor/messages" },
+    // { icon: <PeopleIcon />, name: "Students", href: "/instructor/students" },
+    { icon: <ChatIcon />, name: "Messages", href: "/instructor/messages" },
     { icon: <LogoutIcon />, name: "Logout", href: "/logout" },
   ];
 

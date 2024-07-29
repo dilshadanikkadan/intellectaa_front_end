@@ -18,12 +18,16 @@ import { ThemeProvider } from "@/store/storeProviders/ThemeProvider";
 
 export default function LandingPageView() {
   const { data: session, status } = useSession();
-  const { isAuthenticated, loginSuccess, logoutSuccess, user ,googleAuthSucess} = useUserStore(
-    (state) => state
-  );
- 
-  if(user){
-    return null
+  const {
+    isAuthenticated,
+    loginSuccess,
+    logoutSuccess,
+    user,
+    googleAuthSucess,
+  } = useUserStore((state) => state);
+
+  if (user) {
+    return null;
   }
 
   return (
@@ -35,21 +39,20 @@ export default function LandingPageView() {
         disableTransitionOnChange
       >
         <div className="w-full overflow-hidden">
-        {/* < />   */}
-        <TutorialHell />
-        <Wrapper>
-          <MainBanner />
-        </Wrapper>
-        <AboutSection />
-        <OneToOne />
-        <AboutGoals />
-        <Productivity />
-        <WhyUs />
-        <GlobWithchild />   
-        <Foooter />
-      </div>
+          {/* < />   */}
+          <TutorialHell />
+          <Wrapper>
+            <MainBanner />
+          </Wrapper>
+          <AboutSection />
+          <OneToOne />
+          <AboutGoals />
+          <Productivity />
+          <WhyUs />
+          <GlobWithchild />
+          <Foooter />
+        </div>
       </ThemeProvider>
-
     </>
   );
 }

@@ -1,6 +1,11 @@
-"use client"
+"use client";
 import React from "react";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useQuery } from "@tanstack/react-query";
 import { getMyAttendenceHelper } from "@/helpers/course/courseApiHelper";
@@ -38,27 +43,37 @@ const ActivitySquare: React.FC<ActivitySquareProps> = ({ date, activity }) => {
     </TooltipProvider>
   );
 };
-
 const ActivityTracker: React.FC = () => {
-  const user = useUserStore(state => state.user);
+  const user = useUserStore((state) => state.user);
 
   const { data: myAttendance } = useQuery({
-    queryKey: ['myAttendance', user?._id],
-    queryFn: getMyAttendenceHelper
+    queryKey: ["myAttendance", user?._id],
+    queryFn: getMyAttendenceHelper,
   });
 
   const generateActivityData = (attendanceData: any): ActivityData => {
     const data: ActivityData = {};
-    const startDate = new Date('2024-01-01');
-    for (let i = 0; i < 180; i++) {
-      const date = new Date(startDate.getTime() + i * 24 * 60 * 60 * 1000);
-      data[date.toISOString().split('T')[0]] = 0;
+
+    if (!attendanceData || attendanceData.length === 0) {
+      return data;
     }
 
-    attendanceData?.forEach((entry: any) => {
+    const earliestDate = new Date(Math.min(...attendanceData?.map((entry: any) => new Date(entry._id))));
+    
+    earliestDate.setHours(0, 0, 0, 0);
+
+    for (let i = 0; i < 190; i++) {
+      const currentDate = new Date(earliestDate);
+      currentDate.setDate(earliestDate.getDate() + i);
+      data[currentDate.toISOString().split('T')[0]] = 0;
+    }
+
+    attendanceData.forEach((entry: any) => {
       const date = entry._id;
       const submissions = entry.submissionByDate.length;
-      data[date] = submissions;
+      if (date in data) {
+        data[date] = submissions;
+      }
     });
 
     return data;
@@ -69,19 +84,22 @@ const ActivityTracker: React.FC = () => {
   return (
     <Card className="w-[95%] max-w-4xl ml-10 mx-auto mt-8">
       <CardHeader>
-        <CardTitle className="text-gray-600">What You have Done</CardTitle>
+        <CardTitle className="text-gray-600">What You Have Done</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="flex flex-wrap gap-1">
-          {Object.entries(activityData)?.map(([date, activity]) => (
+          {Object.entries(activityData).map(([date, activity]) => (
             <ActivitySquare key={date} date={date} activity={activity} />
           ))}
         </div>
-        <div className="flex justify-between items-center mt-4 ">
+        <div className="flex justify-between items-center mt-4">
           <span className="text-sm text-gray-500">Less</span>
           <div className="flex items-center space-x-1">
-            {[100, 200, 300, 400, 500, 600]?.map((shade: number) => (
-              <div key={shade} className={`w-3 h-3 bg-green-${shade} rounded-sm`} />
+            {[100, 200, 300, 400, 500, 600].map((shade: number) => (
+              <div
+                key={shade}
+                className={`w-3 h-3 bg-green-${shade} rounded-sm`}
+              />
             ))}
           </div>
           <span className="text-sm text-gray-500">More</span>
@@ -90,5 +108,4 @@ const ActivityTracker: React.FC = () => {
     </Card>
   );
 };
-
 export default ActivityTracker;

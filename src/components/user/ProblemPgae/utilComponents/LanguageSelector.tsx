@@ -12,9 +12,9 @@ const LanguageCode = ({ setSelectedLanguage }: any) => {
     setSelectedLanguage(value);
   };
   return (
-    <div className="mt-2 w-[35%] py-1">
+    <div className="mt-2 w-[150px] ml-1 ">
       <Select onValueChange={handleLanguageChange}>
-        <SelectTrigger className="w-[97%] py-1.5">
+        <SelectTrigger className="w-[97%] py-0.5 text-sm focus-visible:ring-white border-none">
           <SelectValue placeholder="Language" />
         </SelectTrigger>
         <SelectContent>

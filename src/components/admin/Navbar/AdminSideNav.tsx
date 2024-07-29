@@ -1,22 +1,23 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import HomeIcon from "@mui/icons-material/Home";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PeopleIcon from "@mui/icons-material/People";
-import SettingsIcon from "@mui/icons-material/Settings";
+import CategoryIcon from '@mui/icons-material/Category';
 import LogoutIcon from "@mui/icons-material/Logout";
-
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
+import LaptopChromebookIcon from '@mui/icons-material/LaptopChromebook';
 const AdminSideNav = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const navItems = [
-    { icon: <HomeIcon />, name: "Dashboard", href: "/admin" },
+    { icon: <DashboardIcon />, name: "Dashboard", href: "/admin" },
     { icon: <PeopleIcon />, name: "Users", href: "/admin/users" },
-    { icon: <PeopleIcon />, name: "Courses", href: "/admin/courses" },
-    { icon: <PeopleIcon />, name: "Tasks", href: "/admin/tasks" },
-    { icon: <PeopleIcon />, name: "Instructors", href: "/admin/instructor" },
-    { icon: <HomeIcon />, name: "Category", href: "/admin/category" },
+    { icon: <LaptopChromebookIcon />, name: "Courses", href: "/admin/courses" },
+    { icon: <AssignmentIcon />, name: "Tasks", href: "/admin/tasks" },
+    { icon: <PersonAddAltIcon />, name: "Instructors", href: "/admin/instructor" },
+    { icon: <CategoryIcon />, name: "Category", href: "/admin/category" },
     { icon: <LogoutIcon />, name: "Logout", href: "/logout" },
   ];
 

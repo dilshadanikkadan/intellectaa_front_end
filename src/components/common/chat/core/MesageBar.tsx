@@ -149,10 +149,10 @@ const MesageBar = ({
                     typing.....
                   </p>
                 ) : (
-                  <div className="flex ">
+                  <div className="flex">
                     {currentChatMembersName
                       ?.filter(
-                        (user: TOBE) => user.username !== currentUser?.username
+                        (user: TOBE) => user._id !== currentUser?._id
                       )
                       .map((user: TOBE, i: number) => (
                         <p key={i} className="text-sm">

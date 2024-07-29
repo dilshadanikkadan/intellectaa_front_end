@@ -11,6 +11,7 @@ import { flushSync } from "react-dom";
 import ProgressTrack from "./utilComponents/ProgressTrack";
 import LeaderBoard from "./utilComponents/LeaderBoard";
 import SubmissionMine from "./utilComponents/SubmissionMine";
+import { TOBE } from "@/types/constants/Tobe";
 
 enum IComponents {
   WhatToday = "WhatToday",
@@ -21,10 +22,13 @@ export default function ProfilePage() {
   const isAuthenticated = useUserStore((state) => state.isAuthenticated);
   const user = useUserStore((state) => state.user);
   const [currentView, setCurrentView] = useState<any>(IComponents.WhatToday);
-
+  const [myCourse, setMyCourse] = useState<TOBE>(null);
   if (!user) return null;
   console.log("(((((((((", currentView);
 
+  const hanldeMyCourse = (course:TOBE) => {
+    setMyCourse(course);
+  };
   return (
     <div>
       {/* <NavBar /> */}
@@ -36,7 +40,7 @@ export default function ProfilePage() {
             currentView={currentView}
           />
           {currentView === "course" ? (
-            <ProgressTrack />
+            <ProgressTrack hanldeMyCourse={hanldeMyCourse} />
           ) : currentView === "LeaderBoard" ? (
             <LeaderBoard />
           ) : currentView === "Submission" ? (

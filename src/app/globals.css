@@ -105,4 +105,10 @@
     background: #555; 
   }
 
+  .custom-ace-editor .ace_gutter {
+    background-color: transparent !important;
+  }
   
+  .custom-ace-editor .ace_gutter-cell {
+    color: #888 !important;
+  }

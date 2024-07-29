@@ -25,7 +25,7 @@ const SubmissionModal = ({setIsOpen,isOpen,problemName}: Props) => {
         <DialogHeader>
           <DialogTitle>Contgratulation 🎉</DialogTitle>
           <DialogDescription>
-            <button onClick={()=> router.push(`/problems/${problemName}/submission`)} className="px-4 py-1.5 rounded-md bg-gray-900 text-white ">
+            <button onClick={()=> router.push(`/problems/${problemName}/submission`)} className="px-4 py-1.5 rounded-md bg-[#20B486] text-white ">
               See All Submissiom
             </button>
           </DialogDescription>

@@ -498,3 +498,31 @@ export const getInstructorTrendCourse = async (id?: TOBE) => {
     throw NewError(error);
   }
 };
+
+export const getMylikesHelper = async (id?: TOBE) => {
+  try {
+    const response = await courseService.getMylikes({}, { id });
+    if (response.status === 200 || 201) {
+      return {
+        success: true,
+        payload: response.data,
+      };
+    }
+  } catch (error: TOBE) {
+    throw NewError(error);
+  }
+};
+
+export const getTrendCoursesHelper = async (id?: TOBE) => {
+  try {
+    const response = await courseService.getTrendingCourses({}, {  });
+    if (response.status === 200 || 201) {
+      return {
+        success: true,
+        payload: response.data,
+      };
+    }
+  } catch (error: TOBE) {
+    throw NewError(error);
+  }
+};

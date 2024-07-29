@@ -1,11 +1,10 @@
-
-
+import { TOBE } from "@/types/constants/Tobe";
 import { jsPDF } from "jspdf";
 import "jspdf-autotable";
 
 export function Certificate(
-  name: string,
-  courseName: string,
+  name: TOBE,
+  courseName: TOBE,
   date: any,
   download = true
 ) {
@@ -25,8 +24,8 @@ export function Certificate(
     doc.text("CONGRATULATIONS", 148.5, 50, { align: "center" });
 
     doc.setFontSize(30);
-    doc.setTextColor(0, 0, 0); // Black color
-    doc.setFont("helvetica", "bold"); // Set font to helvetica bold
+    doc.setTextColor(0, 0, 0);
+    doc.setFont("helvetica", "bold");
     doc.text(name, 148.5, 100, { align: "center" });
 
     doc.setFontSize(20);

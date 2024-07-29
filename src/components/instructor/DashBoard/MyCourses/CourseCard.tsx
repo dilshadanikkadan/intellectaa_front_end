@@ -9,26 +9,28 @@ interface props {
 }
 const CourseCard = ({ className, item }: props) => {
   return (
-    <Card className={` md:w-[23%] min-h-80 ${className} `}>
-      <CardTitle className="flex text-xl flex-col mt-3 gap-2 w-[90%] mx-auto">
-        <img
-          src={item?.courseTitle?.thumbnail}
-          className="w-full object-cover"
-          alt=""
-        />
-        <h3>{item?.courseTitle?.title}</h3>
-      </CardTitle>
-      <CardContent>
-        <p className="line-clamp-2">{item?.courseTitle?.description}</p>
-      </CardContent>
-      <CardFooter>
-        <p>
-          Enrolled By{" "}
-          <span className="font-semibold">{item?.enrollmentCount}</span>
-          <PeopleIcon fontSize="inherit" className="ml-2 text-[1rem]" />
-        </p>
-      </CardFooter>
-    </Card>
+    <>
+      <Card className={` md:w-[23%] min-h-80 ${className} `}>
+        <CardTitle className="flex text-xl flex-col mt-3 gap-2 w-[90%] mx-auto">
+          <img
+            src={item?.courseTitle?.thumbnail}
+            className="w-full object-cover"
+            alt=""
+          />
+          <h3>{item?.courseTitle?.title}</h3>
+        </CardTitle>
+        <CardContent>
+          <p className="line-clamp-2">{item?.courseTitle?.description}</p>
+        </CardContent>
+        <CardFooter>
+          <p>
+            Enrolled By{" "}
+            <span className="font-semibold">{item?.enrollmentCount}</span>
+            <PeopleIcon fontSize="inherit" className="ml-2 text-[1rem]" />
+          </p>
+        </CardFooter>
+      </Card>
+    </>
   );
 };
 

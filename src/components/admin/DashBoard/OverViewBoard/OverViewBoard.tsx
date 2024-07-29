@@ -25,30 +25,32 @@ const OverViewBoard = () => {
       <div className="flex w-full">
         <div className="w-[22%]  border-l-2 border-gray-600 h-20 flex items-center gap-8   ">
           <div className="ml-10 flex gap-2 flex-col text-gray-700">
-            <h3 className="font-semibold ml-3">Impression</h3>
-            <span className="ml-3 font-semibold">456</span>
+            <h3 className="font-semibold ml-3">Total Users</h3>
+            <span className="ml-3 font-semibold">{userCount}</span>
           </div>
           <CiWavePulse1 className="text-5xl ml-2 " />
         </div>
 
         <div className="w-[22%]  border-l-2 border-gray-600 h-20 flex items-center gap-8   ">
           <div className="ml-10 flex gap-2 flex-col text-gray-700">
-            <h3 className="font-semibold ml-3">Impression</h3>
-            <span className="ml-3 font-semibold">456</span>
+            <h3 className="font-semibold ml-3">Total Profit</h3>
+            <span className="ml-3 font-semibold">
+              {currentUser?.payload?.profit}
+            </span>
           </div>
           <CiWavePulse1 className="text-5xl ml-2 " />
         </div>
         <div className="w-[22%]  border-l-2 border-gray-600 h-20 flex items-center gap-8   ">
           <div className="ml-10 flex gap-2 flex-col text-gray-700">
-            <h3 className="font-semibold ml-3">Impression</h3>
-            <span className="ml-3 font-semibold">456</span>
+            <h3 className="font-semibold ml-3">Total Instrcutor</h3>
+            <span className="ml-3 font-semibold">{instructorCount}</span>
           </div>
           <CiWavePulse1 className="text-5xl ml-2 " />
         </div>
         <div className="w-[22%]  border-l-2 border-gray-600 h-20 flex items-center gap-8   ">
           <div className="ml-10 flex gap-2 flex-col text-gray-700">
-            <h3 className="font-semibold ml-3">Impression</h3>
-            <span className="ml-3 font-semibold">456</span>
+            <h3 className="font-semibold ml-3">Total Courses</h3>
+            <span className="ml-3 font-semibold">{instructorCount}</span>
           </div>
           <CiWavePulse1 className="text-5xl ml-2 " />
         </div>
@@ -58,21 +60,25 @@ const OverViewBoard = () => {
         <Card className="w-[30%]  h-32 mb-5">
           <CardHeader>
             <CardTitle>Profit</CardTitle>
-            <CardContent>$ {currentUser?.payload?.profit}</CardContent>
+            <CardContent className="font-semibold">
+              $ {currentUser?.payload?.profit}
+            </CardContent>
           </CardHeader>
         </Card>
 
         <Card className="w-[30%]  h-32 mb-5 ">
           <CardHeader>
             <CardTitle>Users</CardTitle>
-            <CardContent>{userCount}</CardContent>
+            <CardContent className="font-semibold">{userCount}</CardContent>
           </CardHeader>
         </Card>
 
         <Card className="w-[30%]  h-32 mb-5">
           <CardHeader>
             <CardTitle>Total Course</CardTitle>
-            <CardContent>{instructorCount}</CardContent>
+            <CardContent className="font-semibold">
+              {instructorCount}
+            </CardContent>
           </CardHeader>
         </Card>
       </div>

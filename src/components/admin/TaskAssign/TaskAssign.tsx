@@ -36,7 +36,10 @@ const TaskAssign = () => {
   const { mutate: taskAssignMutate } = useMutation({
     mutationFn: dailyTaskHelper,
     onSuccess: (data) => {
-      setSuccess("task is added");
+      setSuccess("Task is added");
+      setTimeout(() => {
+        setSuccess("");
+      }, 3000);
     },
     onError: (err: any) => {
       setError(err);
@@ -84,7 +87,7 @@ const TaskAssign = () => {
             Assigned Task For Today
           </h3>
 
-          {success && <p className="my-2">{success}</p>}
+          {success && <p className="py-2 text-green-500">{success}</p>}
           <Card className="h-40 w-[85%]">
             <div className="w-[90%] mx-auto flex mt-3 flex-wrap gap-5">
               {selectedTask?.map((problem: string, i: number) => (

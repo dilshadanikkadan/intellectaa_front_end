@@ -3,7 +3,7 @@ import React from "react";
 
 const QuateBanner = () => {
   return (
-    <div className="flex  mt-20">
+    <div data-aos="fade-up" className="flex  mt-20">
       <ContainerFuild>
         <div className="bg-[#F0FAF7] h-[60vh]">
           <p className="mt-20 text-4xl font-medium text-center w-[80%] mx-auto">

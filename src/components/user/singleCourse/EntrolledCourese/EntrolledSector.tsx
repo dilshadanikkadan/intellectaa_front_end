@@ -157,16 +157,12 @@ const EnrolledSector = ({ course, myCourse }: TOBE) => {
         )}
         <button
           onClick={() => {
-            Certificate(
-              "John Doe",
-              "Advanced React Development",
-              "July 23, 2024"
-            );
+            Certificate(user?.username, current?.title, "July 30, 2024");
           }}
-          className="px-3 py-2 bg-teal-700 rounded-md text-white"
+          className="mt-6 w-full py-3 px-4 bg-[#20B486] text-white rounded-md flex items-center justify-center"
         >
           {" "}
-          Download
+          Certificate
         </button>
       </div>
     </div>

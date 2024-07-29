@@ -136,11 +136,11 @@ const ChatSideBar = ({
   };
   return (
     <div
-      className={`flex w-full flex-[2] overflow-y-auto ${
+      className={`flex w-full flex-[2]  ${
         cuurrentChat && "hidden md:flex"
       }  h-[80vh]`}
     >
-      <Card className="w-full rounded-none">
+      <Card className="w-full rounded-none  overflow-y-auto ">
         <div className="wrapper w-[90%] mx-auto">
           <div className="searc mt-3 pb-2">
             <Input
@@ -150,7 +150,7 @@ const ChatSideBar = ({
           </div>
           {myChatrooms?.map((chat: TOBE, i: number) => (
             <div
-            key={i}
+              key={i}
               onClick={() =>
                 handleCurrentRoom(
                   chat?._id,
@@ -161,7 +161,8 @@ const ChatSideBar = ({
                       chat?.roomProfile ||
                       chat?.participantDetails?.find(
                         (x: TOBE) => x?._id !== user?._id
-                      )?.profile || '/avt.png',
+                      )?.profile ||
+                      "/avt.png",
                     roomName: chat?.roomName,
                   }
                 )
@@ -178,7 +179,8 @@ const ChatSideBar = ({
                     chat?.roomProfile ||
                     chat?.participantDetails?.find(
                       (x: TOBE) => x?._id !== user?._id
-                    )?.profile || '/avt.png'
+                    )?.profile ||
+                    "/avt.png"
                   }
                   className="w-14 object-cover h-12 rounded-full"
                   alt=""

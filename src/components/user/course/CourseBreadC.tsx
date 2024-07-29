@@ -1,6 +1,6 @@
 import { ContainerFuild } from "@/styles/layouts/Wrappers";
 import Input from "@/styles/ui/Input";
-import React, { useState } from "react";
+import React, {  useState } from "react";
 import CategorySelector from "./utilComponents/CategorySelector";
 import LannguageSelector from "./utilComponents/LanguageSelector";
 interface Props {
@@ -10,7 +10,6 @@ interface Props {
 }
 const CourseBreadC = ({ onSearch, setCategory, setLanguage }: Props) => {
   const [searchTerm, setSearchTerm] = useState("");
-
   const handleInputChange = (e: any) => {
     setSearchTerm(e.target.value);
     onSearch(e.target.value);

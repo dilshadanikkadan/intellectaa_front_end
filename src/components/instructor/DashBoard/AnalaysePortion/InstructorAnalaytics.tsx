@@ -60,12 +60,14 @@ const InstructorAnalaytics = () => {
   }, [userDataAnalstics]);
 
   return (
+    <>
     <div>
       <p className="font-bold text-2xl mb-10 ">Course Analaytics</p>
       <Card className="w-full h-auto md:w-[75%] mt-10   px-2">
         <Bar data={userData} />
       </Card>
     </div>
+    </>
   );
 };
 

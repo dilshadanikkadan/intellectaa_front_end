@@ -126,6 +126,14 @@ const courseEndpoints = {
     method: "get" as const,
     path: "getInstructorTrendCourse/:id",
   },
+  getMylikes: {
+    method: "get" as const,
+    path: "getMylikes/:id",
+  },
+  getTrendingCourses: {
+    method: "get" as const,
+    path: "getTrendingCourses",
+  },
 };
 
 const courseService = createApiService("course", courseEndpoints);

@@ -10,7 +10,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Image from "next/image";
 import { TOBE } from "@/types/constants/Tobe";
 
-const ProgressTrack = () => {
+const ProgressTrack = ({ hanldeMyCourse }: { hanldeMyCourse: any }) => {
   const user = useUserStore((state) => state.user);
   const { data: MyEntroll, isLoading } = useQuery({
     queryFn: getMyEntrollHelper,

@@ -9,7 +9,7 @@ const GoogleForm = () => {
   const loginSuccess = useUserStore((state) => state.loginSuccess);
   const router = useRouter();
   return (
-    <main className="w-auto  md:mr-0 md:w-[63%] mx-auto">
+    <main className="w-auto  md:mr-0 md:w-[63%]">
       <GoogleLogin
         onSuccess={async (credentialResponse) => {
           console.log("_______________________");
