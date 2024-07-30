@@ -42,7 +42,7 @@ const LeaderBoard = () => {
                   alt=""
                 />
               </TableCell>
-              <TableCell className="font-medium p-2 text-nowrap   ">
+              <TableCell className="font-medium p-2 text-nowrap   text-[1rem] ">
                 {user?.userName}
               </TableCell>
               <TableCell className="font-medium p-2  ">

@@ -467,7 +467,7 @@ export const addCategoryHelper = async (payload?: TOBE) => {
       };
     }
   } catch (error: TOBE) {
-    throw NewError(error);
+    throw error.response.data.message;
   }
 };
 

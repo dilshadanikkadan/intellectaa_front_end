@@ -18,15 +18,23 @@ import { TOBE } from "@/types/constants/Tobe";
 
 const AddCategory = () => {
   const [title, setTitle] = useState<string>("");
+  const [errornew, setError] = useState<string>("");
 
   const queryClient = useQueryClient();
-  const { mutate: addMutate } = useMutation({
+  const { mutate: addMutate ,error} = useMutation({
     mutationFn: addCategoryHelper,
     onSuccess: (data) => {
       queryClient.invalidateQueries(["all category"] as TOBE);
     },
+    onError: (err:TOBE) => {
+      setError(err);
+    },
   });
   const handleAddCategory = () => {
+    if (title.trim() == "") {
+      return setError("can not be empty");
+    }
+
     addMutate({
       title,
     });
@@ -39,6 +47,9 @@ const AddCategory = () => {
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>AddCategory</DialogTitle>
+          {error || errornew &&(
+            <p className="text-red-500 py-1 text-sm capitalize">{error || errornew}</p>
+          )}
           <DialogDescription>
             Make changes to your Category here. Click save when you're done.
           </DialogDescription>
@@ -49,7 +60,10 @@ const AddCategory = () => {
               Category
             </Label>
             <Input
-              onChange={(e) => setTitle(e.target.value)}
+              onChange={(e) => {
+                setTitle(e.target.value);
+                setError("");
+              }}
               id="name"
               value={title}
               placeholder="Type here..."

@@ -15,7 +15,7 @@ const TopBarProfile: React.FC<Props> = ({ setCurrentView, currentView }) => {
     { id: "Submission", label: "Submission", icon: ChatIcon },
     { id: "course", label: "My Course", icon: LocalLibraryIcon },
     { id: "LeaderBoard", label: "Leaderboard", icon: LeaderboardIcon },
-    { id: "ChatRoom", label: "Chat Room", icon: ChatIcon },
+    // { id: "ChatRoom", label: "Chat Room", icon: ChatIcon },
   ];
 
   return (
