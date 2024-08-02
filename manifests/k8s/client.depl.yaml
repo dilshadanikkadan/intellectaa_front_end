@@ -15,9 +15,21 @@ spec:
       containers:
       - image: dilshadjr3312/intellectaa-client:latest
         name: intellectaa-client
-        envFrom:
-          - configMapRef:
-              name: client-configmap
+        ports:
+        - containerPort: 3000        
+        volumeMounts:
+        - mountPath: /app/.env.local
+          name: env-local
+          readOnly: true
+          subPath: .env.local
+      volumes:
+      - configMap:
+          defaultMode: 420
+          items:
+          - key: .env
+            path: .env.local
+          name: env-local
+        name: env-local
 ---
 apiVersion: v1
 kind: Service

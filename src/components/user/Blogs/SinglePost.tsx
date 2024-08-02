@@ -13,7 +13,7 @@ const SinglePost = () => {
   useEffect(() => {
     const handleGetBlogs = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/api/blogs/${id}`);
+        const res = await axios.get(`https://www.medifly.site/api/blogs/${id}`);
         if (res.status === 200 || res.status === 201) {
           setBlog(res.data);
         }

@@ -9,7 +9,7 @@
       apiClient = axios.create({
         baseURL: "https://www.medifly.site/api/",
         withCredentials: true,
-      });
+      }); 
     } else {
       apiClient = axios.create({
         baseURL: "https://www.medifly.site/api/",

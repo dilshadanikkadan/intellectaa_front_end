@@ -92,7 +92,8 @@ const CourseSinglePage = () => {
                   key={videoKey}
                   width={100}
                   height={50}
-                  src={getPublicId(videoSrc)}
+                  // src={getPublicId(videoSrc)}
+                  src={"https://res.cloudinary.com/dvqq5x5x6/video/upload/v1720097515/application/nxqhqddljasntvwxmhje.mp4"}
                   sourceTypes={["hls", "dash"]}
                   transformation={{ streaming_profile: "hd" }}
                 />

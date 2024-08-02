@@ -23,7 +23,7 @@ interface BlogResponse {
 
 const fetchBlogs = async ({ pageParam = 1 }): Promise<BlogResponse> => {
   const res = await axios.get<BlogResponse>(
-    `http://localhost:3000/api/blogs?page=${pageParam}&limit=4`
+    `https://www.medifly.site/api/blogs?page=${pageParam}&limit=4`
   );
   return res.data;
 };
