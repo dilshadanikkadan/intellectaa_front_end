@@ -33,7 +33,7 @@ const CategorySelector = ({ setCategory }: Props) => {
             All
           </SelectItem>
           {allCategory?.payload?.map((item: TOBE, i: TOBE) => (
-            <SelectItem value={item?.title}>{item?.title}</SelectItem>
+            <SelectItem key={i} value={item?.title}>{item?.title}</SelectItem>
           ))}
         </SelectContent>
       </Select>
