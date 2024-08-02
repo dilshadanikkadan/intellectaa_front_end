@@ -8,7 +8,7 @@ const OneToOne = () => {
         <div className="w-full flex flex-col md:flex-row">
 
         <div className="left flex-[1]">
-          <img src="/OneToOne.png" alt="oneToOne" />
+          <img src="/newOne.png" alt="oneToOne" />
         </div>
         <div className="right flex-[1] flex justify-center flex-col gap-7 ml-10  ">
           <h3 className="text-2xl font-semibold text-primary"><span className="text-[#2F327D]">One-on-One</span> Discussions</h3>

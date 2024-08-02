@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: intellectaa-client-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: intellectaa-client
+  template:
+    metadata:
+      labels:
+        app: intellectaa-client
+    spec:
+      containers:
+      - image: dilshadjr3312/intellectaa-client:latest
+        name: intellectaa-client
+        envFrom:
+          - configMapRef:
+              name: client-configmap
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: intellectaa-client-srv
+spec:
+  selector:
+    app: intellectaa-client
+  ports:
+  - protocol: TCP
+    port: 3001
+    targetPort: 3001
