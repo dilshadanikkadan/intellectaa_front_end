@@ -34,6 +34,8 @@ const CourseSinglePage = () => {
   const [videoKey, setVideoKey] = useState(0);
 
   useEffect(() => {
+    console.log("this is my cloud name",process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME);
+    
     if (course?.payload) {
       setCurrentView(course.payload);
       setVideoSrc(course.payload.trailer || course.payload.video);
