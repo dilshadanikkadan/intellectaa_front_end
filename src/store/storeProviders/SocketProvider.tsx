@@ -4,7 +4,7 @@ import { createContext, ReactNode, useEffect, useState } from "react";
 import io, { Socket } from "socket.io-client";
 import { useUserStore } from "./UseUserStore";
 
-const BACKEND_URL = "http://localhost:3008";
+const BACKEND_URL = "https://www.medifly.site/api/chat";
 
 interface SocketContextType {
   socket: Socket | null;
