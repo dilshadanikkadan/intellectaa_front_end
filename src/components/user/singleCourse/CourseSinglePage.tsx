@@ -89,18 +89,17 @@ const CourseSinglePage = () => {
                   Loading video...
                 </div>
               ) : (
-                <></>
-                // <CldVideoPlayer
-                //   poster={currentView?.thumbnail}
-                //   key={videoKey}
-                //   width={100}
-                //   height={50}
-                //   src={getPublicId(videoSrc)}
+                <CldVideoPlayer
+                  poster={currentView?.thumbnail}
+                  key={videoKey}
+                  width={100}
+                  height={50}
+                  src={getPublicId(videoSrc)}
                                   
-                //   sourceTypes={["hls", "dash"]}
-                //   transformation={{ streaming_profile: "hd" }}
+                  sourceTypes={["hls", "dash"]}
+                  transformation={{ streaming_profile: "hd" }}
                   
-                // />
+                />
               )}
             </Card>
             <WhatYouWillLearn />
