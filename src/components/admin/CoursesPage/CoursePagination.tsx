@@ -9,7 +9,7 @@ import {
   } from "@/components/ui/pagination"
   import { Button } from "@/components/ui/button"
 import { TOBE } from "@/types/constants/Tobe";
-  
+  //
   export function CoursePagination({ setPageNumber, currentPage, totalPages }: TOBE) {
     const handlePrevious = () => {
         
