@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en"  translate="no">
       <body className={inter.className}>
         <div className="flex max-w-[100vw] overflow-hidden ">
           {/* <AddProgressBar/> */}
