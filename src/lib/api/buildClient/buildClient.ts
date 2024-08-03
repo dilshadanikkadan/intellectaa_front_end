@@ -1,18 +1,18 @@
   import axios, { AxiosInstance } from "axios";
 
   const apiUrl = "/api";
-  export const  baseApi_ = 'https://www.medifly.site/api/'
+  export const  baseApi_ = 'https://medifly.site/api/'
   export const buildClient = (): AxiosInstance => {
     let apiClient;
     if (typeof window === "undefined") {
       console.log("🎇✨🧨🎇🎇🎊🎇+++++ IN SERVER +++🎇🎆🎈🎈🎈🎈🎈🎈🎈🎈🎈🎈🎈");
       apiClient = axios.create({
-        baseURL: "https://www.medifly.site/api/",
+        baseURL: "https://medifly.site/api/",
         withCredentials: true,
       }); 
     } else {
       apiClient = axios.create({
-        baseURL: "https://www.medifly.site/api/",
+        baseURL: "https://medifly.site/api/",
         withCredentials: true,
       });
     }
@@ -40,7 +40,7 @@
           try {
             
             const response = await axios.post(
-              "https://www.medifly.site/api/auth/refreshToken",
+              "https://medifly.site/api/auth/refreshToken",
               {},
               { withCredentials: true }
             );
