@@ -9,7 +9,7 @@ const MainBanner = () => {
     >
       <img
         className="w-40 absolute top-0 z-[-999] left-0 h-36 object-cover"
-        src="pattern.png"
+        src="newPattern.png"
         alt="pattern"
       />
       <div className="main w-[88%] mx-auto flex flex-col md:flex-row h-[75vh] mt-7 z-50">

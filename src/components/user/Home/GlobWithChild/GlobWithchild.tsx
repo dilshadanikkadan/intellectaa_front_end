@@ -10,7 +10,7 @@ const GlobWithchild = () => {
           <div className="w-full  flex items-center justify-center">
             <img
               data-aos="fade-up"
-              src="/childglob.png"
+              src="/newchildGlob.png"
               className="h-full w-[100% ] md:w-[70%] object-cover"
               alt=""
             />
