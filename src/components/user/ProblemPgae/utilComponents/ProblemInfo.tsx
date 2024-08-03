@@ -6,8 +6,8 @@ import DescriptionIcon from "@mui/icons-material/Description";
 
 const ProblemInfo = ({ readFile, testCase, outPut }: any) => {
   const { id }: any = useParams();
-  const readMd = readFile?.readMd.split("__").map((x: any) => x.trim());
-  const allOut = outPut?.expectedOut.split("__").map((x: any) => x.trim());
+  const readMd = readFile?.readMd?.split("__").map((x: any) => x.trim());
+  const allOut = outPut?.expectedOut?.split("__").map((x: any) => x.trim());
   const allTestCase = testCase?.testCases
     ?.split("__")
     .map((test: any) => test.trim());
@@ -23,7 +23,7 @@ const ProblemInfo = ({ readFile, testCase, outPut }: any) => {
       </div>
       <div className="wrapper w-[90%] mx-auto">
         <div className="info mt-10 flex flex-col gap-4">
-          <h3 className="text-xl font-semibold">1. {id.split("_") as any}</h3>
+          <h3 className="text-xl font-semibold">1. {id?.split("_") as any}</h3>
           {readMd?.map((item: any, i: number) => (
             <p key={i}>{item}</p>
           ))}

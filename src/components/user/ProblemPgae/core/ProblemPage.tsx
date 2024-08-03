@@ -20,7 +20,7 @@ const ProblemPage = () => {
     queryKey: ["code", id, selectedLanguage],
   });
 
-  console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^",selectedLanguage);
+  console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^ this is code",currentCode);
   
   return (
     <div className="w-[90%] mx-auto flex flex-col md:flex-row gap-3 mt-5">
