@@ -37,7 +37,7 @@ const PaymentPacks = () => {
       }
 
       const response = await axios.post(
-        "http://localhost:5000/api/payment/stripeSession",
+        "https://www.medifly.site/api/payment/stripeSession",
         {
           userId: user?._id,
           courseId: course?.payload._id,
