@@ -3,7 +3,6 @@
 import Aos from "aos";
 import { useEffect, useState } from "react";
 import "aos/dist/aos.css";
-import { SessionProvider } from "next-auth/react";
 import { BlockedUserProtect } from "@/utils/protected/BlockedUserProtect";
 import { SocketProvider } from "@/store/storeProviders/SocketProvider";
 
@@ -30,7 +29,6 @@ export default function Template({
   }, [isClient]);
   return (
     <>
-      <SessionProvider>
         {isClient && (
           <BlockedUserProtect>
             <SocketProvider>
@@ -38,7 +36,6 @@ export default function Template({
             </SocketProvider>
           </BlockedUserProtect>
         )}
-      </SessionProvider>
     </>
   );
 }

@@ -88,7 +88,7 @@ const ActivityTracker: React.FC = () => {
       </CardHeader>
       <CardContent>
         <div className="flex flex-wrap gap-1">
-          {Object.entries(activityData).map(([date, activity]) => (
+          {Object.entries(activityData)?.map(([date, activity]) => (
             <ActivitySquare key={date} date={date} activity={activity} />
           ))}
         </div>
