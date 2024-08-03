@@ -20,13 +20,11 @@ export default function RootLayout({
 }>) {
   return (
     <>
-    <html lang="en"  translate="no">
-      <body className={inter.className}>
+   
         <NavBar />
         <AuthProtected>{children}</AuthProtected>
         <Foooter />
-      </body>
-    </html>
+  
     </>
   );
 }

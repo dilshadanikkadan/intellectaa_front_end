@@ -21,8 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <>
-    <html lang="en"  translate="no">
-      <body className={inter.className}>
+   
         <div className="flex max-w-[100vw] overflow-hidden ">
           {/* <AddProgressBar/> */}
           <InstructorSideNav />
@@ -31,8 +30,7 @@ export default function RootLayout({
             {children}
           </main>
         </div>
-      </body>
-    </html>
+
     </>
   );
 }

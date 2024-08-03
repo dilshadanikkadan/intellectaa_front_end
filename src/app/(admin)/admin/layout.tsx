@@ -19,8 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <>
-    <html lang="en">
-      <body className={inter.className}>
+ 
         <div className="flex">
           <AdminSideNav />
           <main className="flex-grow ml-[5%] transition-all duration-300">
@@ -28,8 +27,7 @@ export default function RootLayout({
             {children}
           </main>
         </div>
-      </body>
-    </html>
+
     </>
   );
 }

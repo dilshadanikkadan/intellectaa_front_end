@@ -18,13 +18,11 @@ export default function RootLayout({
 }>) {
   return (
     <>
-    <html lang="en"  translate="no">
-      <body className={inter.className}>
+    
         <NavBar  />
 
         {children}
-      </body>
-    </html>
+  
     </>
   );
 }
