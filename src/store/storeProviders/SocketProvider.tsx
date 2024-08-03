@@ -4,7 +4,7 @@ import { createContext, ReactNode, useEffect, useState } from "react";
 import io, { Socket } from "socket.io-client";
 import { useUserStore } from "./UseUserStore";
 
-const BACKEND_URL = "https://medifly.site";
+const BACKEND_URL = "https://www.medifly.site";
 
 interface SocketContextType {
   socket: Socket | null;
