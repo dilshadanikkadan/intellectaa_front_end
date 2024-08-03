@@ -2,13 +2,12 @@
 import { logoutHelper } from "@/helpers/api/auth/authApiHelper";
 import { User, useUserStore } from "@/store/storeProviders/UseUserStore";
 import { useMutation } from "@tanstack/react-query";
-import { signOut, useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { ModeToggle } from "./DarkModeBtn";
 
 const SignupButton = () => {
-  const { data: session, status } = useSession();
   const { loginSuccess, logoutSuccess, isAuthenticated ,setIsAuthMode,googleAuthSucess,user} = useUserStore();
   const router = useRouter();
 
@@ -25,15 +24,7 @@ const SignupButton = () => {
     }
   });
 
-  useEffect(() => {
-    if (status === 'authenticated' && session?.user) {
-      setIsAuthMode()
-      googleAuthSucess(session.user as User);
-    }
-    else if (status === "unauthenticated" && session) {
-      logoutSuccess();
-   }
-  }, [status, session, googleAuthSucess]);
+
 
   const handleLogout = async () => {
     logoutSuccess(); 

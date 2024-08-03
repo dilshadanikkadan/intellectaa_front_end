@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { useUserStore } from "@/store/storeProviders/UseUserStore";
 const GoogleForm = () => {
   const setOAuthMode = useUserStore((state) => state.setOAuthMode);

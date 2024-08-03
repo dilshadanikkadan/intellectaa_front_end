@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import authService from "@/lib/api/auth";
 import { useUserStore } from "@/store/storeProviders/UseUserStore";
 import { currentUserHelper } from '@/helpers/api/auth/authApiHelper';
-import { signOut, useSession } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
 
 interface BlockedUserProtectProps {
   children: React.ReactNode;
@@ -17,7 +17,6 @@ export const BlockedUserProtect: React.FC<BlockedUserProtectProps> = ({ children
   const router = useRouter();
   const userExist = useUserStore(state => state.user);
   const logoutSuccess = useUserStore(state => state.logoutSuccess);
-  const { data: session, status } = useSession();
 
   useEffect(() => {
     const checkUserStatus = async () => {

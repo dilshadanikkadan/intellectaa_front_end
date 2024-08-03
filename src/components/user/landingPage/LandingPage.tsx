@@ -13,11 +13,9 @@ import GlobWithchild from "@/components/user/Home/GlobWithChild/GlobWithchild";
 import Foooter from "@/components/common/Foooter";
 import { Wrapper } from "@/styles/layouts/Wrappers";
 import { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
 import { ThemeProvider } from "@/store/storeProviders/ThemeProvider";
 
 export default function LandingPageView() {
-  const { data: session, status } = useSession();
   const {
     isAuthenticated,
     loginSuccess,

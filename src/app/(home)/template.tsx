@@ -3,7 +3,7 @@
 import Aos from "aos";
 import { useEffect, useState } from "react";
 import "aos/dist/aos.css";
-import { SessionProvider, useSession } from "next-auth/react";
+import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "@/store/storeProviders/ThemeProvider";
 import dynamic from "next/dynamic";
 import { useUserStore } from "@/store/storeProviders/UseUserStore";
