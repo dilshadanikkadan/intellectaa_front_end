@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import authService from "@/lib/api/auth";
 import { useUserStore } from "@/store/storeProviders/UseUserStore";
 import { currentUserHelper } from '@/helpers/api/auth/authApiHelper';
-import { signOut } from 'next-auth/react';
 
 interface BlockedUserProtectProps {
   children: React.ReactNode;
@@ -28,15 +27,12 @@ export const BlockedUserProtect: React.FC<BlockedUserProtectProps> = ({ children
         const user = await currentUserHelper({
           email:userExist.email
         })
-        // console.log("============================&&&&&&&&&",user?.payload);
         if (user?.payload.isBlocked) {
           setIsBlocked(true);
           router.push('/login');
           await authService.logout();
           logoutSuccess() 
-          if(status === "authenticated"){
-            await signOut({ redirect: false }); 
-          }
+
         }
       } catch (error) {
         console.error('Error checking user status:', error);
