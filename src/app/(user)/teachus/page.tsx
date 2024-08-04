@@ -7,11 +7,9 @@ import TachUsBreakcrumbs from "@/components/user/teachus/TachUsBreakcrumbs";
 const page = () => {
   return (
     <>
-      <NavBar />
       <TachUsBreakcrumbs />
       <ApplyDoctor />
       <HowToApply />
-      <Foooter />
     </>
   );
 };

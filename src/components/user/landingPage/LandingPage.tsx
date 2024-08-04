@@ -12,10 +12,12 @@ import WhyUs from "@/components/user/Home/whyUs/WhyUs";
 import GlobWithchild from "@/components/user/Home/GlobWithChild/GlobWithchild";
 import Foooter from "@/components/common/Foooter";
 import { Wrapper } from "@/styles/layouts/Wrappers";
-import { useEffect, useState } from "react";
 import { ThemeProvider } from "@/store/storeProviders/ThemeProvider";
+import { useTheme } from "next-themes";
+import { useEffect } from "react";
 
 export default function LandingPageView() {
+  
   const {
     isAuthenticated,
     loginSuccess,
@@ -24,6 +26,8 @@ export default function LandingPageView() {
     googleAuthSucess,
   } = useUserStore((state) => state);
 
+  
+  
   if (user) {
     return null;
   }

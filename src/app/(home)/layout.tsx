@@ -18,11 +18,13 @@ export default function RootLayout({
 }>) {
   return (
     <>
-    
-        <NavBar  />
-
-        {children}
-  
+      <html lang="en" suppressHydrationWarning>
+      <body className={inter.className}>
+   
+          <NavBar />
+          {children}
+      </body>
+    </html>
     </>
   );
 }

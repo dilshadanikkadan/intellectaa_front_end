@@ -7,7 +7,6 @@ import React, { useState, useEffect } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import { useUserStore } from "@/store/storeProviders/UseUserStore";
-
 const SignupButton = dynamic(() => import("./clientUi/SignupButton"), {
   ssr: false,
 });
