@@ -48,7 +48,7 @@ const loginSuccess = useUserStore(state=> state.loginSuccess)
       }
     }
   });
-
+//
   const onSubmit = async (data: InstructorFormData) => {
     console.log(data);
     if (!isChecked) return setIsCheckError("Please agree to the terms and conditions");
