@@ -28,9 +28,9 @@ const OtpForm = () => {
     mutationFn: verifyOtpHelper,
     onSuccess: (data) => {
       if (data?.success) {
-        router.replace("/");
+        loginSuccess(data.payload.success)  
         setIsAuth();
-        loginSuccess(data.payload)  
+        router.replace("/");
       }
       console.log(data);
     },
