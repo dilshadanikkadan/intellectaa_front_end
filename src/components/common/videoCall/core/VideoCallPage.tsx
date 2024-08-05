@@ -182,7 +182,7 @@ const VideoCallPage = () => {
 
     await new Promise((resolve) => setTimeout(resolve, 100));
 
-    router.push(`/courses/${id}/chat`);
+    router.replace(`/courses/${id}/chat`);
   };
   console.log("_________________________________");
   console.log(callerSignal);

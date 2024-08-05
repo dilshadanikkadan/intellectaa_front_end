@@ -12,7 +12,6 @@ export default function Template({
   children: React.ReactNode | any;
 }) {
   const [isClient, setIsClient] = useState(false);
-
   useEffect(() => {
     setIsClient(true);
   }, []);

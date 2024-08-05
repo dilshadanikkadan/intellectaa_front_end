@@ -30,7 +30,7 @@ const ChatSector = () => {
         setCallerSignal(data.signal);
       });
       setIncomingCall(true);
-      router.push(`/courses/${id}/chat/videoCall`);
+      router.replace(`/courses/${id}/chat/videoCall`);
     });
   }, [socket]);
 

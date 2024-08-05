@@ -5,13 +5,13 @@ import React from "react";
 
 const ApplicationButton = () => {
   const router = useRouter();
-  const isAuthenticated = useUserStore(state=> state.isAuthenticated)
+  const user = useUserStore(state=> state.user)
   return (
     <>
     
       <button
         onClick={() => {
-          if(isAuthenticated){
+          if(user){
             router.push("/teachus/application")
           }else{
             router.push("/login")

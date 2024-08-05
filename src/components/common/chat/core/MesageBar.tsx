@@ -17,7 +17,7 @@ import ReplyMessage from "../utilComponents/ReplyMessage";
 import ForwardMessages from "../utilComponents/ForwardMessages";
 import Camera from "../utilComponents/Camera";
 import VideocamIcon from "@mui/icons-material/Videocam";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import VoiceMessage from "../utilComponents/voiceMessage";
 import { TOBE } from "@/types/constants/Tobe";
 import { currentUserHelper } from "@/helpers/api/auth/authApiHelper";
@@ -33,6 +33,7 @@ const MesageBar = ({
   currentChatMembersName,
   cuurentRoom,
 }: Props) => {
+  const {id} = useParams()
   const [messages, setMessages] = useState<TOBE>([]);
   const router = useRouter();
   const { socket, rooms, onlineUsers } = useContext(SocketContext);
@@ -167,7 +168,7 @@ const MesageBar = ({
               <VideocamIcon
                 onClick={() =>
                   router.push(
-                    `/courses/66915ba51b8371f06fcddb22/chat/videoCall`
+                    `/courses/${id || "66915ba51b8371f06fcddb22"}/chat/videoCall`
                   )
                 }
                 fontSize="large"

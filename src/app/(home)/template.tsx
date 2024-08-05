@@ -14,7 +14,7 @@
 
   export default function Template({ children }: { children: React.ReactNode }) {
     const [isClient, setIsClient] = useState(false);
-    const isAuthenticated = useUserStore((state) => state.isAuthenticated);
+    const user = useUserStore((state) => state.user);
 
     useEffect(() => {
       setIsClient(true);
@@ -23,10 +23,10 @@
 
     return (
       <>
-        {isClient && !isAuthenticated && <ParticlesComponent id="particlejs" />}
+        {isClient && !user && <ParticlesComponent id="particlejs" />}
         <div
           className={`relative z-10 ${
-            isAuthenticated ? "bg-white text-black" : ""
+            user ? "bg-white text-black" : ""
           }`}
         >
           {children}

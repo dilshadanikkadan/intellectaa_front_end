@@ -32,6 +32,7 @@ const currentUser = useUserStore(state=> state.user)
       if (data?.success) {
         console.log("Logout successful");
         await handleLogout();
+        router.push("/");
       }
     },
     onError: (error) => {
@@ -59,13 +60,7 @@ const currentUser = useUserStore(state=> state.user)
         </>
       ) : (
         <>
-          {/* <button
-          onClick={() => logoutMutate()}
-          disabled={isLoggingOut}
-          className="text-white bg-[#20B486] px-7 py-[6px]"
-          >
-          {isLoggingOut ? 'Logout' : 'Logout'}
-        </button> */}
+     
                <TooltipProvider>
             <Tooltip>
               <TooltipTrigger>
