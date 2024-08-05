@@ -6,11 +6,26 @@ import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { ModeToggle } from "./DarkModeBtn";
+import { FaRegUser } from "react-icons/fa";
+import { CiLogout } from "react-icons/ci";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const SignupButton = () => {
-  const { loginSuccess, logoutSuccess, isAuthenticated ,setIsAuthMode,googleAuthSucess,user} = useUserStore();
+  const {
+    loginSuccess,
+    logoutSuccess,
+    isAuthenticated,
+    setIsAuthMode,
+    googleAuthSucess,
+    user,
+  } = useUserStore();
   const router = useRouter();
-
+const currentUser = useUserStore(state=> state.user)
   const { mutate: logoutMutate, isPending: isLoggingOut } = useMutation({
     mutationFn: logoutHelper,
     onSuccess: async (data) => {
@@ -21,38 +36,62 @@ const SignupButton = () => {
     },
     onError: (error) => {
       console.error("Logout failed", error);
-    }
+    },
   });
 
-
-
   const handleLogout = async () => {
-    logoutSuccess(); 
-    await signOut({ redirect: false }); 
-    router.push("/"); 
+    logoutSuccess();
+    await signOut({ redirect: false });
+    router.push("/");
   };
 
   return (
-    <div className="flex gap-5"> 
+    <div className="flex gap-5 items-center">
       {!user ? (
-        <button
+        <>
+          <button
           onClick={() => router.push("/signup")}
           className="text-white bg-[#20B486] px-7 py-[6px]"
-        >
+          >
           Sign Up
         </button>
+  
+        </>
       ) : (
-        <button
+        <>
+          {/* <button
           onClick={() => logoutMutate()}
           disabled={isLoggingOut}
           className="text-white bg-[#20B486] px-7 py-[6px]"
-        >
+          >
           {isLoggingOut ? 'Logout' : 'Logout'}
-        </button>
+        </button> */}
+               <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger>
+                <FaRegUser className="text-[1.3rem]" />
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{currentUser?.username}</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger>
+          <CiLogout onClick={() => logoutMutate()} className="text-[1.3rem]" />
+              </TooltipTrigger>
+              <TooltipContent>
+                <p  >Logout</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </>
       )}
-      <div className="ml-10%">
+      {/* <div className="ml-10%">
         <ModeToggle />
-      </div>
+      </div> */}
     </div>
   );
 };

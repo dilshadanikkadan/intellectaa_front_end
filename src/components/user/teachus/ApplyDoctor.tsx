@@ -4,7 +4,7 @@ import ApplicationButton from "@/components/user/teachus/ApplicationButton";
 
 const ApplyDoctor = () => {
   return (
-    <div className="w-[70%] flex-col md:flex-row flex mx-auto mt-16 mb-10">
+    <div data-aos="fade-up" className="w-[70%] flex-col md:flex-row flex mx-auto mt-16 mb-10">
       <div className="left flex-[1]">
         <img src="/teacher.png" className="w-[100%] md:w-[70%]" alt="" />
       </div>

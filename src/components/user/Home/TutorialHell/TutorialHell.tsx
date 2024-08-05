@@ -1,5 +1,6 @@
 "use client";
 import { ContainerFuild } from "@/styles/layouts/Wrappers";
+import Link from "next/link";
 import React from "react";
 import { useTypewriter } from "react-simple-typewriter";
 const TutorialHell = () => {
@@ -24,12 +25,12 @@ const TutorialHell = () => {
               </h3>
             </div>
             <div className="mt-5 flex gap-10">
-              <button className=" border border-white rounded-md py-1.5 px-5 md:px-16 md:py-4  ">
+              <Link target="_blank" href={'https://www.youtube.com/results?search_query=how+e+learning+works'} className=" border hover:bg-white hover:text-black transition-all duration-300 border-white rounded-md py-1.5 px-5 md:px-16 md:py-4  ">
                 Make It UnReal
-              </button>
-              <button className=" border border-white rounded-md py-1.5 px-5 md:px-16 md:py-4  ">
+              </Link>
+              <Link  href={'/signup'} className=" border hover:bg-white hover:text-black transition-all duration-300 border-white rounded-md py-1.5 px-5 md:px-16 md:py-4  ">
                 Sign Up
-              </button>
+              </Link>
             </div>
           </div>
         </div>

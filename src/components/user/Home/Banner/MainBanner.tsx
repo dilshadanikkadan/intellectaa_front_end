@@ -28,12 +28,12 @@ const MainBanner = () => {
           </p>
           <div className=" flex gap-9">
             <Button
-              className="bg-[#20B486] text-white px-7 py-3  rounded-md"
+              className="bg-[#20B486] hover:bg-[#4dddaf] hover:border-[#20B486] cursor-pointer transition-all duration-300  text-white px-7 py-3  rounded-md"
               value="Join Now"
             />
             <Button
               value="Play Video"
-              className="bg-[#D4D1FA] text-gray-700 px-7 py-3  rounded-md"
+              className="bg-[#D4D1FA] hover:bg-[#e3e2f3] hover:border-[#D4D1FA] cursor-pointer transition-all duration-300 text-gray-700 px-7 py-3  rounded-md"
             />
           </div>
         </div>
