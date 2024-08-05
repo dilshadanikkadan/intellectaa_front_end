@@ -184,6 +184,7 @@ const VideoCallPage = () => {
 
     router.replace(`/courses/${id}/chat`);
   };
+  //
   console.log("_________________________________");
   console.log(callerSignal);
   console.log("_________________________________");
