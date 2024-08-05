@@ -14,6 +14,8 @@ import OtpResent from "./OtpResent";
 const OtpForm = () => {
   const user = useUserStore((state) => state.user);
   const setIsAuth = useUserStore((state) => state.setIsAuthMode);
+  const loginSuccess = useUserStore((state) => state.loginSuccess);
+
   const [otp, setOtp] = useState<string>("");
   const router = useRouter();
 
@@ -27,6 +29,7 @@ const OtpForm = () => {
       if (data?.success) {
         router.replace("/");
         setIsAuth();
+        loginSuccess(data.payload)  
       }
       console.log(data);
     },
@@ -42,11 +45,11 @@ const OtpForm = () => {
 
   return (
     <>
-      <div className="h-[50vh] w-[34%] flex-col flex items-center mt-[5%] gap-3 shadow-xl">
+      <div className="h-[50vh] w-[90%] md:w-[34%] flex-col flex items-center mt-[5%] gap-3 shadow-sm md:shadow-lg">
         <h3 className="text-2xl font-[550] text-gray-800 mt-10">
           Email Verification
         </h3>
-        <p className="w-[70%] mx-auto text-center font-primary">
+        <p className="w-[70%] mx-auto text-center ">
           Enter a 4 digit verification code that was sent to your phone number
         </p>
         {error && (

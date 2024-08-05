@@ -19,10 +19,13 @@ const GoogleForm = () => {
           console.log(res?.payload.data);
           loginSuccess(res?.payload.data);
           router.replace("/");
+          
         }}
         onError={() => {
           console.log("Login Failed");
         }}
+        width="100%"
+        
       />
     </main>
   );

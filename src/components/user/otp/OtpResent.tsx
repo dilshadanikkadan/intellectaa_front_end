@@ -1,5 +1,6 @@
 "use client";
 import { resentOtpHelper } from "@/helpers/api/auth/authApiHelper";
+import { useEmailStore } from "@/store/storeProviders/UseEmailStore";
 import { useUserStore } from "@/store/storeProviders/UseUserStore";
 import { useMutation } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
@@ -13,17 +14,16 @@ type User = {
 
 const OtpResent = () => {
   const user = useUserStore((state) => state.user);
-  const [timeLeft, setTimeLeft] = useState(60); // 60 seconds = 1 minute
+  const currentUser = useEmailStore(state=> state.user)
+  const [timeLeft, setTimeLeft] = useState(60); 
   const [isDisabled, setIsDisabled] = useState(true);
 
   const { mutate: resentOtpMutate } = useMutation({
     mutationFn: resentOtpHelper,
     onSuccess: (data) => {
-      toast.success("OTP resent successfully!", {
-        position: "top-center",
-      });
+  
       if (data?.success) {
-        setTimeLeft(60); // Reset timer
+        setTimeLeft(60); 
         setIsDisabled(true);
       }
     },
@@ -40,8 +40,8 @@ const OtpResent = () => {
 
   const handleResent = () => {
     resentOtpMutate({
-      username: user?.username,
-      email: user?.email,
+      username: currentUser?.username,
+      email: currentUser?.email,
       password: "dilshad4321",
     });
   };

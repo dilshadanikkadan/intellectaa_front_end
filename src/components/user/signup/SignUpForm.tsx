@@ -19,6 +19,8 @@ import { useUserStore } from "@/store/storeProviders/UseUserStore";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import toast from "react-hot-toast";
+import { useEmailStore } from "@/store/storeProviders/UseEmailStore";
+import { PiSpinnerBold } from "react-icons/pi";
 const GoogleForm = dynamic(() => import("./GoogleForm"), { ssr: false });
 
 type FormData = z.infer<typeof SignUpValidationSchema>;
@@ -27,6 +29,7 @@ const SignUpForm = () => {
   const searchParams = useSearchParams();
   const errorMsg = searchParams.get("error");
   const loginSucess = useUserStore((state) => state.loginSuccess);
+  const setEmail = useEmailStore(state=> state.setEmail)
   const router = useRouter();
   const {
     register,
@@ -44,7 +47,8 @@ const SignUpForm = () => {
     mutationFn: signupHelper,
     onSuccess: (data) => {
       if (data?.success) {
-        loginSucess(data.payload);
+        // loginSucess(data.payload);
+        setEmail(data.payload)
         router.replace("/verifyEmail");
       }
     },
@@ -108,7 +112,7 @@ const SignUpForm = () => {
             >
               Sign Up
               {isPending && (
-                <DataSaverOffIcon className="text-white text-[1.2rem] ml-3 animate-spin" />
+                <PiSpinnerBold className="text-xl ml-2 animate-spin" />
               )}
             </button>
             <div className="flex text-[0.6rem] md:text-sm gap-5 mt-2 lowercase text-[#20B486] underline">

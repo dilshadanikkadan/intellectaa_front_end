@@ -35,7 +35,7 @@ const ForgotPasswordForm = () => {
     }
   };
   return (
-    <div className="flex w-[90%] md:w-[40%] justify-center mx-auto mt-10 pb-10 relative pb5  dark:bg-gray-900 z-50">
+    <div className="flex w-[90%]  md:w-[40%] justify-center mx-auto mt-10 pb-10 relative pb5  dark:bg-gray-900 z-[-100]">
       <img
         src="/BG.png"
         className="w-full h-32 object-cover absolute top-[-10%] rounded-lg dark:opacity-0"

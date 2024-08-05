@@ -23,7 +23,7 @@ const FormInstructor = ({ isChecked }: props) => {
   const [isCheckErr, setIsCheckError] = useState<string>("");
   const router = useRouter();
   const user = useUserStore((state) => state.user);
-
+const loginSuccess = useUserStore(state=> state.loginSuccess)
   const {
     register,
     handleSubmit,
@@ -40,6 +40,10 @@ const FormInstructor = ({ isChecked }: props) => {
     onSuccess: (data) => {
       console.log("+++++++++++++++", data);
       if (data?.success) {
+        loginSuccess({
+          ...user as any,
+          isInstructor:true
+        })
         router.push('/instructor');
       }
     }

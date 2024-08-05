@@ -29,10 +29,8 @@ const AdminLoginForm = () => {
   const { mutate: loginMutate, isPending,error } = useMutation({
     mutationFn: loginHelper,
     onSuccess: (data) => {
-      if (data?.success) {
         router.push("/admin");
-        loginSuccess(data.payload);
-      }
+        loginSuccess(data?.payload);
     },
     onError: (errors: string) => {
       toast.error(errors, {

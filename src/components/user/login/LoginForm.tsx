@@ -67,7 +67,7 @@ const LoginForm = () => {
                 Login
               </h3>
               <GoogleForm />
-              {error && <p className="text-red-500 mr-28 text-sm">{error}</p>}
+              {error && <p className="text-red-500 self-start ml-[18%] min-w-10 text-sm mt-1">{error} </p>}
               {loginUpData.map((input: any) => (
                 <div
                   key={input.name}

@@ -7,16 +7,40 @@ import PeopleIcon from "@mui/icons-material/People";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ChatIcon from "@mui/icons-material/Chat";
+import { useUserStore } from "@/store/storeProviders/UseUserStore";
+import { logoutHelper } from "@/helpers/api/auth/authApiHelper";
+import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 
 const InstructorSideNav = () => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const router = useRouter();
+  const {
+    logoutSuccess,
+  } = useUserStore();
 
+  const { mutate: logoutMutate, isPending: isLoggingOut } = useMutation({
+    mutationFn: logoutHelper,
+    onSuccess: async (data) => {
+      if (data?.success) {
+        console.log("Logout successful");
+        await handleLogout();
+        router.push("/");
+      }
+    },
+    onError: (error) => {
+      console.error("Logout failed", error);
+    },
+  });
+  const handleLogout = async () => {
+    logoutSuccess();
+    router.push("/");
+  };
   const navItems = [
     { icon: <DashboardIcon />, name: "Dashboard", href: "/instructor" },
     { icon: <PeopleIcon />, name: "My Courses", href: "/instructor/myCourses" },
     // { icon: <PeopleIcon />, name: "Students", href: "/instructor/students" },
     { icon: <ChatIcon />, name: "Messages", href: "/instructor/messages" },
-    { icon: <LogoutIcon />, name: "Logout", href: "/logout" },
   ];
 
   return (
@@ -45,6 +69,12 @@ const InstructorSideNav = () => {
               </div>
             </Link>
           ))}
+              <div>
+              <div onClick={handleLogout} className="flex gap-4 text-white py-3 px-6 rounded-lg mt-5 hover:bg-gray-500 transition-all duration-300 cursor-pointer">
+                <div className={isExpanded ? "" : "mx-auto"}><LogoutIcon /></div>
+                <h3 className={isExpanded ? "" : "hidden"}>Logout</h3>
+              </div>
+            </div>
         </nav>
       </div>
     </section>
