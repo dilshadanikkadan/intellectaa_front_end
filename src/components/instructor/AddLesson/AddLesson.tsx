@@ -169,7 +169,7 @@ const AddLesson = () => {
                     });
                   }}
                   placeholder={input.placeholder}
-                  className="pl-3 border-[1px] max-w-lg rounded-sm placeholder:text-gray-800 shadow-sm border-gray-300 w-[100%] h-10 mt-4 text-sm"
+                  className="pl-3 border-[1px] max-w-lg bg-white rounded-sm placeholder:text-gray-800 shadow-sm border-gray-300 w-[100%] h-10 mt-4 text-sm"
                 />
               </div>
             ))}

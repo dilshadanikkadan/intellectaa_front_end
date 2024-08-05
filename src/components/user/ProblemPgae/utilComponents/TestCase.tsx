@@ -83,7 +83,7 @@ const TestCase = ({
                 <div key={i}>
                   <div
                     onClick={() => setTestIndex(i)}
-                    className={`py-1.5 flex items-center px-3 cursor-pointer transition-all duration-200  ${
+                    className={`py-1.5 flex items-center px-3 bg-white cursor-pointer transition-all duration-200  ${
                       testIndex === i ? "bg-base-200" : ""
                     }  rounded-md`}
                   >

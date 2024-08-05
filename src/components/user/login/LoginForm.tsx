@@ -76,7 +76,7 @@ const LoginForm = () => {
                   <Input
                     {...register(input.name)}
                     type={`${input.name === "password" ? "password" : "text"}`}
-                    className="border-[1px] border-dotted border-[#20B486]  w-[88%] md:w-[65%] h-9  mt-4 text-sm"
+                    className="border-[1px] border-dotted border-[#20B486] bg-white  w-[88%] md:w-[65%] h-9  mt-4 text-sm"
                     placeholder={input.placeholder}
                     name={input.name}
                   />

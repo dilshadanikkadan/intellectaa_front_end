@@ -9,7 +9,7 @@ const AboutSection = () => {
     <ContainerFuild>
       <section data-aos="fade-up" className="w-full flex flex-col ">
         <div className="title ">
-          <h3 className="font-primary text-gray-600 text-center font-semibold text-3xl">
+          <h3 className=" text-gray-600 text-center font-semibold text-3xl">
             Learn More About Us
           </h3>
         </div>

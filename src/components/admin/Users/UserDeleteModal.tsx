@@ -47,7 +47,7 @@ const UserBlockModal: React.FC<ModalProps> = ({
       <button className="btn relative w-20 z-50" onClick={openModal}>
         {buttonText}
       </button>
-      <dialog id={id} className="modal">
+      <dialog id={id} className="modal bg-white">
         <div className="modal-box flex flex-col">
           <h3 className="font-bold text-lg">{title}</h3>
           <div className="py-4 text-center">{content}</div>

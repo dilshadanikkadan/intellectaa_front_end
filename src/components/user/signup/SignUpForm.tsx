@@ -94,7 +94,7 @@ const SignUpForm = () => {
                 <Input
                   {...register(input.name)}
                   type={`${input.name === "password" ? "password" : "text"}`}
-                  className="border-[1px] border-dotted border-[#20B486] dark:bg-gray-900 w-[88%] md:w-[65%] h-9  mt-4 text-sm"
+                  className="border-[1px] border-dotted bg-white border-[#20B486] dark:bg-gray-900 w-[88%] md:w-[65%] h-9  mt-4 text-sm"
                   placeholder={input.placeholder}
                   name={input.name}
                 />

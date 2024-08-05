@@ -7,8 +7,8 @@ const TopBar = () => {
   const user = useUserStore((state) => state.user);
   return (
     <div className="wrapper flex h-[10vh] md:h-[15vh]  w-[90%] md:w-[90%]  md:mx-auto    items-center">
-      <div className="center flex-[2] flex gap-6 text-[1.2rem]  font-primary text-gray-600"></div>
-      <div className="right flex-[1] flex justify-end text-[1.1rem]  font-primary">
+      <div className="center flex-[2] flex gap-6 text-[1.2rem]   text-gray-600"></div>
+      <div className="right flex-[1] flex justify-end text-[1.1rem]  ">
         {user?.isInstructor ? (
           <button
             onClick={() => router.push("/")}

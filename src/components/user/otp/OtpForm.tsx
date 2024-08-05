@@ -10,12 +10,13 @@ import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import React, { ReactNode, useState } from "react";
 import OtpResent from "./OtpResent";
+import { useEmailStore } from "@/store/storeProviders/UseEmailStore";
 
 const OtpForm = () => {
   const user = useUserStore((state) => state.user);
   const setIsAuth = useUserStore((state) => state.setIsAuthMode);
   const loginSuccess = useUserStore((state) => state.loginSuccess);
-
+  const currentUser = useEmailStore(state=> state.user)
   const [otp, setOtp] = useState<string>("");
   const router = useRouter();
 
@@ -38,7 +39,7 @@ const OtpForm = () => {
   const handleSubmit = () => {
     console.log("Submitted OTP:", otp);
     verifyOtpMutate({
-      email: user?.email,
+      email: currentUser?.email,
       otp,
     });
   };

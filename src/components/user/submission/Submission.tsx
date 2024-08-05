@@ -58,7 +58,7 @@ const Submission = () => {
               </div>
 
               <div>
-                <button className="mt-3 flex items-center bg-base-200 px-3 py-1.5 rounded-md">
+                <button className="mt-3 flex items-center  bg-base-200 px-3 py-1.5 rounded-md">
                   {submission?.likes?.includes(user?._id) ? (
                     <ThumbUpIcon
                       onClick={() => handleLikes(submission?._id)}

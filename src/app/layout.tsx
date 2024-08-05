@@ -20,7 +20,7 @@
   }>) {
     return (
       <html lang="en"  translate="no">
-        <body className={inter.className}>
+        <body className={`${inter.className} min-h-screen`}>
           <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string}>
             <ReactQueryClientProvider>
               <Toaster position="top-right" reverseOrder={false} />
