@@ -28,6 +28,7 @@ const InstructorSideNav = () => {
         router.push("/");
       }
     },
+    //
     onError: (error) => {
       console.error("Logout failed", error);
     },
