@@ -55,7 +55,7 @@ export async function middleware(request: NextRequest) {
         return NextResponse.redirect(new URL("/", request.url));
       }
     } catch (error) {
-      // console.error("Token verification failed:", error);
+      console.error("Token verification failed:", error);
       return NextResponse.redirect(new URL("/admin/login", request.url));
     }
   }

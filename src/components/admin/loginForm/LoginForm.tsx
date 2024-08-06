@@ -31,6 +31,8 @@ const AdminLoginForm = () => {
     mutationFn: loginHelper,
     onSuccess: (data) => {
       loginSuccess(data?.payload);
+      console.log("____________________________we reached heere",data?.payload);
+      
      setTimeout(() => {
       redirect('/admin')
      }, 1000);
