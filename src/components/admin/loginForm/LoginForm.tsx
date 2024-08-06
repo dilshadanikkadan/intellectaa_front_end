@@ -11,10 +11,11 @@ import DataSaverOffIcon from "@mui/icons-material/DataSaverOff";
 import Link from "next/link";
 import { useMutation } from "@tanstack/react-query";
 import { loginHelper } from "@/helpers/api/auth/authApiHelper";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import { PiSpinnerBold } from "react-icons/pi";
 import toast from "react-hot-toast";
 import { useUserStore } from "@/store/storeProviders/UseUserStore";
+import { redirect } from "next/navigation";
 type FormData = z.infer<typeof LoginValidationSchema>;
 const AdminLoginForm = () => {
   const {
@@ -31,7 +32,7 @@ const AdminLoginForm = () => {
     onSuccess: (data) => {
       loginSuccess(data?.payload);
      setTimeout(() => {
-      router.push("/admin");
+      redirect('/admin')
      }, 1000);
     },
     onError: (errors: string) => {
