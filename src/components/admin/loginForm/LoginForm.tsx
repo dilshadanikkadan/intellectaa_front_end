@@ -30,7 +30,9 @@ const AdminLoginForm = () => {
     mutationFn: loginHelper,
     onSuccess: (data) => {
       loginSuccess(data?.payload);
+     setTimeout(() => {
       router.push("/admin");
+     }, 1000);
     },
     onError: (errors: string) => {
       toast.error(errors, {
