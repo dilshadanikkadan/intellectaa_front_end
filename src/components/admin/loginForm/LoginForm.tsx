@@ -11,7 +11,7 @@ import DataSaverOffIcon from "@mui/icons-material/DataSaverOff";
 import Link from "next/link";
 import { useMutation } from "@tanstack/react-query";
 import { loginHelper } from "@/helpers/api/auth/authApiHelper";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { PiSpinnerBold } from "react-icons/pi";
 import toast from "react-hot-toast";
 import { useUserStore } from "@/store/storeProviders/UseUserStore";
