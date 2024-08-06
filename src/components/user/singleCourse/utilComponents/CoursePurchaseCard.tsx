@@ -7,7 +7,9 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import XIcon from "@mui/icons-material/X";
 import { useRouter } from "next/navigation";
 import { TOBE } from "@/types/constants/Tobe";
+import { useUserStore } from "@/store/storeProviders/UseUserStore";
 const CoursePurchaseCard = ({ item }: TOBE) => {
+  const user = useUserStore(state=> state.user)
   const router = useRouter()
   return (
     <Card className="w-[70vw] mt-5 md:mt-0 md:w-[20vw] pb-5">
@@ -17,7 +19,11 @@ const CoursePurchaseCard = ({ item }: TOBE) => {
           <p className="text-lg font-semibold">$ 799</p>
           <button onClick={(e)=> {
             e.preventDefault()
+           if(user){
             router.push(`/courses/${item?._id}/purchase`)
+           }else{
+            router.push(`/login`)
+           }
 
           }} className="w-full py-2 bg-[#20B486] rounded-md text-white mt-2">
            Buy Now
