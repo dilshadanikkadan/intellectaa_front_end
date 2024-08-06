@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <>
    
-        <div className="flex max-w-[100vw] min-h-screen overflow-hidden ">
+        <div className={`flex max-w-[100vw] min-h-screen overflow-hidden ${inter.className} `}>
           {/* <AddProgressBar/> */}
           <InstructorSideNav />
           <main className="flex-grow ml-[5%] transition-all duration-300">
