@@ -107,12 +107,12 @@ const SignUpForm = () => {
             ))}
             <button
               type="submit"
-              className="bg-[#20B486] text-white w-[88%] md:w-[65%] py-1.5 rounded-sm mt-4"
+              className="bg-[#20B486] text-white flex items-center justify-center w-[88%] md:w-[65%] py-1.5 rounded-sm mt-4"
               value="Register"
             >
               Sign Up
               {isPending && (
-                <PiSpinnerBold className="text-xl ml-2 animate-spin" />
+                <PiSpinnerBold className="text-xl ml-2  animate-spin" />
               )}
             </button>
             <div className="flex text-[0.6rem] md:text-sm gap-5 mt-2 lowercase text-[#20B486] underline">

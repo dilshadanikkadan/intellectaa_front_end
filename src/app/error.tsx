@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React, { useEffect } from 'react';
-import Link from 'next/link';
+import React, { useEffect } from "react";
+import Link from "next/link";
 
 interface ErrorProps {
   error: Error & { digest?: string };
@@ -10,7 +10,6 @@ interface ErrorProps {
 
 const Error: React.FC<ErrorProps> = ({ error, reset }) => {
   useEffect(() => {
-    // Log the error to an error reporting service
     console.error(error);
   }, [error]);
 
@@ -20,7 +19,9 @@ const Error: React.FC<ErrorProps> = ({ error, reset }) => {
         <h1 className="text-6xl font-bold text-gray-800 mb-4">Oops!</h1>
         <p className="text-xl text-gray-600 mb-8">Something went wrong</p>
         <p className="text-md text-gray-500 mb-8">
-          {process.env.NODE_ENV === 'development' ? error.message : 'An unexpected error occurred'}
+          {process.env.NODE_ENV === "development"
+            ? error.message
+            : "An unexpected error occurred"}
         </p>
         <div className="space-x-4">
           <button
@@ -29,19 +30,23 @@ const Error: React.FC<ErrorProps> = ({ error, reset }) => {
           >
             Try Again
           </button>
-          <Link 
-            href="/" 
+          <Link
+            href="/"
             className="px-6 py-3 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition-colors"
           >
             Go Home
           </Link>
         </div>
+        {process.env.NODE_ENV !== "production" && (
           <div className="mt-8">
-            <p className="text-sm text-gray-500">Error details (visible in development only):</p>
+            <p className="text-sm text-gray-500">
+              Error details (visible in development only):
+            </p>
             <pre className="mt-2 p-4 bg-gray-200 rounded-lg overflow-auto text-left">
               {error.stack}
             </pre>
           </div>
+        )}
       </div>
     </div>
   );

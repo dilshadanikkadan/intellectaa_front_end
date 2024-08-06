@@ -20,48 +20,50 @@ import { userPrfilePatchHelper } from "@/helpers/user/userApiHelper";
 import { TOBE } from "@/types/constants/Tobe";
 
 export function EditProfile() {
-  const user = useUserStore(state => state.user);
+  const user = useUserStore((state) => state.user);
   const [profileImage, setProfileImage] = useState(user?.profile || "/avt.png");
   const [username, setUsername] = useState(user?.username || "");
   const [firstName, setFirstName] = useState(user?.firstName || "");
   const [lastName, setLastaName] = useState(user?.lastaName || "");
   const [uploadProgress, setUploadProgress] = useState(0);
-const loginSucees = useUserStore(state=> state.loginSuccess)
-  const handleImageUpload = async (e:TOBE) => {
+  const [error, setError] = useState("");
+  const loginSucees = useUserStore((state) => state.loginSuccess);
+  const handleImageUpload = async (e: TOBE) => {
     const file = e.target.files[0];
     if (file) {
       const imageUrl = await UseCloudinaryImage(file, setUploadProgress);
       if (imageUrl) {
-        setProfileImage(imageUrl);  
+        setProfileImage(imageUrl);
       }
     }
   };
 
-  const {mutate:profileUpdateMutate,}= useMutation({
-    mutationFn:userPrfilePatchHelper,
-    onSuccess:(data)=>{
-         console.log("______________________________",data?.payload);
-         loginSucees(data?.payload)
-    }
-  })
+  const { mutate: profileUpdateMutate } = useMutation({
+    mutationFn: userPrfilePatchHelper,
+    onSuccess: (data) => {
+      console.log("______________________________", data?.payload);
+      loginSucees(data?.payload);
+    },
+  });
   const handleSaveChanges = () => {
     const updatedUser = {
       username,
       firstName,
       lastName,
-      profile:profileImage,
+      profile: profileImage,
     };
-
+    if (username.trim().length > 10) {
+      setError("UserName Cannot exceed 10 char");
+    }
     console.log({
       ...updatedUser,
-      userId:user?._id
+      userId: user?._id,
     });
-    
+
     profileUpdateMutate({
-        ...updatedUser,
-        userId:user?._id
-    })
-      
+      ...updatedUser,
+      userId: user?._id,
+    });
   };
 
   return (
@@ -75,6 +77,9 @@ const loginSucees = useUserStore(state=> state.loginSuccess)
           <DialogDescription>
             Make changes to your profile here. Click save when you're done
           </DialogDescription>
+          {error &&
+          <p className="text-red-500">{error}</p>
+          }
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
@@ -142,7 +147,9 @@ const loginSucees = useUserStore(state=> state.loginSuccess)
           </div>
         </div>
         <DialogFooter>
-          <Button type="submit" onClick={handleSaveChanges}>Save changes</Button>
+          <Button type="submit" onClick={handleSaveChanges}>
+            Save changes
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

@@ -193,7 +193,7 @@ const AddCourse = () => {
             name="price"
             placeholder="price"
             onChange={(e) => setKeyValue({ [e.target.name]: e.target.value })}
-            className="border-[1px] max-w-lg rounded-sm placeholder:text-gray-800 shadow-sm border-gray-300 w-[100%] h-10 mt-4 text-sm"
+            className="border-[1px] max-w-lg rounded-sm bg-white placeholder:text-gray-800 shadow-sm border-gray-300 w-[100%] h-10 mt-4 text-sm"
           />
         </div>
         <div className="w-10 h-10 ">

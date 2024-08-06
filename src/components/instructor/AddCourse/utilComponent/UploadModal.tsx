@@ -14,7 +14,7 @@ interface Props{
 }
   const UploadModal = ({percentage=0,isOpen,onOpenChange}:Props) => {
   return (
-    <Dialog open={isOpen} onOpenChange={onOpenChange}>
+    <Dialog  open={isOpen} onOpenChange={onOpenChange}>
     <DialogTrigger className="underline"></DialogTrigger>
     <DialogContent>
       <DialogHeader>
