@@ -15,7 +15,6 @@ import { useRouter } from "next/navigation";
 import { PiSpinnerBold } from "react-icons/pi";
 import toast from "react-hot-toast";
 import { useUserStore } from "@/store/storeProviders/UseUserStore";
-import { redirect } from "next/navigation";
 type FormData = z.infer<typeof LoginValidationSchema>;
 const AdminLoginForm = () => {
   const {
@@ -34,7 +33,8 @@ const AdminLoginForm = () => {
       console.log("____________________________we reached heere",data?.payload);
       
      setTimeout(() => {
-      redirect('/admin')
+      router.push('/admin')
+      window.location.href = '/admin';
      }, 1000);
     },
     onError: (errors: string) => {
