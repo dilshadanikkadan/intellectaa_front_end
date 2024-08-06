@@ -11,7 +11,7 @@ import LaptopChromebookIcon from '@mui/icons-material/LaptopChromebook';
 import { useMutation } from "@tanstack/react-query";
 import { logoutHelper } from "@/helpers/api/auth/authApiHelper";
 import { useUserStore } from "@/store/storeProviders/UseUserStore";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 const AdminSideNav = () => {
   const router = useRouter();
   const {
