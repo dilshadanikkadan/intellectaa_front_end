@@ -52,8 +52,8 @@ export function EditProfile() {
       lastName,
       profile: profileImage,
     };
-    if (username.trim().length > 10) {
-      setError("UserName Cannot exceed 10 char");
+    if (username.trim().length > 20) {
+      setError("UserName Cannot exceed 20 char");
     }
     console.log({
       ...updatedUser,
