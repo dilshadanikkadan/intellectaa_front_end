@@ -155,7 +155,7 @@ const MesageBar = ({
                       ?.filter(
                         (user: TOBE) => user._id !== currentUser?._id
                       )
-                      .map((user: TOBE, i: number) => (
+                      .slice(0,5).map((user: TOBE, i: number) => (
                         <p key={i} className="text-sm">
                           {user?.username} ,
                         </p>

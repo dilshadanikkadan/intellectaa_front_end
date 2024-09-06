@@ -1,18 +1,18 @@
   import axios, { AxiosInstance } from "axios";
 
   const apiUrl = "/api";
-  export const  baseApi_ = 'https://www.medifly.site/api/'
+  export const  baseApi_ = 'https://intellectaa-api-latest.onrender.com/api/'
   export const buildClient = (): AxiosInstance => {
     let apiClient;
     if (typeof window === "undefined") {
       console.log("🎇✨🧨🎇🎇🎊🎇+++++ IN SERVER +++🎇🎆🎈🎈🎈🎈🎈🎈🎈🎈🎈🎈🎈");
       apiClient = axios.create({
-        baseURL: "https://www.medifly.site/api/",
+        baseURL: "https://intellectaa-api-latest.onrender.com/api/",
         withCredentials: true,
       }); 
     } else {
       apiClient = axios.create({
-        baseURL: "https://www.medifly.site/api/",
+        baseURL: "https://intellectaa-api-latest.onrender.com/api/",
         withCredentials: true,
       });
     }

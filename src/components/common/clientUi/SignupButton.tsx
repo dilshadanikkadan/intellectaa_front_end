@@ -75,7 +75,10 @@ const currentUser = useUserStore(state=> state.user)
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger>
-          <CiLogout onClick={() => logoutMutate()} className="text-[1.3rem]" />
+          <CiLogout onClick={() => {
+            logoutMutate()
+            router.push("/");
+          }} className="text-[1.3rem]" />
               </TooltipTrigger>
               <TooltipContent>
                 <p  >Logout</p>

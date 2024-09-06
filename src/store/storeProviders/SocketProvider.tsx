@@ -4,7 +4,7 @@ import { createContext, ReactNode, useEffect, useState } from "react";
 import io, { Socket } from "socket.io-client";
 import { useUserStore } from "./UseUserStore";
 
-const BACKEND_URL = "https://www.medifly.site";
+const BACKEND_URL = "https://intellectaa-chat-latest.onrender.com";
 
 interface SocketContextType {
   socket: Socket | null;
