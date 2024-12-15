@@ -10,43 +10,25 @@ export async function middleware(request: NextRequest) {
   const token = request.cookies.get("token");
 
   if (pathname === "/signup" || pathname === "/login") {
-    // console.log('&&&&&&&&&&&&&&&&&&&&&&&& in signp middleware');
 
     if (token) {
       return NextResponse.redirect(new URL("/", request.url));
     }
     return NextResponse.next();
   }
-  // if (pathname.startsWith("/")) {
-  //   if (!token) {
-  //     return NextResponse.next();
-  //   }
-  //   const { payload } = await jwtVerify(
-  //     token?.value as string | Uint8Array,
-  //     JWT_SECRET
-  //   );
-  //   console.log(typeof Boolean(payload.isBlocked));
 
-  //   if (Boolean(payload.isBlocked)) {
-  //     console.log("entered to this page");
-  //     const response = NextResponse.redirect(new URL("/login", request.url));
-  //     response.cookies.delete("token");
-  //     return response;
-  //   }
-  // }
   if (pathname.startsWith("/admin") && pathname !== "/admin/login") {
     if (!token) {
       return NextResponse.redirect(new URL("/admin/login", request.url));
     }
 
-    // console.log("+++++++++", payload);
 
     try {
       const { payload } = await jwtVerify(
         token?.value as string | Uint8Array,
         JWT_SECRET
       );
-      // console.log("+++++++++++++++", payload);
+   
 
       const isAdmin = payload.isAdmin;
       const userId = payload.userId;
