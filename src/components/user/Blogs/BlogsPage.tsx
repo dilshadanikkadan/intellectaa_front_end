@@ -23,7 +23,7 @@ interface BlogResponse {
 
 const fetchBlogs = async ({ pageParam = 1 }): Promise<BlogResponse> => {
   const res = await axios.get<BlogResponse>(
-    `https://www.medifly.site/api/blogs?page=${pageParam}&limit=4`
+    `https://intellectaa-front-end.vercel.app/api/blogs?page=${pageParam}&limit=4`
   );
   return res.data;
 };
@@ -60,7 +60,7 @@ const BlogsPage = () => {
   }
 
   if (status === "error") {
-    return <div>Error fetching blogs</div>;
+    return <div className="text-center">Error fetching blogs</div>;
   }
 
   return (

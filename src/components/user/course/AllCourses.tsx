@@ -7,6 +7,7 @@ import { getAllPublishCoursesHelper } from "@/helpers/course/courseApiHelper";
 import CourseBreadC from "./CourseBreadC";
 import { CoursePagination } from "./utilComponents/CoursePagination";
 import { TOBE } from "@/types/constants/Tobe";
+import { PiSpinnerBold } from "react-icons/pi";
 
 const AllCourses = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -27,7 +28,7 @@ const AllCourses = () => {
   }, [searchTerm]);
 
   const limit = 4;
-  const { data: allCourses } = useQuery({
+  const { data: allCourses, isLoading } = useQuery({
     queryFn: () =>
       getAllPublishCoursesHelper(
         debouncedSearchTerm,
@@ -64,9 +65,15 @@ const AllCourses = () => {
       <div className="mt-10">
         <div className="flex mx-auto w-[80%] flex-col gap-5">
           <div className="w-full flex flex-wrap gap-7">
-            {allCourses?.payload?.courses?.map((item: TOBE, i: number) => (
-              <CourseCard key={item.id} course={item} i={i} />
-            ))}
+            {isLoading ? (
+              <div className="text-center mt-10 h-[30vh] flex items-center justify-center w-[80%] mx-auto">
+                <PiSpinnerBold className="text-xl ml-2 animate-spin" />
+              </div>
+            ) : (
+              allCourses?.payload?.courses?.map((item: TOBE, i: number) => (
+                <CourseCard key={item.id} course={item} i={i} />
+              ))
+            )}
           </div>
           <CoursePagination
             setPageNumber={setPageNumber}

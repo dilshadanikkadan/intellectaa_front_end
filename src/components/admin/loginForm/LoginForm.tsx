@@ -33,9 +33,9 @@ const AdminLoginForm = () => {
       console.log("____________________________we reached heere",data?.payload);
       
      setTimeout(() => {
+       window.location.href = '/admin';
       router.push('/admin')
-      window.location.href = '/admin';
-     }, 1000);
+     }, 2000);
     },
     onError: (errors: string) => {
       toast.error(errors, {
