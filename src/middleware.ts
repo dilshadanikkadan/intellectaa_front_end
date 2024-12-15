@@ -18,9 +18,9 @@ export async function middleware(request: NextRequest) {
   }
 
   if (pathname.startsWith("/admin") && pathname !== "/admin/login") {
-    if (!token) {
-      return NextResponse.redirect(new URL("/admin/login", request.url));
-    }
+    // if (!token) {
+    //   return NextResponse.redirect(new URL("/admin/login", request.url));
+    // }
 
 
     try {
